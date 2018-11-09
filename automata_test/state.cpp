@@ -1,37 +1,37 @@
-#include "state.h"
+#include "State.h"
 
 
 
-state::state() : label("")
+State::State() : label("")
 {
 }
 
-state::state(string t) : label(t)
+State::State(string t) : label(t)
 {
 }
 
 
-void state::addNearState(char symbol, state* nearState)
+void State::addTransition(char symbol, State* state)
 {
-	nearStates.insert(std::pair<char, state*>(symbol, nearState));
+	transitions.insert(pair<char, State*>(symbol, state));
 }
 
-state* state::stateViaSymbol(char symbol)
+State* State::stateViaSymbol(char symbol)
 {
-	state* temp = nearStates.at(symbol);
+	State* temp = transitions.at(symbol);
 	return temp;
 }
 
-string state::getLabel()
+string State::getLabel()
 {
 	return label;
 }
 
 
-state::~state()
+State::~State()
 {
 	label.clear();
-	nearStates.clear();
+	transitions.clear();
 }
 
 

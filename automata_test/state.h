@@ -1,22 +1,24 @@
 #pragma once
-#include<string>
-#include<map>
+#include <string>
+#include <map>
 
 using std::string;
+using std::map;
+using std::pair;
 
-class state
+class State
 {
 private:
-	std::string label; // Название состояния
-	std::map<char, state*> nearStates; // Карта доступных состояний из текущего состояния 
+	string label; // Название состояния
+	map<char, State*> transitions; // Карта переходов в другие состояния 
 public:
-	state();
-	state(string);
+	State();
+	State(string);
 
-	~state();
+	~State();
 
-	void addNearState(char, state*); // Добавить новое смежное состояние в карту
-	state* stateViaSymbol(char); // Возвращает указатель на состояние по символу
+	void addTransition(char, State*); // Добавить новый переход в карту
+	State* stateViaSymbol(char); // Возвращает указатель на состояние по символу
 	string getLabel();
 };
 

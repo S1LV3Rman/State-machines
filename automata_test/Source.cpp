@@ -1,4 +1,4 @@
-#include "automata.h"
+#include "Automata.h"
 #include <iostream>
 #include <vector>
 
@@ -8,32 +8,32 @@ using std::vector;
 
 int main()
 {
-	state s0("0");
-	state s1("1");
-	state s2("2");
-	state s3("3");
+	State s0("0");
+	State s1("1");
+	State s2("2");
+	State s3("3");
 
-	s0.addNearState('a', &s1);
-	s0.addNearState('b', &s1);
+	s0.addTransition('a', &s1);
+	s0.addTransition('b', &s1);
 
-	s1.addNearState('a', &s1);
-	s1.addNearState('b', &s2);
+	s1.addTransition('a', &s1);
+	s1.addTransition('b', &s2);
 
-	s2.addNearState('a', &s2);
-	s2.addNearState('b', &s3);
+	s2.addTransition('a', &s2);
+	s2.addTransition('b', &s3);
 
-	s3.addNearState('a', &s3);
-	s3.addNearState('b', &s0);
+	s3.addTransition('a', &s3);
+	s3.addTransition('b', &s0);
 
-	automata a;
+	Automata a;
 	
-	string word = "abbbabbba";
+	string word = "abbababbba";
 
 	cout << "Word: " << word << endl;
 
-	vector<state*> states { &s0, &s1, &s2, &s3 };
+	vector<State*> States { &s0, &s1, &s2, &s3 };
 
-	for (auto i : states)
+	for (auto i : States)
 	{
 		a.setStart(i);
 		cout << "Starting is " << i->getLabel() << ", ending is - " << (a.inputWord(word)->getLabel()) << endl;

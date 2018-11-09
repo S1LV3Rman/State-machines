@@ -1,19 +1,19 @@
 #pragma once
-#include"state.h"
+#include"State.h"
 
-class automata
+class Automata
 {
 private:
-	state* startState; // Начальное состояние 
-	state* currentState; // Текущее состояние
+	State* startState; // Начальное состояние 
+	State* currentState; // Текущее состояние
 public:
-	automata();
-	automata(state*);
+	Automata();
+	Automata(State*);
 
-	~automata();
+	~Automata();
 
-	state* inputWord(string); // Ввод слова в автомат
+	State* inputWord(string); // Ввод слова в автомат
 	void reset(); // Сброс автомата в начальное состояние
-	void setStart(state*); // Установка начального состояния
+	void setStart(State*); // Установка начального состояния
 };
 

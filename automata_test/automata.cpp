@@ -1,21 +1,21 @@
-#include "automata.h"
+#include "Automata.h"
 
 
 
-automata::automata() : startState(nullptr), currentState(nullptr)
+Automata::Automata() : startState(nullptr), currentState(nullptr)
 {
 }
 
-automata::automata(state* t) : startState(t), currentState(t)
+Automata::Automata(State* t) : startState(t), currentState(t)
 {
 
 }
 
-automata::~automata()
+Automata::~Automata()
 {
 }
 
-state* automata::inputWord(string word)
+State* Automata::inputWord(string word)
 {
 	for (unsigned int i = 0; i < word.length(); ++i)
 	{
@@ -24,12 +24,12 @@ state* automata::inputWord(string word)
 	return currentState;
 }
 
-void automata::reset()
+void Automata::reset()
 {
 	currentState = startState;
 }
 
-void automata::setStart(state* t)
+void Automata::setStart(State* t)
 {
 	startState = t;
 	currentState = t;
