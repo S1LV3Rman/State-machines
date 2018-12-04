@@ -88,40 +88,40 @@ public:
 
 	string findShortestResetWord()
 	{
-		vector<set<State>> used, states, nextStates;
-		vector<string> words, nextWords;
+		vector<set<State>> usedStates, currentStates, nextStates;
+		vector<string> currentWords, nextWords;
 		set<State> start;
 
 		for (auto s : _states)
 			start.insert(s);
 
-		states.push_back(start);
-		words.push_back("");
+		currentStates.push_back(start);
+		currentWords.push_back("");
 			
 
-		while (!states.empty())
+		while (!currentStates.empty())
 		{
-			for (auto state : states)
-				used.push_back(state);
+			for (auto state : currentStates)
+				usedStates.push_back(state);
 
-			for (int i = 0, n = states.size(); i < n; ++i)
+			for (int i = 0, n = currentStates.size(); i < n; ++i)
 				for (int j = 0, l = _letters.size(); j < l; ++j)
 				{
-					set<State> temp = d(states[i], _letters[j]);
+					set<State> temp = d(currentStates[i], _letters[j]);
 					
 					bool isNew = true;
-					for (int k = 0, m = used.size(); isNew && k < m; ++k)
-						isNew = temp != used[k];
+					for (int k = 0, m = usedStates.size(); isNew && k < m; ++k)
+						isNew = temp != usedStates[k];
 
 					if (isNew)
 					{
 						nextStates.push_back(temp);
-						nextWords.push_back(words[i] + _letters[j]);
+						nextWords.push_back(currentWords[i] + _letters[j]);
 					}
 				}
 
-			states.clear();
-			words.clear();
+			currentStates.clear();
+			currentWords.clear();
 
 			for (int i = 0, n = nextStates.size(); i < n; ++i)
 			{
@@ -129,8 +129,8 @@ public:
 					return nextWords[i];
 				else
 				{
-					words.push_back(nextWords[i]);
-					states.push_back(nextStates[i]);
+					currentWords.push_back(nextWords[i]);
+					currentStates.push_back(nextStates[i]);
 				}
 			}
 
@@ -152,14 +152,74 @@ public:
 		Цикл пока(C не пусто)
 		{
 			Копируем все множества из C в N
+
 			Поочерёдно действуем каждой буквой алфавита на все множества из C
 				и добавляем в T каждое полученное множество, не находящееся в N
+
 			Для добавленных множеств дописываем в W слова, которыми они получены
 
 			Если в T есть множество из 1 элемента, то возвращаем слово, которым мы его получили
 				иначе заменяем C на T и очищаем T
 		}
 		Автомат несинхронизируемый!
+	}
+	*/
+
+	string findResetWord()
+	{
+		set<set<State>> pairs;
+		string word;
+		vector<set<set<State>>> usedStates;
+		map<char, set<set<States>>> nextStates;
+
+		for(int i = 0, n = _states.size() - 1; i < n; ++i)
+			for (int j = i + 1, m = n + 1; j < m; ++j)
+			{
+				set<State> pair = { _states[i], _states[j] };
+				pairs.insert(pair);
+			}
+
+		while (!pairs.empty())
+		{
+			usedStates.push_back(pairs);
+
+			for(auto pair : pairs)
+				for (auto letter : _letters)
+					nextStates.push_back(d(pair, _letter));
+
+			char minSet = _letters[0];
+			for (auto letter : _letters)
+			{
+				for (auto state : usedStates)
+				{
+					
+				}
+			}
+		}
+		return word;
+	}
+
+	/*
+	Функция нахождения синхр. слова
+	{
+		P - множество пар состояний
+		W - синхр. слово
+		U - использованные множества пар состояний
+
+		Записываем в P все пары состояний
+
+		Цикл пока(P не пусто)
+		{
+			Записываем P в U
+
+			Применяем каждую букву алфавита к парам из P записывая результаты в T
+
+			Выбираем из T первое, не находящееся в U, множество с наименьшим кол-вом
+				пар и дописываем в W букву, которой оно было получено (если выбрать нечего => автомат не синхр.)
+
+			Заменяем P на выбранное слово и очищаем T
+		}
+		Возвращаем W
 	}
 	*/
 };
