@@ -8,11 +8,14 @@ int main()
 {
 	vector<int> states = { 0, 1, 2, 3 };
 
-	vector<vector<int>> d = { {1, 1}, {1, 2}, {2, 3}, {3, 0} };
+	vector<vector<int>> d = {{1, 1},
+							 {1, 2},
+							 {2, 3},
+							 {3, 0}};
 
 	Automata<int> a(states, "ab", d);
 	
-	string word = "abbababbba";
+	string word = a.findShortestResetWord();
 
 	cout << "Word: " << word << endl;
 

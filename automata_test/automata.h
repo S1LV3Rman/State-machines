@@ -74,13 +74,73 @@ public:
 		return states;
 	}
 
-	string findResetWord()
+	set<State> d(set<State> states, char letter)
 	{
-		vector<set<State>> N;
-		vector<set<State>> N;
-		vector<string> W;
+		set<State> nextStates;
+
+		for (auto state : states)
+			nextStates.insert(_transitions[state][letter]);
+
+		states = nextStates;
+
+		return states;
 	}
 
+	string findShortestResetWord()
+	{
+		vector<set<State>> used, states, nextStates;
+		vector<string> words, nextWords;
+		set<State> start;
+
+		for (auto s : _states)
+			start.insert(s);
+
+		states.push_back(start);
+		words.push_back("");
+			
+
+		while (!states.empty())
+		{
+			for (auto state : states)
+				used.push_back(state);
+
+			for (int i = 0, n = states.size(); i < n; ++i)
+				for (int j = 0, l = _letters.size(); j < l; ++j)
+				{
+					set<State> temp = d(states[i], _letters[j]);
+					
+					bool isNew = true;
+					for (int k = 0, m = used.size(); isNew && k < m; ++k)
+						isNew = temp != used[k];
+
+					if (isNew)
+					{
+						nextStates.push_back(temp);
+						nextWords.push_back(words[i] + _letters[j]);
+					}
+				}
+
+			states.clear();
+			words.clear();
+
+			for (int i = 0, n = nextStates.size(); i < n; ++i)
+			{
+				if (nextStates[i].size() == 1)
+					return nextWords[i];
+				else
+				{
+					words.push_back(nextWords[i]);
+					states.push_back(nextStates[i]);
+				}
+			}
+
+			nextStates.clear();
+			nextWords.clear();
+		}
+		return "";
+	}
+
+	/*
 	Функция нахождения кратчайшего синхр. слова
 	{
 		N - список множеств состояний, которые уже были рассмотрены (изначально пустое)
@@ -101,5 +161,6 @@ public:
 		}
 		Автомат несинхронизируемый!
 	}
+	*/
 };
 
