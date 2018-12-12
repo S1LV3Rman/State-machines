@@ -3,25 +3,26 @@
 #include <set>
 #include <string>
 #include <map>
+#include <iostream>
 
-
+using std::cout;
+using std::endl;
 using std::string;
 using std::set;
 using std::vector;
 using std::map;
 
-template <typename State>
 class Automata
 {
 private:
-	vector<State> _states;
+	vector<int> _states;
 	string _letters;
-	map<State, map<char, State>> _transitions;
+	map<int, map<char, int>> _transitions;
 
 public:
 	Automata() {}
 
-	Automata(set<State> states, set<char> letters, vector<vector<State>> transitions)
+	Automata(set<int> states, set<char> letters, vector<vector<int>> transitions)
 	{
 		for (auto i : states)
 			_states.push_back(i);
@@ -34,7 +35,7 @@ public:
 				_transitions[_states[i]][_letters[j]] = transitions[i][j];
 	}
 
-	Automata(vector<State> states, string letters, vector<vector<State>> transitions)
+	Automata(vector<int> states, string letters, vector<vector<int>> transitions)
 	{
 		_states = states;
 		_letters = letters;
@@ -44,7 +45,7 @@ public:
 				_transitions[_states[i]][_letters[j]] = transitions[i][j];
 	}
 
-	Automata(vector<State> states, string letters, map<State, map<char, State>> transitions)
+	Automata(vector<int> states, string letters, map<int, map<char, int>> transitions)
 	{
 		_states = states;
 		_letters = letters;
@@ -59,11 +60,16 @@ public:
 		_transitions.clear();
 	}
 
-	set<State> d(set<State> states, string word)
+	vector<int> getStates()
+	{
+		return _states;
+	}
+
+	set<int> d(set<int> states, string word)
 	{
 		for (auto letter : word)
 		{
-			set<State> nextStates;
+			set<int> nextStates;
 
 			for (auto state : states)
 				nextStates.insert(_transitions[state][letter]);
@@ -74,23 +80,46 @@ public:
 		return states;
 	}
 
-	set<State> d(set<State> states, char letter)
+	vector<int> d(vector<int> states, string word)
 	{
-		set<State> nextStates;
+		for (auto letter : word)
+		{
+			vector<int> nextStates;
 
-		for (auto state : states)
-			nextStates.insert(_transitions[state][letter]);
+			for (auto state : states)
+				nextStates.push_back(_transitions[state][letter]);
 
-		states = nextStates;
+			states = nextStates;
+		}
 
 		return states;
 	}
 
+	set<int> d(set<int> states, char letter)
+	{
+		set<int> nextStates;
+
+		for (auto state : states)
+			nextStates.insert(_transitions[state][letter]);
+
+		return nextStates;
+	}
+
+	vector<int> d(vector<int> states, char letter)
+	{
+		vector<int> nextStates;
+
+		for (auto state : states)
+			nextStates.push_back(_transitions[state][letter]);
+
+		return nextStates;
+	}
+
 	string findShortestResetWord()
 	{
-		vector<set<State>> usedStates, currentStates, nextStates;
+		vector<set<int>> usedStates, currentStates, nextStates;
 		vector<string> currentWords, nextWords;
-		set<State> start;
+		set<int> start;
 
 		for (auto s : _states)
 			start.insert(s);
@@ -107,7 +136,7 @@ public:
 			for (int i = 0, n = currentStates.size(); i < n; ++i)
 				for (int j = 0, l = _letters.size(); j < l; ++j)
 				{
-					set<State> temp = d(currentStates[i], _letters[j]);
+					set<int> temp = d(currentStates[i], _letters[j]);
 					
 					bool isNew = true;
 					for (int k = 0, m = usedStates.size(); isNew && k < m; ++k)
@@ -167,15 +196,15 @@ public:
 
 	string findResetWord()
 	{
-		set<set<State>> pairs;
+		set<set<int>> pairs;
 		string word;
-		vector<set<set<State>>> usedStates;
-		map<char, set<set<States>>> nextStates;
+		vector<set<set<int>>> usedStates;
+		map<char, set<set<int>>> nextStates;
 
 		for(int i = 0, n = _states.size() - 1; i < n; ++i)
 			for (int j = i + 1, m = n + 1; j < m; ++j)
 			{
-				set<State> pair = { _states[i], _states[j] };
+				set<int> pair = { _states[i], _states[j] };
 				pairs.insert(pair);
 			}
 
@@ -183,19 +212,51 @@ public:
 		{
 			usedStates.push_back(pairs);
 
-			for(auto pair : pairs)
-				for (auto letter : _letters)
-					nextStates.push_back(d(pair, _letter));
-
-			char minSet = _letters[0];
 			for (auto letter : _letters)
 			{
-				for (auto state : usedStates)
+				set<set<int>> temp;
+				
+				for (auto pair : pairs)
 				{
-					
+					set<int> next = d(pair, letter);
+					if(next.size() == 2)
+						temp.insert(next);
+				}
+
+				nextStates[letter] = temp;
+			}
+
+			char nextLetter = 0;
+			size_t minState = pairs.size();
+
+			for (auto letter : _letters)
+			{
+				bool isNew = true;
+				for (int i = 0, n = usedStates.size(); isNew && i < n; ++i)
+					isNew = nextStates[letter] != usedStates[i];
+
+				if (isNew && nextStates[letter].size() <= minState)
+				{
+					minState = nextStates[letter].size();
+					nextLetter = letter;
 				}
 			}
+
+			usedStates.push_back(pairs);
+
+			if (nextLetter != 0)
+			{
+				pairs = nextStates[nextLetter];
+				word += nextLetter;
+			}
+			else
+			{
+				pairs.clear();
+			}
+
+			nextStates.clear();
 		}
+
 		return word;
 	}
 
@@ -214,7 +275,7 @@ public:
 
 			ѕримен€ем каждую букву алфавита к парам из P записыва€ результаты в T
 
-			¬ыбираем из T первое, не наход€щеес€ в U, множество с наименьшим кол-вом
+			¬ыбираем из T последнее, не наход€щеес€ в U, множество с наименьшим кол-вом
 				пар и дописываем в W букву, которой оно было получено (если выбрать нечего => автомат не синхр.)
 
 			«амен€ем P на выбранное слово и очищаем T
@@ -222,5 +283,50 @@ public:
 		¬озвращаем W
 	}
 	*/
+
+	static Automata random(int numStates, int numLetters)
+	{
+		vector<int> states;
+		for (int i = 0; i < numStates; ++i)
+			states.push_back(i);
+
+		string letters;
+		for (int i = 0; i < numLetters; ++i)
+			letters += char('a' + i);
+
+		map<int, map<char, int>> transitions;
+		for (int i = 0; i < numStates; ++i)
+			for (int j = 0; j < numLetters; ++j)
+				transitions[i]['a' + j] = rand() % numStates;
+
+		return Automata(states, letters, transitions);
+	}
+
+	void output()
+	{
+		cout << "States: ";
+		for (int i = 0, n = _states.size(); i < n; ++i)
+			cout << _states[i] << ' ';
+		cout << endl;
+
+		cout << "Language: ";
+		for (int i = 0, n = _letters.size(); i < n; ++i)
+			cout << _letters[i] << ' ';
+		cout << endl;
+
+
+		cout << "Transitions: " << endl << "   ";
+		for (int j = 0, m = _letters.size(); j < m; ++j)
+			cout << _letters[j] << ' ';
+		cout << endl;
+
+		for (int i = 0, n = _states.size(); i < n; ++i)
+		{
+			cout << _states[i] << ": ";
+			for (int j = 0, m = _letters.size(); j < m; ++j)
+				cout << _transitions[_states[i]][_letters[j]] << ' ';
+			cout << endl;
+		}
+	}
 };
 

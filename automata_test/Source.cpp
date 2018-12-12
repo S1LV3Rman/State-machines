@@ -1,32 +1,52 @@
 #include "Automata.h"
-#include <iostream>
-
-using std::cout;
-using std::endl;
+#include <conio.h>
 
 int main()
 {
-	vector<int> states = { 0, 1, 2, 3 };
+	char ch;
 
-	vector<vector<int>> d = {{1, 1},
-							 {1, 2},
-							 {2, 3},
-							 {3, 0}};
+	do
+	{
+		system("cls");
 
-	Automata<int> a(states, "ab", d);
-	
-	string word = a.findShortestResetWord();
+		Automata a = Automata::random(4, 2);
 
-	cout << "Word: " << word << endl;
+		string sword = a.findShortestResetWord();
+		string word = a.findResetWord();
 
-	set<int> s = { 0, 1, 2, 3 };
+		a.output();
 
-	s = a.d(s, word);
+		cout << endl << "Shortest reset word: " << sword << endl;
+		cout << "Verification: " << endl;
 
-	for (auto i : s)
-		cout << i << ' ';
+		cout << "\tInput: ";
+		vector<int> input = a.getStates();
+		for (int i = 0, n = input.size(); i < n; ++i)
+			cout << input[i] << ' ';
+		cout << endl;
 
-	system("pause");
+		cout << "\tOutput: ";
+		vector<int> output = a.d(input, sword);
+		for (int i = 0, n = output.size(); i < n; ++i)
+			cout << output[i] << ' ';
+		cout << endl;
+
+		cout << endl << "Short reset word: " << word << endl;
+		cout << "Verification: " << endl;
+
+		cout << "\tInput: ";
+		for (int i = 0, n = input.size(); i < n; ++i)
+			cout << input[i] << ' ';
+		cout << endl;
+
+		cout << "\tOutput: ";
+		output = a.d(input, word);
+		for (int i = 0, n = output.size(); i < n; ++i)
+			cout << output[i] << ' ';
+		cout << endl;
+
+		ch = _getch();
+	} while (ch != 'q');
 
 	return 0;
 }
