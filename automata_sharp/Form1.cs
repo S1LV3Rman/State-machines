@@ -36,13 +36,19 @@ namespace automata_sharp
             var state = buttonGenerate.Enabled;//Сохраняем состояние 
             buttonGenerate.Enabled = false;//Выключаем кнопку что бы не было проблем 
 
+            labelState.Text = "FindResetWord...";
+
             labelQuickResetWord.Text = await Task.Run(() => automata.FindResetWord());
             labelQuickResetWord.ForeColor = Color.LimeGreen;
+
+            labelState.Text = "FindShortestResetWord...";
 
             labelShortestResetWord.Text = await Task.Run(() => automata.FindShortestResetWord());
             labelShortestResetWord.ForeColor = Color.LimeGreen;
 
             buttonGenerate.Enabled |= state;//Востонавливаем состояние 
+
+            labelState.Text = "Completed";
         }
 
         private void buttonGeneratorImpact_Click(object sender, EventArgs e)

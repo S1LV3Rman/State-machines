@@ -54,6 +54,7 @@
             this.labelGeneratorInfo = new System.Windows.Forms.Label();
             this.tabPageOpen = new System.Windows.Forms.TabPage();
             this.panelGenerate = new System.Windows.Forms.Panel();
+            this.labelState = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPageGenerate.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -288,6 +289,8 @@
             // 
             // buttonGenerate
             // 
+            this.buttonGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonGenerate.BackColor = System.Drawing.SystemColors.ControlLight;
             this.buttonGenerate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonGenerate.Location = new System.Drawing.Point(3, 117);
@@ -342,6 +345,7 @@
             // 
             this.panelGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelGenerate.Controls.Add(this.labelState);
             this.panelGenerate.Controls.Add(this.labelGeneratorInfo);
             this.panelGenerate.Controls.Add(this.labelGenerateInfo1);
             this.panelGenerate.Controls.Add(this.numericUpDownAlphabet);
@@ -352,6 +356,15 @@
             this.panelGenerate.Name = "panelGenerate";
             this.panelGenerate.Size = new System.Drawing.Size(449, 147);
             this.panelGenerate.TabIndex = 11;
+            // 
+            // labelState
+            // 
+            this.labelState.AutoSize = true;
+            this.labelState.Location = new System.Drawing.Point(305, 59);
+            this.labelState.Name = "labelState";
+            this.labelState.Size = new System.Drawing.Size(39, 19);
+            this.labelState.TabIndex = 9;
+            this.labelState.Text = "Wait";
             // 
             // Form1
             // 
@@ -406,6 +419,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxWord;
         private System.Windows.Forms.Panel panelGenerate;
+        private System.Windows.Forms.Label labelState;
     }
 }
 
