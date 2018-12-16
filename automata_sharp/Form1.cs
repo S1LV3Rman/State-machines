@@ -19,7 +19,7 @@ namespace automata_sharp
             InitializeComponent();
         }
 
-        private void buttonGenerate_Click(object sender, EventArgs e)
+        private async void buttonGenerate_Click(object sender, EventArgs e)
         {
             automata = Automata.Random(
                 Convert.ToInt32(numericUpDownStates.Value),
@@ -29,15 +29,20 @@ namespace automata_sharp
             foreach(var i in states)
                 comboBoxStates.Items.Add(i);
 
-            dataGridViewGenerated.DataSource = automata.OutputToDataTable();
+            dataGridViewGenerated.DataSource =automata.OutputToDataTable();
             for(int i = 1; i < dataGridViewGenerated.Columns.Count; ++i)
                 dataGridViewGenerated.Columns[i].Width = 70;
 
-            labelQuickResetWord.Text = automata.FindResetWord();
+            var state = buttonGenerate.Enabled;//Сохраняем состояние 
+            buttonGenerate.Enabled = false;//Выключаем кнопку что бы не было проблем 
+
+            labelQuickResetWord.Text = await Task.Run(() => automata.FindResetWord());
             labelQuickResetWord.ForeColor = Color.LimeGreen;
 
-            labelShortestResetWord.Text = automata.FindShortestResetWord();
+            labelShortestResetWord.Text = await Task.Run(() => automata.FindShortestResetWord());
             labelShortestResetWord.ForeColor = Color.LimeGreen;
+
+            buttonGenerate.Enabled |= state;//Востонавливаем состояние 
         }
 
         private void buttonGeneratorImpact_Click(object sender, EventArgs e)
