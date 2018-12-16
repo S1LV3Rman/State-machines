@@ -12,17 +12,38 @@ namespace automata_sharp
 {
     public partial class Form1 : Form
     {
+        public Automata automata = new Automata();
+
         public Form1()
         {
             InitializeComponent();
-            
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonGenerate_Click(object sender, EventArgs e)
         {
-            Automata a = Automata.Random(Convert.ToInt32(textBox1.Text), Convert.ToInt32(textBox2.Text));
+            automata = Automata.Random(
+                Convert.ToInt32(numericUpDownStates.Value),
+                Convert.ToInt32(numericUpDownAlphabet.Value));
 
-            richTextBox1.Text = a.Output();
+            List<int> states = automata.GetStates();
+            foreach(var i in states)
+                comboBoxStates.Items.Add(i);
+
+            dataGridViewGenerated.DataSource = automata.OutputToDataTable();
+            for(int i = 1; i < dataGridViewGenerated.Columns.Count; ++i)
+                dataGridViewGenerated.Columns[i].Width = 70;
+
+            labelQuickResetWord.Text = automata.FindResetWord();
+            labelQuickResetWord.ForeColor = Color.LimeGreen;
+
+            labelShortestResetWord.Text = automata.FindShortestResetWord();
+            labelShortestResetWord.ForeColor = Color.LimeGreen;
+        }
+
+        private void buttonGeneratorImpact_Click(object sender, EventArgs e)
+        {
+            labelGeneratedStoped.Text = automata.Delta(Convert.ToInt32(comboBoxStates.SelectedItem.ToString()), textBoxWord.Text).ToString();
+            labelGeneratedStoped.ForeColor = Color.LimeGreen;
         }
     }
 }

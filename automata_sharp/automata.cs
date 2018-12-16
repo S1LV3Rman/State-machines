@@ -3,22 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace automata_sharp
 {
-    /*
-     * TO DO:
-     * 
-     * Поиск слова, поиск кратчайшего слова
-     
-         */
-    class Automata
+    public class Automata
     {
         private List<int> _states;
         private String _letters;
         Dictionary<int, Dictionary<char, int>> _transitions;
 
-        Automata() { }
+        public Automata() { }
 
         Automata(HashSet<int> states, HashSet<char> letters, List<List<int>> transitions)
         {
@@ -105,7 +100,71 @@ namespace automata_sharp
             return nextStates;
         }
 
-        // String findShortestResetWord()
+        public int Delta(int state, String word)
+        {
+            int? nextState = null;
+            foreach(var letter in word)
+                nextState = _transitions[state][letter];
+            if (nextState.HasValue)
+                return nextState.Value;
+            else
+                return -1;              
+        }
+        
+        public String FindShortestResetWord()
+        {
+            List<HashSet<int>> usedStates = new List<HashSet<int>>(),
+                            currentStates = new List<HashSet<int>>(), 
+                               nextStates = new List<HashSet<int>>();
+            List<String> currentWords = new List<String>(), 
+                            nextWords = new List<String>();
+            HashSet<int> start = new HashSet<int>();
+
+            foreach (var s in _states)
+                start.Add(s);
+
+            currentStates.Add(start);
+            currentWords.Add("");
+
+            while (currentStates.Count != 0)
+            {
+                for (int i = 0, n = currentStates.Count; i < n; ++i)
+                    for (int j = 0, l = _letters.Length; j < l; ++j)
+                    {
+                        HashSet<int> temp = Delta(currentStates[i], _letters[j]);
+
+                        bool isNew = true;
+                        for (int k = 0, m = usedStates.Count; isNew && k < m; ++k)
+                            isNew = temp != usedStates[k];
+
+                        if (isNew)
+                        {
+                            nextStates.Add(temp);
+                            nextWords.Add(currentWords[i] + _letters[j]);
+                        }
+                    }
+
+                currentStates.Clear();
+                currentWords.Clear();
+
+                for (int i = 0, n = nextStates.Count; i < n; ++i)
+                {
+                    if (nextStates[i].Count == 1)
+                        return nextWords[i];
+                    else
+                    {
+                        currentWords.Add(nextWords[i]);
+                        currentStates.Add(nextStates[i]);
+                    }
+                }
+
+                nextStates.Clear();
+                nextWords.Clear();
+            }
+            return "";
+        }
+
+
         /*
         Функция нахождения кратчайшего синхр.слова
         {
@@ -139,6 +198,71 @@ namespace automata_sharp
     }
     */
 
+        public String FindResetWord()
+        {
+            HashSet<HashSet<int>> pairs = new HashSet<HashSet<int>>();
+            String word = String.Empty;
+            List<HashSet<HashSet<int>>> usedStates = new List<HashSet<HashSet<int>>>();
+            Dictionary<char, HashSet<HashSet<int>>> nextStates = new Dictionary<char, HashSet<HashSet<int>>>();
+
+            for(int i = 0, n = _states.Count - 1; i < n; ++i)
+                for(int j = i + 1, m = n + 1; j<m; ++j)
+                {
+                    HashSet<int> pair = new HashSet<int>();
+                    pair.Add(_states[i]);
+                    pair.Add(_states[j]);
+                    pairs.Add(pair);
+                }
+
+            while (pairs.Count != 0)
+            {
+                usedStates.Add(pairs);
+
+                foreach (var letter in _letters)
+                {
+                    HashSet<HashSet<int>> temp = new HashSet<HashSet<int>>();
+
+                    foreach (var pair in pairs)
+                    {
+                        HashSet<int> next = Delta(pair, letter);
+                        if (next.Count == 2)
+                            temp.Add(next);
+                    }
+
+                    nextStates[letter] = temp;
+                }
+
+                char nextLetter = '\0';
+                int minState = pairs.Count;
+
+                foreach(var letter in _letters)
+                {
+                    bool isNew = true;
+                    for (int i = 0, n = usedStates.Count; isNew && i < n; ++i)
+                        isNew = nextStates[letter] != usedStates[i];
+
+                    if(isNew && nextStates[letter].Count <= minState)
+                    {
+                        minState = nextStates[letter].Count;
+                        nextLetter = letter;
+                    }
+                }
+
+                usedStates.Add(pairs);
+
+                if (nextLetter != '\0')
+                {
+                    pairs = nextStates[nextLetter];
+                    word += nextLetter;
+                }
+                else
+                    pairs.Clear();
+
+                nextStates.Clear();
+            }
+
+            return word;
+        }
 
         // String findResetWord()
         /*
@@ -191,7 +315,7 @@ namespace automata_sharp
             // Серега сказал так во всех учебниках пишут, хотя упростить можно
         }
 
-        public String Output()
+        public String OutputToString()
         {
             String output = "States: ";
             for (int i = 0, n = _states.Count; i < n; ++i)
@@ -216,6 +340,25 @@ namespace automata_sharp
                     output += $"{_transitions[_states[i]][_letters[j]]} ";
                 output += '\n';
             }
+            return output;
+        }
+
+        public DataTable OutputToDataTable()
+        {
+            DataTable output = new DataTable();
+
+            output.Columns.Add("State");
+
+            for (int j = 0, m = _letters.Length; j < m; ++j)
+                output.Columns.Add($"by {_letters[j].ToString()}");
+
+            for (int i = 0, n = _states.Count; i < n; ++i)
+            {
+                output.Rows.Add(_states[i].ToString());
+                for (int j = 0, m = _letters.Length; j < m; ++j)
+                    output.Rows[i][j + 1] = _transitions[_states[i]][_letters[j]];
+            }
+
             return output;
         }
     }
