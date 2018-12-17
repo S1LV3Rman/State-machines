@@ -42,7 +42,7 @@ namespace automata_sharp
             labelShortestResetWord.Text = await Task.Run(() => automata.FindShortestResetWord());
             labelShortestResetWord.ForeColor = Color.LimeGreen;
 
-            buttonGenerate.Enabled |= state;//Востонавливаем состояние 
+            buttonGenerate.Enabled |= state;//Востанавливаем состояние 
         }
 
         private void buttonGeneratorImpact_Click(object sender, EventArgs e)
