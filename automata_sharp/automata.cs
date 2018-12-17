@@ -15,6 +15,29 @@ namespace automata_sharp
 
         public Automata() { }
 
+        public Automata(DataTable dataTable)
+        {
+            int states = dataTable.Rows.Count;
+            int letters = dataTable.Columns.Count - 1;
+
+            _states = new List<int>();
+            for (int i = 0; i < states; ++i)
+                _states.Add(i);
+
+            _letters = String.Empty;
+            for (int i = 0; i < letters; ++i)
+                _letters += Convert.ToChar('a' + i);
+
+            _transitions = new Dictionary<int, Dictionary<char, int>>();
+            for (int i = 0, n = states; i < n; ++i)
+            {
+                Dictionary<char, int> temp = new Dictionary<char, int>();
+                _transitions.Add(i, temp);
+                for (int j = 0, m = letters; j < m; ++j)
+                    temp.Add(Convert.ToChar('a' + j), Convert.ToInt32(dataTable.Rows[i][j + 1]));
+            }
+        }
+
         Automata(HashSet<int> states, HashSet<char> letters, List<List<int>> transitions)
         {
             foreach (var i in states)
@@ -102,13 +125,10 @@ namespace automata_sharp
 
         public int Delta(int state, String word)
         {
-            int? nextState = null;
+            int nextState = state;
             foreach(var letter in word)
-                nextState = _transitions[state][letter];
-            if (nextState.HasValue)
-                return nextState.Value;
-            else
-                return -1;              
+                nextState = _transitions[nextState][letter];
+            return nextState;         
         }
         
         public String FindShortestResetWord()
@@ -128,6 +148,9 @@ namespace automata_sharp
 
             while (currentStates.Count != 0)
             {
+                foreach (var state in currentStates)
+                    usedStates.Add(state);
+
                 for (int i = 0, n = currentStates.Count; i < n; ++i)
                     for (int j = 0, l = _letters.Length; j < l; ++j)
                     {
@@ -206,7 +229,7 @@ namespace automata_sharp
             Dictionary<char, HashSet<HashSet<int>>> nextStates = new Dictionary<char, HashSet<HashSet<int>>>();
 
             for(int i = 0, n = _states.Count - 1; i < n; ++i)
-                for(int j = i + 1, m = n + 1; j<m; ++j)
+                for(int j = i + 1, m = n + 1; j < m; ++j)
                 {
                     HashSet<int> pair = new HashSet<int>();
                     pair.Add(_states[i]);
@@ -232,7 +255,7 @@ namespace automata_sharp
                     nextStates[letter] = temp;
                 }
 
-                char nextLetter = '\0';
+                char nextLetter = Convert.ToChar(0);
                 int minState = pairs.Count;
 
                 foreach(var letter in _letters)
@@ -250,7 +273,7 @@ namespace automata_sharp
 
                 usedStates.Add(pairs);
 
-                if (nextLetter != '\0')
+                if (nextLetter != Convert.ToChar(0))
                 {
                     pairs = nextStates[nextLetter];
                     word += nextLetter;
