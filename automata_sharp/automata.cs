@@ -38,29 +38,6 @@ namespace automata_sharp
             }
         }
 
-        Automata(HashSet<int> states, HashSet<char> letters, List<List<int>> transitions)
-        {
-            foreach (var i in states)
-                _states.Add(i);
-
-            foreach (var i in letters)
-                _letters += i;
-
-            for (int i = 0, n = transitions.Count; i < n; ++i)
-                for (int j = 0, m = transitions[i].Count; j < m; ++j)
-                    _transitions[_states[i]][_letters[j]] = transitions[i][j];
-        }
-
-        Automata(List<int> states, String letters, List<List<int>> transitions)
-        {
-            _states = states;
-            _letters = letters;
-
-            for (int i = 0, n = transitions.Count; i < n; ++i)
-                for (int j = 0, m = transitions[i].Count; j < m; ++j)
-                    _transitions[_states[i]][_letters[j]] = transitions[i][j];
-        }
-
         Automata(List<int> states, String letters, Dictionary<int, Dictionary<char, int>> transitions)
         {
             _states = states;

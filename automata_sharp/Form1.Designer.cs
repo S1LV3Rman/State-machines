@@ -38,7 +38,19 @@
             this.labelGenerateInfo2 = new System.Windows.Forms.Label();
             this.numericUpDownStates = new System.Windows.Forms.NumericUpDown();
             this.buttonGenerate = new System.Windows.Forms.Button();
+            this.tabPageCreate = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.buttonCreateConfirm = new System.Windows.Forms.Button();
+            this.labelCreateInfo = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.numericUpDownCreateAlphabet = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.numericUpDownCreateStates = new System.Windows.Forms.NumericUpDown();
+            this.buttonCreateTable = new System.Windows.Forms.Button();
             this.tabPageOpen = new System.Windows.Forms.TabPage();
+            this.labelOpenSaveText = new System.Windows.Forms.Label();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonOpen = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.labelStoped = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -56,27 +68,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.labelGeneratorResetWord = new System.Windows.Forms.Label();
             this.dataGridViewAutomata = new System.Windows.Forms.DataGridView();
-            this.tabPageCreate = new System.Windows.Forms.TabPage();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.numericUpDownCreateAlphabet = new System.Windows.Forms.NumericUpDown();
-            this.label8 = new System.Windows.Forms.Label();
-            this.numericUpDownCreateStates = new System.Windows.Forms.NumericUpDown();
-            this.buttonCreateTable = new System.Windows.Forms.Button();
-            this.buttonCreateConfirm = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageGenerate.SuspendLayout();
             this.panelGenerate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAlphabet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStates)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            this.groupBoxResetWord.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAutomata)).BeginInit();
             this.tabPageCreate.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCreateAlphabet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCreateStates)).BeginInit();
+            this.tabPageOpen.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBoxResetWord.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAutomata)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -202,8 +206,136 @@
             this.buttonGenerate.UseVisualStyleBackColor = false;
             this.buttonGenerate.Click += new System.EventHandler(this.buttonGenerate_Click);
             // 
+            // tabPageCreate
+            // 
+            this.tabPageCreate.Controls.Add(this.panel2);
+            this.tabPageCreate.Location = new System.Drawing.Point(4, 28);
+            this.tabPageCreate.Name = "tabPageCreate";
+            this.tabPageCreate.Size = new System.Drawing.Size(443, 178);
+            this.tabPageCreate.TabIndex = 2;
+            this.tabPageCreate.Text = "Create";
+            this.tabPageCreate.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.buttonCreateConfirm);
+            this.panel2.Controls.Add(this.labelCreateInfo);
+            this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.numericUpDownCreateAlphabet);
+            this.panel2.Controls.Add(this.label8);
+            this.panel2.Controls.Add(this.numericUpDownCreateStates);
+            this.panel2.Controls.Add(this.buttonCreateTable);
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(443, 178);
+            this.panel2.TabIndex = 12;
+            // 
+            // buttonCreateConfirm
+            // 
+            this.buttonCreateConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCreateConfirm.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.buttonCreateConfirm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonCreateConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCreateConfirm.Location = new System.Drawing.Point(7, 117);
+            this.buttonCreateConfirm.Name = "buttonCreateConfirm";
+            this.buttonCreateConfirm.Size = new System.Drawing.Size(433, 27);
+            this.buttonCreateConfirm.TabIndex = 9;
+            this.buttonCreateConfirm.Text = "Confirm";
+            this.buttonCreateConfirm.UseVisualStyleBackColor = false;
+            this.buttonCreateConfirm.Visible = false;
+            this.buttonCreateConfirm.Click += new System.EventHandler(this.buttonCreateConfirm_Click);
+            // 
+            // labelCreateInfo
+            // 
+            this.labelCreateInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelCreateInfo.AutoSize = true;
+            this.labelCreateInfo.Location = new System.Drawing.Point(8, 7);
+            this.labelCreateInfo.Name = "labelCreateInfo";
+            this.labelCreateInfo.Size = new System.Drawing.Size(247, 19);
+            this.labelCreateInfo.TabIndex = 0;
+            this.labelCreateInfo.Text = "Select size, then push \"Create Table\"";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(8, 37);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(49, 19);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "States";
+            // 
+            // numericUpDownCreateAlphabet
+            // 
+            this.numericUpDownCreateAlphabet.Location = new System.Drawing.Point(111, 77);
+            this.numericUpDownCreateAlphabet.Maximum = new decimal(new int[] {
+            26,
+            0,
+            0,
+            0});
+            this.numericUpDownCreateAlphabet.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownCreateAlphabet.Name = "numericUpDownCreateAlphabet";
+            this.numericUpDownCreateAlphabet.Size = new System.Drawing.Size(120, 27);
+            this.numericUpDownCreateAlphabet.TabIndex = 8;
+            this.numericUpDownCreateAlphabet.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(8, 79);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(67, 19);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "Alphabet";
+            // 
+            // numericUpDownCreateStates
+            // 
+            this.numericUpDownCreateStates.Location = new System.Drawing.Point(111, 35);
+            this.numericUpDownCreateStates.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownCreateStates.Name = "numericUpDownCreateStates";
+            this.numericUpDownCreateStates.Size = new System.Drawing.Size(120, 27);
+            this.numericUpDownCreateStates.TabIndex = 7;
+            this.numericUpDownCreateStates.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // buttonCreateTable
+            // 
+            this.buttonCreateTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCreateTable.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.buttonCreateTable.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonCreateTable.Location = new System.Drawing.Point(7, 117);
+            this.buttonCreateTable.Name = "buttonCreateTable";
+            this.buttonCreateTable.Size = new System.Drawing.Size(433, 27);
+            this.buttonCreateTable.TabIndex = 5;
+            this.buttonCreateTable.Text = "Create Table";
+            this.buttonCreateTable.UseVisualStyleBackColor = false;
+            this.buttonCreateTable.Click += new System.EventHandler(this.buttonCreateTable_Click);
+            // 
             // tabPageOpen
             // 
+            this.tabPageOpen.Controls.Add(this.labelOpenSaveText);
+            this.tabPageOpen.Controls.Add(this.buttonSave);
+            this.tabPageOpen.Controls.Add(this.buttonOpen);
             this.tabPageOpen.Location = new System.Drawing.Point(4, 28);
             this.tabPageOpen.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageOpen.Name = "tabPageOpen";
@@ -212,6 +344,39 @@
             this.tabPageOpen.TabIndex = 1;
             this.tabPageOpen.Text = "Open";
             this.tabPageOpen.UseVisualStyleBackColor = true;
+            // 
+            // labelOpenSaveText
+            // 
+            this.labelOpenSaveText.AutoSize = true;
+            this.labelOpenSaveText.Location = new System.Drawing.Point(8, 7);
+            this.labelOpenSaveText.Name = "labelOpenSaveText";
+            this.labelOpenSaveText.Size = new System.Drawing.Size(245, 19);
+            this.labelOpenSaveText.TabIndex = 2;
+            this.labelOpenSaveText.Text = "Save your automata or open existing";
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSave.Location = new System.Drawing.Point(3, 126);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(433, 27);
+            this.buttonSave.TabIndex = 1;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = false;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
+            // buttonOpen
+            // 
+            this.buttonOpen.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.buttonOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonOpen.Location = new System.Drawing.Point(3, 77);
+            this.buttonOpen.Name = "buttonOpen";
+            this.buttonOpen.Size = new System.Drawing.Size(433, 27);
+            this.buttonOpen.TabIndex = 0;
+            this.buttonOpen.Text = "Open";
+            this.buttonOpen.UseVisualStyleBackColor = false;
+            this.buttonOpen.Click += new System.EventHandler(this.buttonOpen_Click);
             // 
             // groupBox2
             // 
@@ -336,6 +501,7 @@
             // buttonResetWordCalculate
             // 
             this.buttonResetWordCalculate.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.buttonResetWordCalculate.Enabled = false;
             this.buttonResetWordCalculate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonResetWordCalculate.ForeColor = System.Drawing.Color.Red;
             this.buttonResetWordCalculate.Location = new System.Drawing.Point(6, 77);
@@ -396,130 +562,6 @@
             this.dataGridViewAutomata.Size = new System.Drawing.Size(444, 441);
             this.dataGridViewAutomata.TabIndex = 6;
             // 
-            // tabPageCreate
-            // 
-            this.tabPageCreate.Controls.Add(this.panel2);
-            this.tabPageCreate.Location = new System.Drawing.Point(4, 28);
-            this.tabPageCreate.Name = "tabPageCreate";
-            this.tabPageCreate.Size = new System.Drawing.Size(443, 178);
-            this.tabPageCreate.TabIndex = 2;
-            this.tabPageCreate.Text = "Create";
-            this.tabPageCreate.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.Controls.Add(this.buttonCreateConfirm);
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.label7);
-            this.panel2.Controls.Add(this.numericUpDownCreateAlphabet);
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.numericUpDownCreateStates);
-            this.panel2.Controls.Add(this.buttonCreateTable);
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(443, 178);
-            this.panel2.TabIndex = 12;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 7);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(247, 19);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Select size, then push \"Create Table\"";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 37);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(49, 19);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "States";
-            // 
-            // numericUpDownCreateAlphabet
-            // 
-            this.numericUpDownCreateAlphabet.Location = new System.Drawing.Point(111, 77);
-            this.numericUpDownCreateAlphabet.Maximum = new decimal(new int[] {
-            26,
-            0,
-            0,
-            0});
-            this.numericUpDownCreateAlphabet.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownCreateAlphabet.Name = "numericUpDownCreateAlphabet";
-            this.numericUpDownCreateAlphabet.Size = new System.Drawing.Size(120, 27);
-            this.numericUpDownCreateAlphabet.TabIndex = 8;
-            this.numericUpDownCreateAlphabet.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(8, 79);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(67, 19);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "Alphabet";
-            // 
-            // numericUpDownCreateStates
-            // 
-            this.numericUpDownCreateStates.Location = new System.Drawing.Point(111, 35);
-            this.numericUpDownCreateStates.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownCreateStates.Name = "numericUpDownCreateStates";
-            this.numericUpDownCreateStates.Size = new System.Drawing.Size(120, 27);
-            this.numericUpDownCreateStates.TabIndex = 7;
-            this.numericUpDownCreateStates.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // buttonCreateTable
-            // 
-            this.buttonCreateTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCreateTable.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.buttonCreateTable.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonCreateTable.Location = new System.Drawing.Point(7, 117);
-            this.buttonCreateTable.Name = "buttonCreateTable";
-            this.buttonCreateTable.Size = new System.Drawing.Size(433, 27);
-            this.buttonCreateTable.TabIndex = 5;
-            this.buttonCreateTable.Text = "Create Table";
-            this.buttonCreateTable.UseVisualStyleBackColor = false;
-            this.buttonCreateTable.Click += new System.EventHandler(this.buttonCreateTable_Click);
-            // 
-            // buttonCreateConfirm
-            // 
-            this.buttonCreateConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCreateConfirm.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.buttonCreateConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonCreateConfirm.Location = new System.Drawing.Point(7, 117);
-            this.buttonCreateConfirm.Name = "buttonCreateConfirm";
-            this.buttonCreateConfirm.Size = new System.Drawing.Size(433, 27);
-            this.buttonCreateConfirm.TabIndex = 9;
-            this.buttonCreateConfirm.Text = "Confirm";
-            this.buttonCreateConfirm.UseVisualStyleBackColor = false;
-            this.buttonCreateConfirm.Visible = false;
-            this.buttonCreateConfirm.Click += new System.EventHandler(this.buttonCreateConfirm_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
@@ -540,16 +582,18 @@
             this.panelGenerate.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAlphabet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStates)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBoxResetWord.ResumeLayout(false);
-            this.groupBoxResetWord.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAutomata)).EndInit();
             this.tabPageCreate.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCreateAlphabet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCreateStates)).EndInit();
+            this.tabPageOpen.ResumeLayout(false);
+            this.tabPageOpen.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBoxResetWord.ResumeLayout(false);
+            this.groupBoxResetWord.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAutomata)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -585,13 +629,16 @@
         private System.Windows.Forms.Button buttonResetWordCalculate;
         private System.Windows.Forms.TabPage tabPageCreate;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labelCreateInfo;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown numericUpDownCreateAlphabet;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown numericUpDownCreateStates;
         private System.Windows.Forms.Button buttonCreateTable;
         private System.Windows.Forms.Button buttonCreateConfirm;
+        private System.Windows.Forms.Button buttonOpen;
+        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Label labelOpenSaveText;
     }
 }
 
