@@ -48,6 +48,8 @@
             this.numericUpDownCreateStates = new System.Windows.Forms.NumericUpDown();
             this.buttonCreateTable = new System.Windows.Forms.Button();
             this.tabPageOpen = new System.Windows.Forms.TabPage();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelOpenSaveText = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonOpen = new System.Windows.Forms.Button();
@@ -78,6 +80,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCreateAlphabet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCreateStates)).BeginInit();
             this.tabPageOpen.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBoxResetWord.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAutomata)).BeginInit();
@@ -85,68 +89,44 @@
             // 
             // tabControlMain
             // 
+            resources.ApplyResources(this.tabControlMain, "tabControlMain");
             this.tabControlMain.Controls.Add(this.tabPageGenerate);
             this.tabControlMain.Controls.Add(this.tabPageCreate);
             this.tabControlMain.Controls.Add(this.tabPageOpen);
-            this.tabControlMain.Location = new System.Drawing.Point(0, 0);
-            this.tabControlMain.Margin = new System.Windows.Forms.Padding(4);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(451, 210);
-            this.tabControlMain.TabIndex = 0;
             // 
             // tabPageGenerate
             // 
             this.tabPageGenerate.Controls.Add(this.panelGenerate);
-            this.tabPageGenerate.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tabPageGenerate.Location = new System.Drawing.Point(4, 28);
-            this.tabPageGenerate.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.tabPageGenerate, "tabPageGenerate");
             this.tabPageGenerate.Name = "tabPageGenerate";
-            this.tabPageGenerate.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPageGenerate.Size = new System.Drawing.Size(443, 178);
-            this.tabPageGenerate.TabIndex = 0;
-            this.tabPageGenerate.Text = "Generator";
             this.tabPageGenerate.UseVisualStyleBackColor = true;
             // 
             // panelGenerate
             // 
-            this.panelGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.panelGenerate, "panelGenerate");
             this.panelGenerate.Controls.Add(this.labelGeneratorInfo);
             this.panelGenerate.Controls.Add(this.labelGenerateInfo1);
             this.panelGenerate.Controls.Add(this.numericUpDownAlphabet);
             this.panelGenerate.Controls.Add(this.labelGenerateInfo2);
             this.panelGenerate.Controls.Add(this.numericUpDownStates);
             this.panelGenerate.Controls.Add(this.buttonGenerate);
-            this.panelGenerate.Location = new System.Drawing.Point(0, 0);
             this.panelGenerate.Name = "panelGenerate";
-            this.panelGenerate.Size = new System.Drawing.Size(443, 178);
-            this.panelGenerate.TabIndex = 11;
             // 
             // labelGeneratorInfo
             // 
-            this.labelGeneratorInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelGeneratorInfo.AutoSize = true;
-            this.labelGeneratorInfo.Location = new System.Drawing.Point(8, 7);
+            resources.ApplyResources(this.labelGeneratorInfo, "labelGeneratorInfo");
             this.labelGeneratorInfo.Name = "labelGeneratorInfo";
-            this.labelGeneratorInfo.Size = new System.Drawing.Size(428, 19);
-            this.labelGeneratorInfo.TabIndex = 0;
-            this.labelGeneratorInfo.Text = "Type number of states and size of alpabet, then push \"Generate\"";
             // 
             // labelGenerateInfo1
             // 
-            this.labelGenerateInfo1.AutoSize = true;
-            this.labelGenerateInfo1.Location = new System.Drawing.Point(8, 37);
+            resources.ApplyResources(this.labelGenerateInfo1, "labelGenerateInfo1");
             this.labelGenerateInfo1.Name = "labelGenerateInfo1";
-            this.labelGenerateInfo1.Size = new System.Drawing.Size(49, 19);
-            this.labelGenerateInfo1.TabIndex = 2;
-            this.labelGenerateInfo1.Text = "States";
             // 
             // numericUpDownAlphabet
             // 
-            this.numericUpDownAlphabet.Location = new System.Drawing.Point(111, 77);
+            resources.ApplyResources(this.numericUpDownAlphabet, "numericUpDownAlphabet");
             this.numericUpDownAlphabet.Maximum = new decimal(new int[] {
             26,
             0,
@@ -158,8 +138,6 @@
             0,
             0});
             this.numericUpDownAlphabet.Name = "numericUpDownAlphabet";
-            this.numericUpDownAlphabet.Size = new System.Drawing.Size(120, 27);
-            this.numericUpDownAlphabet.TabIndex = 8;
             this.numericUpDownAlphabet.Value = new decimal(new int[] {
             1,
             0,
@@ -168,24 +146,18 @@
             // 
             // labelGenerateInfo2
             // 
-            this.labelGenerateInfo2.AutoSize = true;
-            this.labelGenerateInfo2.Location = new System.Drawing.Point(8, 79);
+            resources.ApplyResources(this.labelGenerateInfo2, "labelGenerateInfo2");
             this.labelGenerateInfo2.Name = "labelGenerateInfo2";
-            this.labelGenerateInfo2.Size = new System.Drawing.Size(67, 19);
-            this.labelGenerateInfo2.TabIndex = 3;
-            this.labelGenerateInfo2.Text = "Alphabet";
             // 
             // numericUpDownStates
             // 
-            this.numericUpDownStates.Location = new System.Drawing.Point(111, 35);
+            resources.ApplyResources(this.numericUpDownStates, "numericUpDownStates");
             this.numericUpDownStates.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.numericUpDownStates.Name = "numericUpDownStates";
-            this.numericUpDownStates.Size = new System.Drawing.Size(120, 27);
-            this.numericUpDownStates.TabIndex = 7;
             this.numericUpDownStates.Value = new decimal(new int[] {
             1,
             0,
@@ -194,33 +166,22 @@
             // 
             // buttonGenerate
             // 
-            this.buttonGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.buttonGenerate, "buttonGenerate");
             this.buttonGenerate.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.buttonGenerate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonGenerate.Location = new System.Drawing.Point(7, 117);
             this.buttonGenerate.Name = "buttonGenerate";
-            this.buttonGenerate.Size = new System.Drawing.Size(433, 27);
-            this.buttonGenerate.TabIndex = 5;
-            this.buttonGenerate.Text = "Generate";
             this.buttonGenerate.UseVisualStyleBackColor = false;
             this.buttonGenerate.Click += new System.EventHandler(this.buttonGenerate_Click);
             // 
             // tabPageCreate
             // 
             this.tabPageCreate.Controls.Add(this.panel2);
-            this.tabPageCreate.Location = new System.Drawing.Point(4, 28);
+            resources.ApplyResources(this.tabPageCreate, "tabPageCreate");
             this.tabPageCreate.Name = "tabPageCreate";
-            this.tabPageCreate.Size = new System.Drawing.Size(443, 178);
-            this.tabPageCreate.TabIndex = 2;
-            this.tabPageCreate.Text = "Create";
             this.tabPageCreate.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Controls.Add(this.buttonCreateConfirm);
             this.panel2.Controls.Add(this.labelCreateInfo);
             this.panel2.Controls.Add(this.label7);
@@ -228,50 +189,29 @@
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.numericUpDownCreateStates);
             this.panel2.Controls.Add(this.buttonCreateTable);
-            this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(443, 178);
-            this.panel2.TabIndex = 12;
             // 
             // buttonCreateConfirm
             // 
-            this.buttonCreateConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.buttonCreateConfirm, "buttonCreateConfirm");
             this.buttonCreateConfirm.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.buttonCreateConfirm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.buttonCreateConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCreateConfirm.Location = new System.Drawing.Point(7, 117);
             this.buttonCreateConfirm.Name = "buttonCreateConfirm";
-            this.buttonCreateConfirm.Size = new System.Drawing.Size(433, 27);
-            this.buttonCreateConfirm.TabIndex = 9;
-            this.buttonCreateConfirm.Text = "Confirm";
             this.buttonCreateConfirm.UseVisualStyleBackColor = false;
-            this.buttonCreateConfirm.Visible = false;
             this.buttonCreateConfirm.Click += new System.EventHandler(this.buttonCreateConfirm_Click);
             // 
             // labelCreateInfo
             // 
-            this.labelCreateInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelCreateInfo.AutoSize = true;
-            this.labelCreateInfo.Location = new System.Drawing.Point(8, 7);
+            resources.ApplyResources(this.labelCreateInfo, "labelCreateInfo");
             this.labelCreateInfo.Name = "labelCreateInfo";
-            this.labelCreateInfo.Size = new System.Drawing.Size(247, 19);
-            this.labelCreateInfo.TabIndex = 0;
-            this.labelCreateInfo.Text = "Select size, then push \"Create Table\"";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 37);
+            resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(49, 19);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "States";
             // 
             // numericUpDownCreateAlphabet
             // 
-            this.numericUpDownCreateAlphabet.Location = new System.Drawing.Point(111, 77);
+            resources.ApplyResources(this.numericUpDownCreateAlphabet, "numericUpDownCreateAlphabet");
             this.numericUpDownCreateAlphabet.Maximum = new decimal(new int[] {
             26,
             0,
@@ -283,8 +223,6 @@
             0,
             0});
             this.numericUpDownCreateAlphabet.Name = "numericUpDownCreateAlphabet";
-            this.numericUpDownCreateAlphabet.Size = new System.Drawing.Size(120, 27);
-            this.numericUpDownCreateAlphabet.TabIndex = 8;
             this.numericUpDownCreateAlphabet.Value = new decimal(new int[] {
             1,
             0,
@@ -293,24 +231,18 @@
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(8, 79);
+            resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(67, 19);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "Alphabet";
             // 
             // numericUpDownCreateStates
             // 
-            this.numericUpDownCreateStates.Location = new System.Drawing.Point(111, 35);
+            resources.ApplyResources(this.numericUpDownCreateStates, "numericUpDownCreateStates");
             this.numericUpDownCreateStates.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.numericUpDownCreateStates.Name = "numericUpDownCreateStates";
-            this.numericUpDownCreateStates.Size = new System.Drawing.Size(120, 27);
-            this.numericUpDownCreateStates.TabIndex = 7;
             this.numericUpDownCreateStates.Value = new decimal(new int[] {
             1,
             0,
@@ -319,68 +251,61 @@
             // 
             // buttonCreateTable
             // 
-            this.buttonCreateTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.buttonCreateTable, "buttonCreateTable");
             this.buttonCreateTable.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.buttonCreateTable.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonCreateTable.Location = new System.Drawing.Point(7, 117);
             this.buttonCreateTable.Name = "buttonCreateTable";
-            this.buttonCreateTable.Size = new System.Drawing.Size(433, 27);
-            this.buttonCreateTable.TabIndex = 5;
-            this.buttonCreateTable.Text = "Create Table";
             this.buttonCreateTable.UseVisualStyleBackColor = false;
             this.buttonCreateTable.Click += new System.EventHandler(this.buttonCreateTable_Click);
             // 
             // tabPageOpen
             // 
+            this.tabPageOpen.Controls.Add(this.pictureBox2);
+            this.tabPageOpen.Controls.Add(this.pictureBox1);
             this.tabPageOpen.Controls.Add(this.labelOpenSaveText);
             this.tabPageOpen.Controls.Add(this.buttonSave);
             this.tabPageOpen.Controls.Add(this.buttonOpen);
-            this.tabPageOpen.Location = new System.Drawing.Point(4, 28);
-            this.tabPageOpen.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.tabPageOpen, "tabPageOpen");
             this.tabPageOpen.Name = "tabPageOpen";
-            this.tabPageOpen.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPageOpen.Size = new System.Drawing.Size(443, 178);
-            this.tabPageOpen.TabIndex = 1;
-            this.tabPageOpen.Text = "Open";
             this.tabPageOpen.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::automata_sharp.Properties.Resources.save;
+            resources.ApplyResources(this.pictureBox2, "pictureBox2");
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::automata_sharp.Properties.Resources.open;
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
             // 
             // labelOpenSaveText
             // 
-            this.labelOpenSaveText.AutoSize = true;
-            this.labelOpenSaveText.Location = new System.Drawing.Point(8, 7);
+            resources.ApplyResources(this.labelOpenSaveText, "labelOpenSaveText");
             this.labelOpenSaveText.Name = "labelOpenSaveText";
-            this.labelOpenSaveText.Size = new System.Drawing.Size(245, 19);
-            this.labelOpenSaveText.TabIndex = 2;
-            this.labelOpenSaveText.Text = "Save your automata or open existing";
             // 
             // buttonSave
             // 
+            resources.ApplyResources(this.buttonSave, "buttonSave");
             this.buttonSave.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSave.Location = new System.Drawing.Point(3, 126);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(433, 27);
-            this.buttonSave.TabIndex = 1;
-            this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // buttonOpen
             // 
+            resources.ApplyResources(this.buttonOpen, "buttonOpen");
             this.buttonOpen.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.buttonOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonOpen.Location = new System.Drawing.Point(3, 77);
             this.buttonOpen.Name = "buttonOpen";
-            this.buttonOpen.Size = new System.Drawing.Size(433, 27);
-            this.buttonOpen.TabIndex = 0;
-            this.buttonOpen.Text = "Open";
             this.buttonOpen.UseVisualStyleBackColor = false;
             this.buttonOpen.Click += new System.EventHandler(this.buttonOpen_Click);
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.labelStoped);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.buttonImpact);
@@ -389,193 +314,124 @@
             this.groupBox2.Controls.Add(this.comboBoxStates);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.textBoxWord);
-            this.groupBox2.Location = new System.Drawing.Point(459, 217);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(327, 441);
-            this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Impact by own word";
             // 
             // labelStoped
             // 
-            this.labelStoped.AutoSize = true;
+            resources.ApplyResources(this.labelStoped, "labelStoped");
             this.labelStoped.ForeColor = System.Drawing.Color.Red;
-            this.labelStoped.Location = new System.Drawing.Point(177, 169);
             this.labelStoped.Name = "labelStoped";
-            this.labelStoped.Size = new System.Drawing.Size(69, 19);
-            this.labelStoped.TabIndex = 13;
-            this.labelStoped.Text = "Unknown";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 169);
+            resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(160, 19);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Automata is stopped at";
             // 
             // buttonImpact
             // 
             this.buttonImpact.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.buttonImpact.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonImpact.Location = new System.Drawing.Point(10, 139);
+            resources.ApplyResources(this.buttonImpact, "buttonImpact");
             this.buttonImpact.Name = "buttonImpact";
-            this.buttonImpact.Size = new System.Drawing.Size(311, 27);
-            this.buttonImpact.TabIndex = 11;
-            this.buttonImpact.Text = "Impact";
             this.buttonImpact.UseVisualStyleBackColor = false;
             this.buttonImpact.Click += new System.EventHandler(this.buttonGeneratorImpact_Click);
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 96);
+            resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 19);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Word:";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 56);
+            resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 19);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "State:";
             // 
             // comboBoxStates
             // 
             this.comboBoxStates.FormattingEnabled = true;
-            this.comboBoxStates.Location = new System.Drawing.Point(63, 53);
+            resources.ApplyResources(this.comboBoxStates, "comboBoxStates");
             this.comboBoxStates.Name = "comboBoxStates";
-            this.comboBoxStates.Size = new System.Drawing.Size(257, 27);
-            this.comboBoxStates.TabIndex = 2;
             this.comboBoxStates.SelectedIndexChanged += new System.EventHandler(this.comboBoxStates_SelectedIndexChanged);
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 23);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(314, 19);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Select start state, type word and push \"Impact\"";
             // 
             // textBoxWord
             // 
-            this.textBoxWord.Location = new System.Drawing.Point(64, 93);
+            resources.ApplyResources(this.textBoxWord, "textBoxWord");
             this.textBoxWord.Name = "textBoxWord";
-            this.textBoxWord.Size = new System.Drawing.Size(257, 27);
-            this.textBoxWord.TabIndex = 0;
             // 
             // groupBoxResetWord
             // 
-            this.groupBoxResetWord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.groupBoxResetWord, "groupBoxResetWord");
             this.groupBoxResetWord.Controls.Add(this.buttonShortResetWordCalculate);
             this.groupBoxResetWord.Controls.Add(this.buttonResetWordCalculate);
             this.groupBoxResetWord.Controls.Add(this.labelShortestResetWord);
             this.groupBoxResetWord.Controls.Add(this.labelQuickResetWord);
             this.groupBoxResetWord.Controls.Add(this.label1);
             this.groupBoxResetWord.Controls.Add(this.labelGeneratorResetWord);
-            this.groupBoxResetWord.Location = new System.Drawing.Point(459, 28);
             this.groupBoxResetWord.Name = "groupBoxResetWord";
-            this.groupBoxResetWord.Size = new System.Drawing.Size(327, 182);
-            this.groupBoxResetWord.TabIndex = 9;
             this.groupBoxResetWord.TabStop = false;
-            this.groupBoxResetWord.Text = "Reset Word";
             // 
             // buttonShortResetWordCalculate
             // 
             this.buttonShortResetWordCalculate.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.buttonShortResetWordCalculate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonShortResetWordCalculate.Location = new System.Drawing.Point(6, 148);
+            resources.ApplyResources(this.buttonShortResetWordCalculate, "buttonShortResetWordCalculate");
             this.buttonShortResetWordCalculate.Name = "buttonShortResetWordCalculate";
-            this.buttonShortResetWordCalculate.Size = new System.Drawing.Size(311, 27);
-            this.buttonShortResetWordCalculate.TabIndex = 15;
-            this.buttonShortResetWordCalculate.Text = "Calculate (not recomended)";
             this.buttonShortResetWordCalculate.UseVisualStyleBackColor = false;
             this.buttonShortResetWordCalculate.Click += new System.EventHandler(this.buttonShortResetWordCalculate_Click);
             // 
             // buttonResetWordCalculate
             // 
             this.buttonResetWordCalculate.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.buttonResetWordCalculate.Enabled = false;
-            this.buttonResetWordCalculate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonResetWordCalculate.ForeColor = System.Drawing.Color.Red;
-            this.buttonResetWordCalculate.Location = new System.Drawing.Point(6, 77);
+            resources.ApplyResources(this.buttonResetWordCalculate, "buttonResetWordCalculate");
+            this.buttonResetWordCalculate.ForeColor = System.Drawing.SystemColors.ControlText;
             this.buttonResetWordCalculate.Name = "buttonResetWordCalculate";
-            this.buttonResetWordCalculate.Size = new System.Drawing.Size(311, 27);
-            this.buttonResetWordCalculate.TabIndex = 14;
-            this.buttonResetWordCalculate.Text = "NOT WORKING, PUSH ANOTHER BUTTON";
             this.buttonResetWordCalculate.UseVisualStyleBackColor = false;
             this.buttonResetWordCalculate.Click += new System.EventHandler(this.buttonResetWordCalculate_Click);
             // 
             // labelShortestResetWord
             // 
-            this.labelShortestResetWord.AutoSize = true;
+            resources.ApplyResources(this.labelShortestResetWord, "labelShortestResetWord");
             this.labelShortestResetWord.ForeColor = System.Drawing.Color.Red;
-            this.labelShortestResetWord.Location = new System.Drawing.Point(11, 126);
             this.labelShortestResetWord.Name = "labelShortestResetWord";
-            this.labelShortestResetWord.Size = new System.Drawing.Size(69, 19);
-            this.labelShortestResetWord.TabIndex = 3;
-            this.labelShortestResetWord.Text = "Unknown";
+            this.labelShortestResetWord.DoubleClick += new System.EventHandler(this.labelShortestResetWord_DoubleClick);
             // 
             // labelQuickResetWord
             // 
-            this.labelQuickResetWord.AutoSize = true;
+            resources.ApplyResources(this.labelQuickResetWord, "labelQuickResetWord");
             this.labelQuickResetWord.ForeColor = System.Drawing.Color.Red;
-            this.labelQuickResetWord.Location = new System.Drawing.Point(11, 52);
             this.labelQuickResetWord.Name = "labelQuickResetWord";
-            this.labelQuickResetWord.Size = new System.Drawing.Size(69, 19);
-            this.labelQuickResetWord.TabIndex = 2;
-            this.labelQuickResetWord.Text = "Unknown";
+            this.labelQuickResetWord.DoubleClick += new System.EventHandler(this.labelQuickResetWord_DoubleClick);
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 33);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(220, 19);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Most quickly found reset word is";
             // 
             // labelGeneratorResetWord
             // 
-            this.labelGeneratorResetWord.AutoSize = true;
-            this.labelGeneratorResetWord.Location = new System.Drawing.Point(7, 107);
+            resources.ApplyResources(this.labelGeneratorResetWord, "labelGeneratorResetWord");
             this.labelGeneratorResetWord.Name = "labelGeneratorResetWord";
-            this.labelGeneratorResetWord.Size = new System.Drawing.Size(150, 19);
-            this.labelGeneratorResetWord.TabIndex = 0;
-            this.labelGeneratorResetWord.Text = "Shortest reset word is";
             // 
             // dataGridViewAutomata
             // 
-            this.dataGridViewAutomata.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.dataGridViewAutomata, "dataGridViewAutomata");
             this.dataGridViewAutomata.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewAutomata.Location = new System.Drawing.Point(7, 217);
             this.dataGridViewAutomata.Name = "dataGridViewAutomata";
             this.dataGridViewAutomata.ReadOnly = true;
-            this.dataGridViewAutomata.Size = new System.Drawing.Size(444, 441);
-            this.dataGridViewAutomata.TabIndex = 6;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(793, 670);
             this.Controls.Add(this.dataGridViewAutomata);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.groupBoxResetWord);
-            this.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
-            this.Text = "DFA";
             this.tabControlMain.ResumeLayout(false);
             this.tabPageGenerate.ResumeLayout(false);
             this.panelGenerate.ResumeLayout(false);
@@ -589,12 +445,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCreateStates)).EndInit();
             this.tabPageOpen.ResumeLayout(false);
             this.tabPageOpen.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBoxResetWord.ResumeLayout(false);
             this.groupBoxResetWord.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAutomata)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -639,6 +498,8 @@
         private System.Windows.Forms.Button buttonOpen;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Label labelOpenSaveText;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 

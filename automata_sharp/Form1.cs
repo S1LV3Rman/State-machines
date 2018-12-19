@@ -111,6 +111,7 @@ namespace automata_sharp
         private void buttonCreateTable_Click(object sender, EventArgs e)
         {
             resetUI();
+            dataTable = new DataTable();
             dataTable.Columns.Add("State");
 
             for (int j = 0, m = Convert.ToInt32(numericUpDownCreateAlphabet.Value); j < m; ++j)
@@ -156,28 +157,30 @@ namespace automata_sharp
         private void buttonSave_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.ShowDialog(this);
-            StreamWriter stream = new StreamWriter(saveFileDialog.OpenFile());
+            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                StreamWriter stream = new StreamWriter(saveFileDialog.OpenFile());
 
-            dataTable = automata.OutputToDataTable();
+                dataTable = automata.OutputToDataTable();
 
-            int states = dataTable.Rows.Count;
-            int letters = dataTable.Columns.Count - 1;
+                int states = dataTable.Rows.Count;
+                int letters = dataTable.Columns.Count - 1;
 
-            stream.WriteLine(states);
-            stream.WriteLine(letters);
+                stream.WriteLine(states);
+                stream.WriteLine(letters);
 
-            for (int i = 0; i < states; ++i)
-                for (int j = 0; j < letters; ++j)
-                {
-                    stream.Write(dataTable.Rows[i][j]);
-                    if (j + 1 == letters)
-                        stream.Write(';');
-                    else
-                        stream.Write(',');
-                }
+                for (int i = 0; i < states; ++i)
+                    for (int j = 0; j < letters; ++j)
+                    {
+                        stream.Write(dataTable.Rows[i][j + 1]);
+                        if (j + 1 == letters)
+                            stream.Write(';');
+                        else
+                            stream.Write(',');
+                    }
 
-            stream.Close();
+                stream.Close();
+            }
         }
 
         private void buttonOpen_Click(object sender, EventArgs e)
@@ -185,36 +188,39 @@ namespace automata_sharp
             resetUI();
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.ShowDialog(this);
-            StreamReader stream = new StreamReader(openFileDialog.OpenFile());
-            var rawInput = stream.ReadToEnd();
-            stream.Close();
-
-            var lines = rawInput.Split('\n');
-
-            int states = Convert.ToInt32(lines[0]);
-            int alphabet = Convert.ToInt32(lines[1]);
-
-            dataTable = new DataTable();
-
-            dataTable.Columns.Add("State");
-            for (int i = 0; i < alphabet; ++i)
-                dataTable.Columns.Add($"by {Convert.ToChar('a' + i)}");
-            for (int i = 0; i < states; ++i)
-                dataTable.Rows.Add();
-            
-            var rows = lines[2].Split(';'); // Разбиваем таблицу на строки
-            for (int i = 0; i < states; ++i)
+            if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
-                var temp = rows[i].Split(',');// И на отдельные клетки текущей строки
-                dataTable.Rows[i][0] = i;
-                for(int j = 1; j <= alphabet; ++j)
-                    dataTable.Rows[i][j] = temp[j - 1];
+
+                StreamReader stream = new StreamReader(openFileDialog.OpenFile());
+                var rawInput = stream.ReadToEnd();
+                stream.Close();
+
+                var lines = rawInput.Split('\n');
+
+                int states = Convert.ToInt32(lines[0]);
+                int alphabet = Convert.ToInt32(lines[1]);
+
+                dataTable = new DataTable();
+
+                dataTable.Columns.Add("State");
+                for (int i = 0; i < alphabet; ++i)
+                    dataTable.Columns.Add($"by {Convert.ToChar('a' + i)}");
+                for (int i = 0; i < states; ++i)
+                    dataTable.Rows.Add();
+
+                var rows = lines[2].Split(';'); // Разбиваем таблицу на строки
+                for (int i = 0; i < states; ++i)
+                {
+                    var temp = rows[i].Split(',');// И на отдельные клетки текущей строки
+                    dataTable.Rows[i][0] = i;
+                    for (int j = 1; j <= alphabet; ++j)
+                        dataTable.Rows[i][j] = temp[j - 1];
+                }
+
+                automata = new Automata(dataTable);
+
+                ActivateUI();
             }
-
-            automata = new Automata(dataTable);
-
-            ActivateUI();
         }
 
         private void ActivateUI()
@@ -229,6 +235,16 @@ namespace automata_sharp
                 comboBoxStates.Items.Add(i);
 
             dataGridViewAutomata.DataSource = dataTable;
+        }
+
+        private void labelQuickResetWord_DoubleClick(object sender, EventArgs e)
+        {
+            Clipboard.SetText(labelQuickResetWord.Text);
+        }
+
+        private void labelShortestResetWord_DoubleClick(object sender, EventArgs e)
+        {
+            Clipboard.SetText(labelShortestResetWord.Text);
         }
     }
 }

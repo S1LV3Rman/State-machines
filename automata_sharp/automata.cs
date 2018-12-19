@@ -197,6 +197,30 @@ namespace automata_sharp
 
     }
     */
+        private void TryToAddToHashSet(ref HashSet<HashSet<int>> a, ref HashSet<int> b)
+        {
+            bool flag = false;
+            foreach(var t in a)
+                if (t.SetEquals(b))
+                    flag = true;
+            if (!flag)
+                a.Add(b);
+        }
+
+        private bool IsTwoSetsOfSetsAreEqual(HashSet<HashSet<int>> a, HashSet<HashSet<int>> b)
+        {
+            bool flag = true;
+
+            List<HashSet<int>> x = a.ToList();
+            List<HashSet<int>> y = b.ToList();
+
+            if (x.Count != y.Count) return false;
+
+            for(int i = 0; i < x.Count && i < y.Count && flag; ++i)
+                flag = x[i].SetEquals(y[i]);
+
+            return flag;
+        }
 
         public String FindResetWord()
         {
@@ -204,16 +228,16 @@ namespace automata_sharp
             String word = String.Empty;
             List<HashSet<HashSet<int>>> usedStates = new List<HashSet<HashSet<int>>>();
             Dictionary<char, HashSet<HashSet<int>>> nextStates = new Dictionary<char, HashSet<HashSet<int>>>();
-
-            for(int i = 0, n = _states.Count - 1; i < n; ++i)
+            
+            for (int i = 0, n = _states.Count - 1; i < n; ++i)
                 for(int j = i + 1, m = n + 1; j < m; ++j)
                 {
                     HashSet<int> pair = new HashSet<int>();
                     pair.Add(_states[i]);
                     pair.Add(_states[j]);
-                    pairs.Add(pair);
+                    TryToAddToHashSet(ref pairs, ref pair);
                 }
-
+            
             while (pairs.Count != 0)
             {
                 usedStates.Add(pairs);
@@ -224,22 +248,23 @@ namespace automata_sharp
 
                     foreach (var pair in pairs)
                     {
+                        
                         HashSet<int> next = Delta(pair, letter);
                         if (next.Count == 2)
-                            temp.Add(next);
+                            TryToAddToHashSet(ref temp, ref next);
                     }
 
-                    nextStates[letter] = temp;
+                    nextStates.Add(letter, temp);
                 }
 
                 char nextLetter = Convert.ToChar(0);
                 int minState = pairs.Count;
-
+                
                 foreach(var letter in _letters)
                 {
                     bool isNew = true;
                     for (int i = 0, n = usedStates.Count; isNew && i < n; ++i)
-                        isNew = nextStates[letter] != usedStates[i];
+                        isNew = !IsTwoSetsOfSetsAreEqual(nextStates[letter], usedStates[i]);// поменять сравнение двух hashset<hashset>
 
                     if(isNew && nextStates[letter].Count <= minState)
                     {
