@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("automata_sharp")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Automs")]
+[assembly: AssemblyDescription("Environment for synchronizable DFA")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("automata_sharp")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2018")]
+[assembly: AssemblyCompany("Khanvelyan, Serebrennikov")]
+[assembly: AssemblyProduct("Automs")]
+[assembly: AssemblyCopyright("Khanvelyan, Serebrennikov © 2018-2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

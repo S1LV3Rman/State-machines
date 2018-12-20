@@ -68,6 +68,11 @@ namespace automata_sharp
             return _states;
         }
 
+        public String GetLetters()
+        {
+            return _letters;
+        }
+
         public SortedSet<int> Delta(SortedSet<int> states, String word)
         {
             foreach (var letter in word)
