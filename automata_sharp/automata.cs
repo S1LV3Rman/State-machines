@@ -214,16 +214,6 @@ namespace automata_sharp
 
     }
     */
-        private void TryToAddToSortedSet(ref SortedSet<SortedSet<int>> a, ref SortedSet<int> b)
-        {
-            bool flag = false;
-            foreach(var t in a)
-                if (t.SetEquals(b))
-                    flag = true;
-            if (!flag)
-                a.Add(b);
-        }
-
         private bool IsTwoSetsOfSetsAreEqual(SortedSet<SortedSet<int>> a, SortedSet<SortedSet<int>> b)
         {
             bool flag = true;
@@ -254,7 +244,7 @@ namespace automata_sharp
                         _states[i],
                         _states[j],
                     };
-                    TryToAddToSortedSet(ref pairs, ref pair);
+                    pairs.Add(pair);
                 }
             
             while (pairs.Count != 0)
@@ -269,7 +259,7 @@ namespace automata_sharp
                     {
                         SortedSet<int> next = Delta(pair, letter);
                         if (next.Count == 2)
-                            TryToAddToSortedSet(ref temp, ref next);
+                            temp.Add(next);
                     }
 
                     nextStates.Add(letter, temp);
