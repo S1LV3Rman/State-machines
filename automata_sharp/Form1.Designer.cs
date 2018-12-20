@@ -47,9 +47,17 @@
             this.numericUpDownCreateStates = new System.Windows.Forms.NumericUpDown();
             this.buttonCreateTable = new System.Windows.Forms.Button();
             this.tabPageOpen = new System.Windows.Forms.TabPage();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelOpenSaveText = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonOpen = new System.Windows.Forms.Button();
+            this.tabPageAbout = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.buttonCreateConfirm = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.labelStoped = new System.Windows.Forms.Label();
@@ -68,14 +76,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.labelGeneratorResetWord = new System.Windows.Forms.Label();
             this.dataGridViewAutomata = new System.Windows.Forms.DataGridView();
-            this.tabPageAbout = new System.Windows.Forms.TabPage();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPageGenerate.SuspendLayout();
             this.panelGenerate.SuspendLayout();
@@ -86,13 +86,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCreateAlphabet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCreateStates)).BeginInit();
             this.tabPageOpen.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabPageAbout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBoxResetWord.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAutomata)).BeginInit();
-            this.tabPageAbout.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -353,6 +353,30 @@
             this.tabPageOpen.Text = "From File";
             this.tabPageOpen.UseVisualStyleBackColor = true;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::automata_sharp.Properties.Resources.save;
+            this.pictureBox2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.pictureBox2.InitialImage = null;
+            this.pictureBox2.Location = new System.Drawing.Point(8, 126);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(38, 27);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 4;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::automata_sharp.Properties.Resources.open;
+            this.pictureBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.pictureBox1.InitialImage = null;
+            this.pictureBox1.Location = new System.Drawing.Point(8, 77);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(38, 27);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
             // labelOpenSaveText
             // 
             this.labelOpenSaveText.AutoSize = true;
@@ -392,6 +416,71 @@
             this.buttonOpen.Text = "Open";
             this.buttonOpen.UseVisualStyleBackColor = false;
             this.buttonOpen.Click += new System.EventHandler(this.buttonOpen_Click);
+            // 
+            // tabPageAbout
+            // 
+            this.tabPageAbout.Controls.Add(this.label11);
+            this.tabPageAbout.Controls.Add(this.label10);
+            this.tabPageAbout.Controls.Add(this.label9);
+            this.tabPageAbout.Controls.Add(this.label6);
+            this.tabPageAbout.Controls.Add(this.pictureBox3);
+            this.tabPageAbout.Location = new System.Drawing.Point(4, 28);
+            this.tabPageAbout.Name = "tabPageAbout";
+            this.tabPageAbout.Size = new System.Drawing.Size(443, 178);
+            this.tabPageAbout.TabIndex = 3;
+            this.tabPageAbout.Text = "About";
+            this.tabPageAbout.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Calibri", 8F);
+            this.label11.Location = new System.Drawing.Point(8, 162);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(99, 13);
+            this.label11.TabIndex = 4;
+            this.label11.Text = "SPb ETU, 2018-2019";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Calibri", 10F);
+            this.label10.Location = new System.Drawing.Point(8, 144);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(430, 17);
+            this.label10.TabIndex = 3;
+            this.label10.Text = "Made for alternative exam \"Mathematical Logic and Theory of Algorithms\"";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Calibri", 10F);
+            this.label9.Location = new System.Drawing.Point(99, 22);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(303, 119);
+            this.label9.TabIndex = 2;
+            this.label9.Text = resources.GetString("label9.Text");
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Calibri", 12F);
+            this.label6.Location = new System.Drawing.Point(98, 3);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(63, 19);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Authors:";
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::automata_sharp.Properties.Resources.Automaton;
+            this.pictureBox3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.pictureBox3.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(89, 101);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 0;
+            this.pictureBox3.TabStop = false;
             // 
             // buttonCreateConfirm
             // 
@@ -610,94 +699,6 @@
             this.dataGridViewAutomata.Size = new System.Drawing.Size(442, 313);
             this.dataGridViewAutomata.TabIndex = 6;
             // 
-            // tabPageAbout
-            // 
-            this.tabPageAbout.Controls.Add(this.label11);
-            this.tabPageAbout.Controls.Add(this.label10);
-            this.tabPageAbout.Controls.Add(this.label9);
-            this.tabPageAbout.Controls.Add(this.label6);
-            this.tabPageAbout.Controls.Add(this.pictureBox3);
-            this.tabPageAbout.Location = new System.Drawing.Point(4, 28);
-            this.tabPageAbout.Name = "tabPageAbout";
-            this.tabPageAbout.Size = new System.Drawing.Size(443, 178);
-            this.tabPageAbout.TabIndex = 3;
-            this.tabPageAbout.Text = "About";
-            this.tabPageAbout.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::automata_sharp.Properties.Resources.save;
-            this.pictureBox2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pictureBox2.InitialImage = null;
-            this.pictureBox2.Location = new System.Drawing.Point(8, 126);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(38, 27);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 4;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::automata_sharp.Properties.Resources.open;
-            this.pictureBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(8, 77);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(38, 27);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::automata_sharp.Properties.Resources.Automaton;
-            this.pictureBox3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pictureBox3.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(89, 101);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 0;
-            this.pictureBox3.TabStop = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Calibri", 14F);
-            this.label6.Location = new System.Drawing.Point(98, 3);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(77, 23);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Authors:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(98, 33);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(157, 95);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "Zamyslov Nikita\r\nSerebrennikov Vladimir\r\nKhanvelyan Samwel\r\nChajkin Mikhail\r\n\r\n";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Calibri", 10F);
-            this.label10.Location = new System.Drawing.Point(8, 126);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(430, 17);
-            this.label10.TabIndex = 3;
-            this.label10.Text = "Made for alternative exam \"Mathematical Logic and Theory of Algorithms\"";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Calibri", 10F);
-            this.label11.Location = new System.Drawing.Point(8, 148);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(121, 17);
-            this.label11.TabIndex = 4;
-            this.label11.Text = "SPb ETU, 2018-2019";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
@@ -709,7 +710,6 @@
             this.Controls.Add(this.groupBoxResetWord);
             this.Font = new System.Drawing.Font("Calibri", 12F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Automs | Synchronizable Deterministic Finite Automata";
@@ -726,16 +726,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCreateStates)).EndInit();
             this.tabPageOpen.ResumeLayout(false);
             this.tabPageOpen.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tabPageAbout.ResumeLayout(false);
+            this.tabPageAbout.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBoxResetWord.ResumeLayout(false);
             this.groupBoxResetWord.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAutomata)).EndInit();
-            this.tabPageAbout.ResumeLayout(false);
-            this.tabPageAbout.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
 
         }
