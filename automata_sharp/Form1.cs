@@ -73,8 +73,23 @@ namespace automata_sharp
         /// <param name="e"></param>
         private void buttonGeneratorImpact_Click(object sender, EventArgs e)
         {
-            labelStoped.Text = automata.Delta(Convert.ToInt32(comboBoxStates.SelectedItem.ToString()), textBoxWord.Text).ToString();
-            labelStoped.ForeColor = Color.LimeGreen;
+            bool flag = true;
+
+            string input = textBoxWord.Text;
+            string letters = automata.GetLetters();
+
+            for (int i = 0; i < input.Count() && flag; ++i)
+                if (!letters.Contains(input[i])) flag = false;
+
+            if (!flag)
+            {
+                DialogResult dialog = MessageBox.Show("Wrong input word!", "Input word", MessageBoxButtons.OK);
+            }
+            else
+            {
+                labelStoped.Text = automata.Delta(Convert.ToInt32(comboBoxStates.SelectedItem.ToString()), textBoxWord.Text).ToString();
+                labelStoped.ForeColor = Color.LimeGreen;
+            }
         }
 
         /// <summary>
