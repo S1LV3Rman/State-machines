@@ -86,8 +86,16 @@ namespace automata_sharp
         {
             buttonResetWordCalculate.Enabled = false;
             labelQuickResetWord.Text = await Task.Run(() => automata.FindResetWord());
-            labelQuickResetWord.ForeColor = Color.LimeGreen;
-            labelQuickResetWord.Text += $" (reset to {automata.Delta(0, labelQuickResetWord.Text)})";
+            if (labelQuickResetWord.Text == String.Empty)
+            {
+                labelQuickResetWord.ForeColor = Color.Orange;
+                labelQuickResetWord.Text = "Reset word is not exists";
+            }
+            else
+            {
+                labelQuickResetWord.ForeColor = Color.LimeGreen;
+                labelQuickResetWord.Text += $" (reset to {automata.Delta(0, labelQuickResetWord.Text)})";
+            }
         }
 
         /// <summary>
@@ -99,8 +107,16 @@ namespace automata_sharp
         {
             buttonShortResetWordCalculate.Enabled = false;
             labelShortestResetWord.Text = await Task.Run(() => automata.FindShortestResetWord());
-            labelShortestResetWord.ForeColor = Color.LimeGreen;
-            labelShortestResetWord.Text += $" (reset to {automata.Delta(0, labelShortestResetWord.Text)})";
+            if (labelShortestResetWord.Text == String.Empty)
+            {
+                labelShortestResetWord.ForeColor = Color.Orange;
+                labelShortestResetWord.Text = "Reset word is not exists";
+            }
+            else
+            {
+                labelShortestResetWord.ForeColor = Color.LimeGreen;
+                labelShortestResetWord.Text += $" (reset to {automata.Delta(0, labelShortestResetWord.Text)})";
+            }
         }
 
         /// <summary>

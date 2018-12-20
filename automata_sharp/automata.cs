@@ -7,6 +7,23 @@ using System.Data;
 
 namespace automata_sharp
 {
+    public class SortedSetCustomComparer : IComparer<SortedSet<int>>
+    {
+        public int Compare(SortedSet<int> x, SortedSet<int> y)
+        {
+            // x > y - 1; x == y - 0; x < y - -1
+            List<int> a = x.ToList();
+            List<int> b = y.ToList();
+
+            for (int i = 0; i < a.Count && i < b.Count; ++i)
+            {
+                if (a[i] < b[i]) return -1;
+                if (a[i] > b[i]) return 1;
+            }
+            return 0;
+        }
+    }
+
     public class Automata
     {
         private List<int> _states;
@@ -50,11 +67,11 @@ namespace automata_sharp
             return _states;
         }
 
-        public HashSet<int> Delta(HashSet<int> states, String word)
+        public SortedSet<int> Delta(SortedSet<int> states, String word)
         {
             foreach(var letter in word)
             {
-                HashSet<int> nextStates = new HashSet<int>();
+                SortedSet<int> nextStates = new SortedSet<int>();
 
                 foreach (var state in states)
                     nextStates.Add(_transitions[state][letter]);
@@ -80,9 +97,9 @@ namespace automata_sharp
             return states;
         }
 
-        public HashSet<int> Delta(HashSet<int> states, char letter)
+        public SortedSet<int> Delta(SortedSet<int> states, char letter)
         {
-            HashSet<int> nextStates = new HashSet<int>();
+            SortedSet<int> nextStates = new SortedSet<int>();
 
             foreach (var state in states)
                 nextStates.Add(_transitions[state][letter]);
@@ -110,12 +127,12 @@ namespace automata_sharp
         
         public String FindShortestResetWord()
         {
-            List<HashSet<int>> usedStates = new List<HashSet<int>>(),
-                            currentStates = new List<HashSet<int>>(), 
-                               nextStates = new List<HashSet<int>>();
+            List<SortedSet<int>> usedStates = new List<SortedSet<int>>(),
+                            currentStates = new List<SortedSet<int>>(), 
+                               nextStates = new List<SortedSet<int>>();
             List<String> currentWords = new List<String>(), 
                             nextWords = new List<String>();
-            HashSet<int> start = new HashSet<int>();
+            SortedSet<int> start = new SortedSet<int>();
 
             foreach (var s in _states)
                 start.Add(s);
@@ -131,11 +148,11 @@ namespace automata_sharp
                 for (int i = 0, n = currentStates.Count; i < n; ++i)
                     for (int j = 0, l = _letters.Length; j < l; ++j)
                     {
-                        HashSet<int> temp = Delta(currentStates[i], _letters[j]);
+                        SortedSet<int> temp = Delta(currentStates[i], _letters[j]);
 
                         bool isNew = true;
                         for (int k = 0, m = usedStates.Count; isNew && k < m; ++k)
-                            isNew = temp != usedStates[k];
+                            isNew = !temp.SetEquals(usedStates[k]); 
 
                         if (isNew)
                         {
@@ -197,7 +214,7 @@ namespace automata_sharp
 
     }
     */
-        private void TryToAddToHashSet(ref HashSet<HashSet<int>> a, ref HashSet<int> b)
+        private void TryToAddToSortedSet(ref SortedSet<SortedSet<int>> a, ref SortedSet<int> b)
         {
             bool flag = false;
             foreach(var t in a)
@@ -207,12 +224,12 @@ namespace automata_sharp
                 a.Add(b);
         }
 
-        private bool IsTwoSetsOfSetsAreEqual(HashSet<HashSet<int>> a, HashSet<HashSet<int>> b)
+        private bool IsTwoSetsOfSetsAreEqual(SortedSet<SortedSet<int>> a, SortedSet<SortedSet<int>> b)
         {
             bool flag = true;
 
-            List<HashSet<int>> x = a.ToList();
-            List<HashSet<int>> y = b.ToList();
+            List<SortedSet<int>> x = a.ToList();
+            List<SortedSet<int>> y = b.ToList();
 
             if (x.Count != y.Count) return false;
 
@@ -224,18 +241,20 @@ namespace automata_sharp
 
         public String FindResetWord()
         {
-            HashSet<HashSet<int>> pairs = new HashSet<HashSet<int>>();
+            SortedSet<SortedSet<int>> pairs = new SortedSet<SortedSet<int>>(new SortedSetCustomComparer());
             String word = String.Empty;
-            List<HashSet<HashSet<int>>> usedStates = new List<HashSet<HashSet<int>>>();
-            Dictionary<char, HashSet<HashSet<int>>> nextStates = new Dictionary<char, HashSet<HashSet<int>>>();
+            List<SortedSet<SortedSet<int>>> usedStates = new List<SortedSet<SortedSet<int>>>();
+            Dictionary<char, SortedSet<SortedSet<int>>> nextStates = new Dictionary<char, SortedSet<SortedSet<int>>>();
             
             for (int i = 0, n = _states.Count - 1; i < n; ++i)
                 for(int j = i + 1, m = n + 1; j < m; ++j)
                 {
-                    HashSet<int> pair = new HashSet<int>();
-                    pair.Add(_states[i]);
-                    pair.Add(_states[j]);
-                    TryToAddToHashSet(ref pairs, ref pair);
+                    SortedSet<int> pair = new SortedSet<int>
+                    {
+                        _states[i],
+                        _states[j],
+                    };
+                    TryToAddToSortedSet(ref pairs, ref pair);
                 }
             
             while (pairs.Count != 0)
@@ -244,14 +263,13 @@ namespace automata_sharp
 
                 foreach (var letter in _letters)
                 {
-                    HashSet<HashSet<int>> temp = new HashSet<HashSet<int>>();
+                    SortedSet<SortedSet<int>> temp = new SortedSet<SortedSet<int>>(new SortedSetCustomComparer());
 
                     foreach (var pair in pairs)
                     {
-                        
-                        HashSet<int> next = Delta(pair, letter);
+                        SortedSet<int> next = Delta(pair, letter);
                         if (next.Count == 2)
-                            TryToAddToHashSet(ref temp, ref next);
+                            TryToAddToSortedSet(ref temp, ref next);
                     }
 
                     nextStates.Add(letter, temp);
@@ -264,7 +282,7 @@ namespace automata_sharp
                 {
                     bool isNew = true;
                     for (int i = 0, n = usedStates.Count; isNew && i < n; ++i)
-                        isNew = !IsTwoSetsOfSetsAreEqual(nextStates[letter], usedStates[i]);// поменять сравнение двух hashset<hashset>
+                        isNew = !IsTwoSetsOfSetsAreEqual(nextStates[letter], usedStates[i]);
 
                     if(isNew && nextStates[letter].Count <= minState)
                     {
