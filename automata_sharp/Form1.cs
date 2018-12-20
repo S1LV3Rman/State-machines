@@ -105,18 +105,26 @@ namespace automata_sharp
         /// <param name="e"></param>
         private async void buttonShortResetWordCalculate_Click(object sender, EventArgs e)
         {
-            buttonShortResetWordCalculate.Enabled = false;
-            labelShortestResetWord.Text = await Task.Run(() => automata.FindShortestResetWord());
-            if (labelShortestResetWord.Text == String.Empty)
+            if (automata.GetStates().Count > 10)
             {
-                labelShortestResetWord.ForeColor = Color.Orange;
-                labelShortestResetWord.Text = "Reset word is not exists";
-            }
-            else
-            {
-                labelShortestResetWord.ForeColor = Color.LimeGreen;
-                labelShortestResetWord.Text += $" (reset to {automata.Delta(0, labelShortestResetWord.Text)})";
-            }
+                DialogResult caution = MessageBox.Show("This may take a long time, are you sure?", "Confirm", MessageBoxButtons.YesNo);
+                if(caution == DialogResult.Yes)
+                {
+                    buttonShortResetWordCalculate.Enabled = false;
+
+                    labelShortestResetWord.Text = await Task.Run(() => automata.FindShortestResetWord());
+                    if (labelShortestResetWord.Text == String.Empty)
+                    {
+                        labelShortestResetWord.ForeColor = Color.Orange;
+                        labelShortestResetWord.Text = "Reset word is not exists";
+                    }
+                    else
+                    {
+                        labelShortestResetWord.ForeColor = Color.LimeGreen;
+                        labelShortestResetWord.Text += $" (reset to {automata.Delta(0, labelShortestResetWord.Text)})";
+                    }
+                }
+            }            
         }
 
         /// <summary>

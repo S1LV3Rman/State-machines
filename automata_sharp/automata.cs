@@ -216,14 +216,14 @@ namespace automata_sharp
     */
         private bool IsTwoSetsOfSetsAreEqual(SortedSet<SortedSet<int>> a, SortedSet<SortedSet<int>> b)
         {
-            bool flag = true;
-
             List<SortedSet<int>> x = a.ToList();
             List<SortedSet<int>> y = b.ToList();
 
             if (x.Count != y.Count) return false;
+            
+            bool flag = true;
 
-            for(int i = 0; i < x.Count && i < y.Count && flag; ++i)
+            for (int i = 0; i < x.Count && i < y.Count && flag; ++i)
                 flag = x[i].SetEquals(y[i]);
 
             return flag;
