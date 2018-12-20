@@ -40,7 +40,6 @@
             this.buttonGenerate = new System.Windows.Forms.Button();
             this.tabPageCreate = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.buttonCreateConfirm = new System.Windows.Forms.Button();
             this.labelCreateInfo = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.numericUpDownCreateAlphabet = new System.Windows.Forms.NumericUpDown();
@@ -48,11 +47,10 @@
             this.numericUpDownCreateStates = new System.Windows.Forms.NumericUpDown();
             this.buttonCreateTable = new System.Windows.Forms.Button();
             this.tabPageOpen = new System.Windows.Forms.TabPage();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelOpenSaveText = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonOpen = new System.Windows.Forms.Button();
+            this.buttonCreateConfirm = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.labelStoped = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -70,6 +68,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.labelGeneratorResetWord = new System.Windows.Forms.Label();
             this.dataGridViewAutomata = new System.Windows.Forms.DataGridView();
+            this.tabPageAbout = new System.Windows.Forms.TabPage();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPageGenerate.SuspendLayout();
             this.panelGenerate.SuspendLayout();
@@ -80,11 +86,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCreateAlphabet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCreateStates)).BeginInit();
             this.tabPageOpen.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBoxResetWord.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAutomata)).BeginInit();
+            this.tabPageAbout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -93,6 +101,7 @@
             this.tabControlMain.Controls.Add(this.tabPageGenerate);
             this.tabControlMain.Controls.Add(this.tabPageCreate);
             this.tabControlMain.Controls.Add(this.tabPageOpen);
+            this.tabControlMain.Controls.Add(this.tabPageAbout);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
             // 
@@ -190,14 +199,6 @@
             this.panel2.Controls.Add(this.buttonCreateTable);
             this.panel2.Name = "panel2";
             // 
-            // buttonCreateConfirm
-            // 
-            resources.ApplyResources(this.buttonCreateConfirm, "buttonCreateConfirm");
-            this.buttonCreateConfirm.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.buttonCreateConfirm.Name = "buttonCreateConfirm";
-            this.buttonCreateConfirm.UseVisualStyleBackColor = false;
-            this.buttonCreateConfirm.Click += new System.EventHandler(this.buttonCreateConfirm_Click);
-            // 
             // labelCreateInfo
             // 
             resources.ApplyResources(this.labelCreateInfo, "labelCreateInfo");
@@ -267,20 +268,6 @@
             this.tabPageOpen.Name = "tabPageOpen";
             this.tabPageOpen.UseVisualStyleBackColor = true;
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::automata_sharp.Properties.Resources.save;
-            resources.ApplyResources(this.pictureBox2, "pictureBox2");
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::automata_sharp.Properties.Resources.open;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
-            // 
             // labelOpenSaveText
             // 
             resources.ApplyResources(this.labelOpenSaveText, "labelOpenSaveText");
@@ -301,6 +288,14 @@
             this.buttonOpen.Name = "buttonOpen";
             this.buttonOpen.UseVisualStyleBackColor = false;
             this.buttonOpen.Click += new System.EventHandler(this.buttonOpen_Click);
+            // 
+            // buttonCreateConfirm
+            // 
+            resources.ApplyResources(this.buttonCreateConfirm, "buttonCreateConfirm");
+            this.buttonCreateConfirm.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.buttonCreateConfirm.Name = "buttonCreateConfirm";
+            this.buttonCreateConfirm.UseVisualStyleBackColor = false;
+            this.buttonCreateConfirm.Click += new System.EventHandler(this.buttonCreateConfirm_Click);
             // 
             // groupBox2
             // 
@@ -425,6 +420,58 @@
             this.dataGridViewAutomata.Name = "dataGridViewAutomata";
             this.dataGridViewAutomata.ReadOnly = true;
             // 
+            // tabPageAbout
+            // 
+            this.tabPageAbout.Controls.Add(this.label11);
+            this.tabPageAbout.Controls.Add(this.label10);
+            this.tabPageAbout.Controls.Add(this.label9);
+            this.tabPageAbout.Controls.Add(this.label6);
+            this.tabPageAbout.Controls.Add(this.pictureBox3);
+            resources.ApplyResources(this.tabPageAbout, "tabPageAbout");
+            this.tabPageAbout.Name = "tabPageAbout";
+            this.tabPageAbout.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::automata_sharp.Properties.Resources.save;
+            resources.ApplyResources(this.pictureBox2, "pictureBox2");
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::automata_sharp.Properties.Resources.open;
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::automata_sharp.Properties.Resources.Automaton;
+            resources.ApplyResources(this.pictureBox3, "pictureBox3");
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.TabStop = false;
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
+            // 
+            // label11
+            // 
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.Name = "label11";
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -447,13 +494,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCreateStates)).EndInit();
             this.tabPageOpen.ResumeLayout(false);
             this.tabPageOpen.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBoxResetWord.ResumeLayout(false);
             this.groupBoxResetWord.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAutomata)).EndInit();
+            this.tabPageAbout.ResumeLayout(false);
+            this.tabPageAbout.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -501,6 +551,12 @@
         private System.Windows.Forms.Label labelOpenSaveText;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.TabPage tabPageAbout;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label6;
     }
 }
 
