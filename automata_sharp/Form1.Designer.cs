@@ -40,7 +40,6 @@
             this.buttonGenerate = new System.Windows.Forms.Button();
             this.tabPageCreate = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.buttonCreateConfirm = new System.Windows.Forms.Button();
             this.labelCreateInfo = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.numericUpDownCreateAlphabet = new System.Windows.Forms.NumericUpDown();
@@ -53,6 +52,7 @@
             this.labelOpenSaveText = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonOpen = new System.Windows.Forms.Button();
+            this.buttonCreateConfirm = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.labelStoped = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -70,6 +70,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.labelGeneratorResetWord = new System.Windows.Forms.Label();
             this.dataGridViewAutomata = new System.Windows.Forms.DataGridView();
+            this.buttonCancelResetWord = new System.Windows.Forms.Button();
+            this.buttonCancelShortResetWord = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageGenerate.SuspendLayout();
             this.panelGenerate.SuspendLayout();
@@ -190,14 +192,6 @@
             this.panel2.Controls.Add(this.buttonCreateTable);
             this.panel2.Name = "panel2";
             // 
-            // buttonCreateConfirm
-            // 
-            resources.ApplyResources(this.buttonCreateConfirm, "buttonCreateConfirm");
-            this.buttonCreateConfirm.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.buttonCreateConfirm.Name = "buttonCreateConfirm";
-            this.buttonCreateConfirm.UseVisualStyleBackColor = false;
-            this.buttonCreateConfirm.Click += new System.EventHandler(this.buttonCreateConfirm_Click);
-            // 
             // labelCreateInfo
             // 
             resources.ApplyResources(this.labelCreateInfo, "labelCreateInfo");
@@ -302,6 +296,14 @@
             this.buttonOpen.UseVisualStyleBackColor = false;
             this.buttonOpen.Click += new System.EventHandler(this.buttonOpen_Click);
             // 
+            // buttonCreateConfirm
+            // 
+            resources.ApplyResources(this.buttonCreateConfirm, "buttonCreateConfirm");
+            this.buttonCreateConfirm.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.buttonCreateConfirm.Name = "buttonCreateConfirm";
+            this.buttonCreateConfirm.UseVisualStyleBackColor = false;
+            this.buttonCreateConfirm.Click += new System.EventHandler(this.buttonCreateConfirm_Click);
+            // 
             // groupBox2
             // 
             resources.ApplyResources(this.groupBox2, "groupBox2");
@@ -366,6 +368,8 @@
             // groupBoxResetWord
             // 
             resources.ApplyResources(this.groupBoxResetWord, "groupBoxResetWord");
+            this.groupBoxResetWord.Controls.Add(this.buttonCancelShortResetWord);
+            this.groupBoxResetWord.Controls.Add(this.buttonCancelResetWord);
             this.groupBoxResetWord.Controls.Add(this.buttonShortResetWordCalculate);
             this.groupBoxResetWord.Controls.Add(this.buttonResetWordCalculate);
             this.groupBoxResetWord.Controls.Add(this.labelShortestResetWord);
@@ -424,6 +428,22 @@
             this.dataGridViewAutomata.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewAutomata.Name = "dataGridViewAutomata";
             this.dataGridViewAutomata.ReadOnly = true;
+            // 
+            // buttonCancelResetWord
+            // 
+            this.buttonCancelResetWord.BackColor = System.Drawing.SystemColors.ControlLight;
+            resources.ApplyResources(this.buttonCancelResetWord, "buttonCancelResetWord");
+            this.buttonCancelResetWord.Name = "buttonCancelResetWord";
+            this.buttonCancelResetWord.UseVisualStyleBackColor = false;
+            this.buttonCancelResetWord.Click += new System.EventHandler(this.buttonCancelResetWord_Click);
+            // 
+            // buttonCancelShortResetWord
+            // 
+            this.buttonCancelShortResetWord.BackColor = System.Drawing.SystemColors.ControlLight;
+            resources.ApplyResources(this.buttonCancelShortResetWord, "buttonCancelShortResetWord");
+            this.buttonCancelShortResetWord.Name = "buttonCancelShortResetWord";
+            this.buttonCancelShortResetWord.UseVisualStyleBackColor = false;
+            this.buttonCancelShortResetWord.Click += new System.EventHandler(this.buttonCancelShortResetWord_Click);
             // 
             // Form1
             // 
@@ -501,6 +521,8 @@
         private System.Windows.Forms.Label labelOpenSaveText;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button buttonCancelResetWord;
+        private System.Windows.Forms.Button buttonCancelShortResetWord;
     }
 }
 

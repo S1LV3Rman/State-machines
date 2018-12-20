@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Threading;
 
 namespace automata_sharp
 {
@@ -15,6 +16,7 @@ namespace automata_sharp
     {
         Automata automata = new Automata();
         DataTable dataTable = new DataTable();
+        CancellationTokenSource ResetWordCancellation, ShortResetWordCancellation;
 
 
         public Form1()
@@ -85,16 +87,46 @@ namespace automata_sharp
         private async void buttonResetWordCalculate_Click(object sender, EventArgs e)
         {
             buttonResetWordCalculate.Enabled = false;
-            labelQuickResetWord.Text = await Task.Run(() => automata.FindResetWord());
-            if (labelQuickResetWord.Text == String.Empty)
+
+            //Используем токен только в теле using, в конце у этого токена будет вызвано 
+            using (ResetWordCancellation = new CancellationTokenSource())
             {
-                labelQuickResetWord.ForeColor = Color.Orange;
-                labelQuickResetWord.Text = "Reset word is not exists";
-            }
-            else
-            {
-                labelQuickResetWord.ForeColor = Color.LimeGreen;
-                labelQuickResetWord.Text += $" (reset to {automata.Delta(0, labelQuickResetWord.Text)})";
+                buttonCancelResetWord.Enabled = true;
+                try
+                {
+                    //Ждем OperationCanceledException у таски
+                    labelQuickResetWord.Text = await automata.FindResetWord(ResetWordCancellation);
+                    //если его нет, то обрабатываем соответствущим образом 
+                    buttonCancelResetWord.Enabled = false;
+                    if (string.Empty.Equals(labelQuickResetWord.Text))
+                    {
+                        labelQuickResetWord.ForeColor = Color.Orange;
+                        labelQuickResetWord.Text = "Reset word is not exists";
+                    }
+                    else
+                    {
+                        labelQuickResetWord.ForeColor = Color.LimeGreen;
+                        labelQuickResetWord.Text += $" (reset to {automata.Delta(0, labelQuickResetWord.Text)})";
+                    }
+                }
+                //Если прилител OperationCanceledException  
+                catch (OperationCanceledException)
+                {
+                    labelQuickResetWord.ForeColor = Color.Red;
+                    labelQuickResetWord.Text = "Отменено";
+                    buttonResetWordCalculate.Enabled = true;
+                    buttonCancelResetWord.Enabled = false;//Выключаем кнопку отмены 
+                }
+                //Если прилитело что-то, чего мы не ожидали, пробрасываем исключение наверх
+                catch
+                {
+                    throw;
+                }
+                finally
+                {
+                    //В любом случае нам нужно
+                    ResetWordCancellation = null;//убрать токен
+                }
             }
         }
 
@@ -115,17 +147,44 @@ namespace automata_sharp
             if (flag)
             {
                 buttonShortResetWordCalculate.Enabled = false;
-
-                labelShortestResetWord.Text = await Task.Run(() => automata.FindShortestResetWord());
-                if (labelShortestResetWord.Text == String.Empty)
+                using (ShortResetWordCancellation = new CancellationTokenSource())
                 {
-                    labelShortestResetWord.ForeColor = Color.Orange;
-                    labelShortestResetWord.Text = "Reset word is not exists";
-                }
-                else
-                {
-                    labelShortestResetWord.ForeColor = Color.LimeGreen;
-                    labelShortestResetWord.Text += $" (reset to {automata.Delta(0, labelShortestResetWord.Text)})";
+                    try
+                    {
+                        //Ждем OperationCanceledException у таски
+                        buttonCancelShortResetWord.Enabled = true;
+                        labelShortestResetWord.Text = await automata.FindShortestResetWord(ShortResetWordCancellation);
+                        //если его нет, то обрабатываем соответствущим образом 
+                        buttonCancelShortResetWord.Enabled = false;
+                        if (labelShortestResetWord.Text == String.Empty)
+                        {
+                            labelShortestResetWord.ForeColor = Color.Orange;
+                            labelShortestResetWord.Text = "Reset word is not exists";
+                        }
+                        else
+                        {
+                            labelShortestResetWord.ForeColor = Color.LimeGreen;
+                            labelShortestResetWord.Text += $" (reset to {automata.Delta(0, labelShortestResetWord.Text)})";
+                        }
+                    }
+                    //Если прилител OperationCanceledException  
+                    catch (OperationCanceledException)
+                    {
+                        labelShortestResetWord.ForeColor = Color.Red;
+                        labelShortestResetWord.Text = "Отменено";
+                        buttonShortResetWordCalculate.Enabled = true;
+                        buttonCancelShortResetWord.Enabled = false;//Выключаем кнопку отмены 
+                    }
+                    //Если прилитело что-то, чего мы не ожидали, пробрасываем исключение наверх
+                    catch
+                    {
+                        throw;
+                    }
+                    finally
+                    {
+                        //В любом случае нам нужно
+                        ShortResetWordCancellation = null;//убрать токен
+                    }
                 }
             }
         }
@@ -282,6 +341,16 @@ namespace automata_sharp
         {
             Clipboard.SetText(labelShortestResetWord.Text);
             DialogResult dialog = MessageBox.Show("Copied to clipboard", "Reset word", MessageBoxButtons.OK);
+        }
+
+        private void buttonCancelShortResetWord_Click(object sender, EventArgs e)
+        {
+            ShortResetWordCancellation?.Cancel();
+        }
+
+        private void buttonCancelResetWord_Click(object sender, EventArgs e)
+        {
+            ResetWordCancellation?.Cancel();
         }
     }
 }
