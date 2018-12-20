@@ -182,7 +182,6 @@
             // panel2
             // 
             resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Controls.Add(this.buttonCreateConfirm);
             this.panel2.Controls.Add(this.labelCreateInfo);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.numericUpDownCreateAlphabet);
@@ -194,7 +193,7 @@
             // buttonCreateConfirm
             // 
             resources.ApplyResources(this.buttonCreateConfirm, "buttonCreateConfirm");
-            this.buttonCreateConfirm.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.buttonCreateConfirm.BackColor = System.Drawing.Color.PaleTurquoise;
             this.buttonCreateConfirm.Name = "buttonCreateConfirm";
             this.buttonCreateConfirm.UseVisualStyleBackColor = false;
             this.buttonCreateConfirm.Click += new System.EventHandler(this.buttonCreateConfirm_Click);
@@ -306,6 +305,7 @@
             // groupBox2
             // 
             resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.Controls.Add(this.buttonCreateConfirm);
             this.groupBox2.Controls.Add(this.labelStoped);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.buttonImpact);
@@ -418,6 +418,8 @@
             // 
             // dataGridViewAutomata
             // 
+            this.dataGridViewAutomata.AllowUserToAddRows = false;
+            this.dataGridViewAutomata.AllowUserToDeleteRows = false;
             resources.ApplyResources(this.dataGridViewAutomata, "dataGridViewAutomata");
             this.dataGridViewAutomata.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewAutomata.Name = "dataGridViewAutomata";
@@ -453,7 +455,6 @@
             this.groupBoxResetWord.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAutomata)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

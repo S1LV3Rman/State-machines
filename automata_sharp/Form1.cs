@@ -105,26 +105,29 @@ namespace automata_sharp
         /// <param name="e"></param>
         private async void buttonShortResetWordCalculate_Click(object sender, EventArgs e)
         {
+            bool flag = true;
             if (automata.GetStates().Count > 10)
             {
+                flag = false;
                 DialogResult caution = MessageBox.Show("This may take a long time, are you sure?", "Confirm", MessageBoxButtons.YesNo);
-                if(caution == DialogResult.Yes)
-                {
-                    buttonShortResetWordCalculate.Enabled = false;
+                    flag = caution == DialogResult.Yes;
+            }
+            if (flag)
+            {
+                buttonShortResetWordCalculate.Enabled = false;
 
-                    labelShortestResetWord.Text = await Task.Run(() => automata.FindShortestResetWord());
-                    if (labelShortestResetWord.Text == String.Empty)
-                    {
-                        labelShortestResetWord.ForeColor = Color.Orange;
-                        labelShortestResetWord.Text = "Reset word is not exists";
-                    }
-                    else
-                    {
-                        labelShortestResetWord.ForeColor = Color.LimeGreen;
-                        labelShortestResetWord.Text += $" (reset to {automata.Delta(0, labelShortestResetWord.Text)})";
-                    }
+                labelShortestResetWord.Text = await Task.Run(() => automata.FindShortestResetWord());
+                if (labelShortestResetWord.Text == String.Empty)
+                {
+                    labelShortestResetWord.ForeColor = Color.Orange;
+                    labelShortestResetWord.Text = "Reset word is not exists";
                 }
-            }            
+                else
+                {
+                    labelShortestResetWord.ForeColor = Color.LimeGreen;
+                    labelShortestResetWord.Text += $" (reset to {automata.Delta(0, labelShortestResetWord.Text)})";
+                }
+            }
         }
 
         /// <summary>
@@ -135,6 +138,9 @@ namespace automata_sharp
         private void buttonCreateTable_Click(object sender, EventArgs e)
         {
             resetUI();
+
+            tabControlMain.Enabled = false;
+
             dataTable = new DataTable();
             dataTable.Columns.Add("State");
 
@@ -143,6 +149,10 @@ namespace automata_sharp
 
             for (int i = 0, n = Convert.ToInt32(numericUpDownCreateStates.Value); i < n; ++i)
                 dataTable.Rows.Add(i);
+
+            for (int i = 0, n = Convert.ToInt32(numericUpDownCreateStates.Value); i < n; ++i)
+                for (int j = 1, m = Convert.ToInt32(numericUpDownCreateAlphabet.Value); j <= m; ++j)
+                    dataTable.Rows[i][j] = 0;
 
             dataGridViewAutomata.DataSource = dataTable;
             dataGridViewAutomata.ReadOnly = false;
@@ -159,6 +169,7 @@ namespace automata_sharp
         /// <param name="e"></param>
         private void buttonCreateConfirm_Click(object sender, EventArgs e)
         {
+            tabControlMain.Enabled = true;
             automata = new Automata(dataTable);
             buttonCreateTable.Visible = true;
             buttonCreateConfirm.Visible = false;
@@ -264,11 +275,13 @@ namespace automata_sharp
         private void labelQuickResetWord_DoubleClick(object sender, EventArgs e)
         {
             Clipboard.SetText(labelQuickResetWord.Text);
+            DialogResult dialog = MessageBox.Show("Copied to clipboard", "Reset word", MessageBoxButtons.OK);
         }
 
         private void labelShortestResetWord_DoubleClick(object sender, EventArgs e)
         {
             Clipboard.SetText(labelShortestResetWord.Text);
+            DialogResult dialog = MessageBox.Show("Copied to clipboard", "Reset word", MessageBoxButtons.OK);
         }
     }
 }
