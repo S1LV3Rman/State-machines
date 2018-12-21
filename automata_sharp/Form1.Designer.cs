@@ -428,7 +428,7 @@
             // 
             // buttonCancelShortResetWord
             // 
-            this.buttonCancelShortResetWord.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.buttonCancelShortResetWord.BackColor = System.Drawing.Color.LightCoral;
             resources.ApplyResources(this.buttonCancelShortResetWord, "buttonCancelShortResetWord");
             this.buttonCancelShortResetWord.Name = "buttonCancelShortResetWord";
             this.buttonCancelShortResetWord.UseVisualStyleBackColor = false;
@@ -436,7 +436,7 @@
             // 
             // buttonCancelResetWord
             // 
-            this.buttonCancelResetWord.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.buttonCancelResetWord.BackColor = System.Drawing.Color.LightCoral;
             resources.ApplyResources(this.buttonCancelResetWord, "buttonCancelResetWord");
             this.buttonCancelResetWord.Name = "buttonCancelResetWord";
             this.buttonCancelResetWord.UseVisualStyleBackColor = false;

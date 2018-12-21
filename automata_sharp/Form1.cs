@@ -22,17 +22,17 @@ namespace automata_sharp
         public Form1()
         {
             InitializeComponent();
-            resetUI();
+            ResetUI();
         }
 
         /// <summary>
         /// Сброс интерфейса в холодное
         /// </summary>
-        private void resetUI()
+        private void ResetUI()
         {
             // Отключение кнопок
-            buttonResetWordCalculate.Enabled = false;
-            buttonShortResetWordCalculate.Enabled = false;
+            buttonResetWordCalculate.Visible = true;
+            buttonShortResetWordCalculate.Visible = true;
             buttonImpact.Enabled = false;
             
             // Очистка выпадающего списка
@@ -57,7 +57,7 @@ namespace automata_sharp
         private void buttonGenerate_Click(object sender, EventArgs e)
         {
             // Сброс интерфейса, т.к. создается новый автомат
-            resetUI();
+            ResetUI();
 
             // Генерация
             automata = Automata.Random(
@@ -101,18 +101,17 @@ namespace automata_sharp
         /// <param name="e"></param>
         private async void buttonResetWordCalculate_Click(object sender, EventArgs e)
         {
-            buttonResetWordCalculate.Enabled = false;
 
             //Используем токен только в теле using, в конце у этого токена будет вызвано 
             using (ResetWordCancellation = new CancellationTokenSource())
             {
-                buttonCancelResetWord.Enabled = true;
+                buttonCancelResetWord.Visible = true;
+                buttonResetWordCalculate.Visible = false;
                 try
                 {
                     //Ждем OperationCanceledException у таски
                     labelQuickResetWord.Text = await automata.FindResetWord(ResetWordCancellation);
                     //если его нет, то обрабатываем соответствущим образом 
-                    buttonCancelResetWord.Enabled = false;
                     if (string.Empty.Equals(labelQuickResetWord.Text))
                     {
                         labelQuickResetWord.ForeColor = Color.Orange;
@@ -123,14 +122,15 @@ namespace automata_sharp
                         labelQuickResetWord.ForeColor = Color.LimeGreen;
                         labelQuickResetWord.Text += $" (reset to {automata.Delta(0, labelQuickResetWord.Text)})";
                     }
+                    buttonCancelResetWord.Visible = false;
                 }
                 //Если прилител OperationCanceledException  
                 catch (OperationCanceledException)
                 {
                     labelQuickResetWord.ForeColor = Color.Red;
-                    labelQuickResetWord.Text = "Отменено";
-                    buttonResetWordCalculate.Enabled = true;
-                    buttonCancelResetWord.Enabled = false;//Выключаем кнопку отмены 
+                    labelQuickResetWord.Text = "Canceled";
+                    buttonResetWordCalculate.Visible = true;
+                    buttonCancelResetWord.Visible = false;//Выключаем кнопку отмены 
                 }
                 //Если прилитело что-то, чего мы не ожидали, пробрасываем исключение наверх
                 catch
@@ -161,7 +161,8 @@ namespace automata_sharp
             }
             if (flag)
             {
-                buttonShortResetWordCalculate.Enabled = false;
+                buttonShortResetWordCalculate.Visible = false;
+                buttonCancelShortResetWord.Visible = true;
                 using (ShortResetWordCancellation = new CancellationTokenSource())
                 {
                     try
@@ -181,14 +182,15 @@ namespace automata_sharp
                             labelShortestResetWord.ForeColor = Color.LimeGreen;
                             labelShortestResetWord.Text += $" (reset to {automata.Delta(0, labelShortestResetWord.Text)})";
                         }
+                        buttonCancelShortResetWord.Visible = false;
                     }
                     //Если прилител OperationCanceledException  
                     catch (OperationCanceledException)
                     {
                         labelShortestResetWord.ForeColor = Color.Red;
-                        labelShortestResetWord.Text = "Отменено";
-                        buttonShortResetWordCalculate.Enabled = true;
-                        buttonCancelShortResetWord.Enabled = false;//Выключаем кнопку отмены 
+                        labelShortestResetWord.Text = "Canceled";
+                        buttonShortResetWordCalculate.Visible = true;
+                        buttonCancelShortResetWord.Visible = false;//Выключаем кнопку отмены 
                     }
                     //Если прилитело что-то, чего мы не ожидали, пробрасываем исключение наверх
                     catch
@@ -211,7 +213,7 @@ namespace automata_sharp
         /// <param name="e"></param>
         private void buttonCreateTable_Click(object sender, EventArgs e)
         {
-            resetUI();
+            ResetUI();
 
             tabControlMain.Enabled = false;
 
@@ -294,7 +296,7 @@ namespace automata_sharp
 
         private void buttonOpen_Click(object sender, EventArgs e)
         {
-            resetUI();
+            ResetUI();
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
