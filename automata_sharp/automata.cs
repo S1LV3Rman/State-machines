@@ -25,6 +25,38 @@ namespace automata_sharp
         }
     }
 
+    public class Pair
+    {
+        public int f;
+        public int s;
+
+        public Pair()
+        {
+            f = s = -1;
+        }
+
+        public Pair(int a, int b)
+        {
+            f = a;
+            s = b;
+        }
+
+        public bool isValid()
+        {
+            return f != s;
+        }
+
+        public static bool operator==(Pair L, Pair R)
+        {
+            return L.f == R.f && L.s == R.s || L.f == R.s && L.s == R.f;
+        }
+
+        public static bool operator!=(Pair L, Pair R)
+        {
+            return (L.f != R.f || L.s != R.s) && (L.f != R.s || L.s != R.f);
+        }
+    }
+
     public class Automata
     {
         private List<int> _states;
@@ -76,14 +108,7 @@ namespace automata_sharp
         public SortedSet<int> Delta(SortedSet<int> states, String word)
         {
             foreach (var letter in word)
-            {
-                SortedSet<int> nextStates = new SortedSet<int>();
-
-                foreach (var state in states)
-                    nextStates.Add(_transitions[state][letter]);
-
-                states = nextStates;
-            }
+                states = Delta(states, letter);
 
             return states;
         }
@@ -91,14 +116,7 @@ namespace automata_sharp
         public List<int> Delta(List<int> states, String word)
         {
             foreach (var letter in word)
-            {
-                List<int> nextStates = new List<int>();
-
-                foreach (var state in states)
-                    nextStates.Add(_transitions[state][letter]);
-
-                states = nextStates;
-            }
+                states = Delta(states, letter);
 
             return states;
         }
@@ -121,6 +139,16 @@ namespace automata_sharp
                 nextStates.Add(_transitions[state][letter]);
 
             return nextStates;
+        }
+
+        public Pair Delta(Pair pair, char letter)
+        {
+            var nextPair = new Pair();
+
+            nextPair.f = _transitions[pair.f][letter];
+            nextPair.s = _transitions[pair.s][letter];
+
+            return nextPair;
         }
 
         public int Delta(int state, String word)
@@ -186,6 +214,7 @@ namespace automata_sharp
             }
             return "";
         }
+
         public Task<string> FindShortestResetWord(CancellationTokenSource cancellationTokenSource)
         {
             var token = cancellationTokenSource.Token;
@@ -284,6 +313,7 @@ namespace automata_sharp
 
     }
     */
+
         private bool IsTwoSetsOfSetsAreEqual(SortedSet<SortedSet<int>> a, SortedSet<SortedSet<int>> b)
         {
             List<SortedSet<int>> x = a.ToList();
@@ -373,19 +403,15 @@ namespace automata_sharp
 
             return Task.Run(() =>
             {
-                var pairs = new SortedSet<SortedSet<int>>(new SortedSetCustomComparer());
+                var pairs = new SortedSet<Pair>();
                 var word = string.Empty;
-                var usedStates = new List<SortedSet<SortedSet<int>>>();
-                var nextStates = new Dictionary<char, SortedSet<SortedSet<int>>>();
+                var usedStates = new List<SortedSet<Pair>>();
+                var nextStates = new Dictionary<char, SortedSet<Pair>>();
 
                 for (int i = 0, n = _states.Count - 1; i < n; ++i)
                     for (int j = i + 1, m = n + 1; j < m; ++j)
                     {
-                        var pair = new SortedSet<int>
-                    {
-                    _states[i],
-                    _states[j],
-                    };
+                        var pair = new Pair(_states[i], _states[j]);
                         pairs.Add(pair);
                     }
 
@@ -396,13 +422,13 @@ namespace automata_sharp
                     foreach (var letter in _letters)
                     {
                         token.ThrowIfCancellationRequested();
-                        var temp = new SortedSet<SortedSet<int>>(new SortedSetCustomComparer());
+                        var temp = new SortedSet<Pair>();
                         
                         foreach (var pair in pairs)
                         {
                             token.ThrowIfCancellationRequested();
-                            SortedSet<int> next = Delta(pair, letter);
-                            if (next.Count == 2)
+                            Pair next = Delta(pair, letter);
+                            if (next.isValid())
                                 temp.Add(next);
                         }
 
@@ -418,7 +444,7 @@ namespace automata_sharp
 
                         bool isNew = true;
                         for (int i = 0, n = usedStates.Count; isNew && i < n; ++i)
-                            isNew = !IsTwoSetsOfSetsAreEqual(nextStates[letter], usedStates[i]);
+                            isNew = nextStates[letter] != usedStates[i];
 
                         if (isNew && nextStates[letter].Count <= minState)
                         {
@@ -444,7 +470,6 @@ namespace automata_sharp
             }, token);
         }
 
-        // String findResetWord()
         /*
         Функция нахождения синхр. слова
         {
