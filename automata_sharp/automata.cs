@@ -494,6 +494,43 @@ namespace automata_sharp
         }
         */
 
+        public static Automata CleverRandom(int numStates, int numLetters)
+        {
+            Random rand = new Random();
+
+            var flags = new List<int>();
+            flags.Add(rand.Next(0, numLetters - 1));
+            for (int i = 1, n = numStates - 1; i < n; ++i)
+                flags.Add(rand.Next(flags[i - 1], (i + 1) * numLetters - 1));
+
+            var str = new List<int>();
+            for(int i = 0, n = numStates * numLetters, k = 0; i < n; ++i)
+                if (i == flags[k])
+                    str.Add(k++);
+                else
+                    str.Add(rand.Next(0, k));
+
+            var states = new List<int>();
+            for (int i = 0; i < numStates; ++i)
+                states.Add(i);
+
+            var letters = String.Empty;
+            for (int i = 0; i < numLetters; ++i)
+                letters += Convert.ToChar(Convert.ToInt32('a') + i);
+
+            var transitions = new Dictionary<int, Dictionary<char, int>>();
+            for (int i = 0; i < numStates; ++i)
+            {
+                var temp = new Dictionary<char, int>();
+                transitions.Add(i, temp);
+                for (int j = 0; j < numLetters; ++j)
+                    transitions[i].Add(letters[j], str[i * numLetters + i]);
+            }
+
+            var a = new Automata(states, letters, transitions);
+            return a;
+        }
+
         public static Automata Random(int numStates, int numLetters)
         {
             List<int> states = new List<int>();
