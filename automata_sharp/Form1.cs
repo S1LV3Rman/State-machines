@@ -22,6 +22,8 @@ namespace automata_sharp
         public Form1()
         {
             InitializeComponent();
+            buttonResetWordCalculate.Enabled = false;
+            buttonShortResetWordCalculate.Enabled = false;
             ResetUI();
         }
 
@@ -34,6 +36,8 @@ namespace automata_sharp
             buttonResetWordCalculate.Visible = true;
             buttonShortResetWordCalculate.Visible = true;
             buttonImpact.Enabled = false;
+            labelCheckResult.Text = String.Empty;
+            buttonCheck.Enabled = false;
             
             // Очистка выпадающего списка
             if (comboBoxStates.Items.Count != 0)
@@ -49,6 +53,21 @@ namespace automata_sharp
                 labelStoped.Text = "Unknown";
         }
 
+        private void ActivateUI()
+        {
+            dataGridViewAutomata.ReadOnly = true;
+            buttonResetWordCalculate.Enabled = true;
+            buttonShortResetWordCalculate.Enabled = true;
+            buttonImpact.Enabled = true;
+            buttonCheck.Enabled = true;
+
+            List<int> states = automata.GetStates();
+            foreach (var i in states)
+                comboBoxStates.Items.Add(i);
+
+            dataGridViewAutomata.DataSource = dataTable;
+        }
+
         /// <summary>
         /// Нажатие клавиши генерации нового автомата
         /// </summary>
@@ -59,7 +78,6 @@ namespace automata_sharp
             // Сброс интерфейса, т.к. создается новый автомат
             ResetUI();
 
-            // Генерация
             automata = Automata.Random(
                 Convert.ToInt32(numericUpDownStates.Value),
                 Convert.ToInt32(numericUpDownAlphabet.Value));
@@ -119,8 +137,16 @@ namespace automata_sharp
                     }
                     else
                     {
-                        labelQuickResetWord.ForeColor = Color.LimeGreen;
-                        labelQuickResetWord.Text += $" (reset to {automata.Delta(0, labelQuickResetWord.Text)})";
+                        if (automata.Verificate(labelQuickResetWord.Text))
+                        {
+                            labelQuickResetWord.ForeColor = Color.LimeGreen;
+                            labelQuickResetWord.Text += $" (reset to {automata.Delta(0, labelQuickResetWord.Text)})";
+                        }
+                        else
+                        {
+                            labelQuickResetWord.ForeColor = Color.Purple;
+                            labelQuickResetWord.Text = "Algorythm returned wrong answer";
+                        }
                     }
                     buttonCancelResetWord.Visible = false;
                 }
@@ -334,20 +360,6 @@ namespace automata_sharp
             }
         }
 
-        private void ActivateUI()
-        {
-            dataGridViewAutomata.ReadOnly = true;
-            buttonResetWordCalculate.Enabled = true;
-            buttonShortResetWordCalculate.Enabled = true;
-            buttonImpact.Enabled = true;
-
-            List<int> states = automata.GetStates();
-            foreach (var i in states)
-                comboBoxStates.Items.Add(i);
-
-            dataGridViewAutomata.DataSource = dataTable;
-        }
-
         private void labelQuickResetWord_DoubleClick(object sender, EventArgs e)
         {
             Clipboard.SetText(labelQuickResetWord.Text);
@@ -363,6 +375,20 @@ namespace automata_sharp
         private void buttonCancelShortResetWord_Click(object sender, EventArgs e)
         {
             ShortResetWordCancellation?.Cancel();
+        }
+
+        private void buttonCheck_Click(object sender, EventArgs e)
+        {
+            if(automata.Verificate(textBoxCheck.Text))
+            {
+                labelCheckResult.ForeColor = Color.LimeGreen;
+                labelCheckResult.Text = "Word IS the reset";
+            }
+            else
+            {
+                labelCheckResult.ForeColor = Color.Red;
+                labelCheckResult.Text = "Word NOT the reset";
+            }
         }
 
         private void buttonCancelResetWord_Click(object sender, EventArgs e)

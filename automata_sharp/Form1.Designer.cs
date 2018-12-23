@@ -53,9 +53,10 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonOpen = new System.Windows.Forms.Button();
             this.tabPageAbout = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.buttonCreateConfirm = new System.Windows.Forms.Button();
@@ -78,6 +79,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.labelGeneratorResetWord = new System.Windows.Forms.Label();
             this.dataGridViewAutomata = new System.Windows.Forms.DataGridView();
+            this.groupBoxWordCheck = new System.Windows.Forms.GroupBox();
+            this.labelCheckResult = new System.Windows.Forms.Label();
+            this.buttonCheck = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.textBoxCheck = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPageGenerate.SuspendLayout();
             this.panelGenerate.SuspendLayout();
@@ -95,6 +102,7 @@
             this.groupBox2.SuspendLayout();
             this.groupBoxResetWord.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAutomata)).BeginInit();
+            this.groupBoxWordCheck.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -307,14 +315,25 @@
             // 
             // tabPageAbout
             // 
+            this.tabPageAbout.Controls.Add(this.label9);
+            this.tabPageAbout.Controls.Add(this.label13);
             this.tabPageAbout.Controls.Add(this.label11);
             this.tabPageAbout.Controls.Add(this.label10);
-            this.tabPageAbout.Controls.Add(this.label9);
             this.tabPageAbout.Controls.Add(this.label6);
             this.tabPageAbout.Controls.Add(this.pictureBox3);
             resources.ApplyResources(this.tabPageAbout, "tabPageAbout");
             this.tabPageAbout.Name = "tabPageAbout";
             this.tabPageAbout.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
+            // label13
+            // 
+            resources.ApplyResources(this.label13, "label13");
+            this.label13.Name = "label13";
             // 
             // label11
             // 
@@ -325,11 +344,6 @@
             // 
             resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
             // 
             // label6
             // 
@@ -354,7 +368,6 @@
             // groupBox2
             // 
             resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Controls.Add(this.buttonCreateConfirm);
             this.groupBox2.Controls.Add(this.labelStoped);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.buttonImpact);
@@ -492,10 +505,51 @@
             this.dataGridViewAutomata.Name = "dataGridViewAutomata";
             this.dataGridViewAutomata.ReadOnly = true;
             // 
+            // groupBoxWordCheck
+            // 
+            resources.ApplyResources(this.groupBoxWordCheck, "groupBoxWordCheck");
+            this.groupBoxWordCheck.Controls.Add(this.labelCheckResult);
+            this.groupBoxWordCheck.Controls.Add(this.buttonCreateConfirm);
+            this.groupBoxWordCheck.Controls.Add(this.buttonCheck);
+            this.groupBoxWordCheck.Controls.Add(this.label14);
+            this.groupBoxWordCheck.Controls.Add(this.textBoxCheck);
+            this.groupBoxWordCheck.Controls.Add(this.label12);
+            this.groupBoxWordCheck.Name = "groupBoxWordCheck";
+            this.groupBoxWordCheck.TabStop = false;
+            // 
+            // labelCheckResult
+            // 
+            resources.ApplyResources(this.labelCheckResult, "labelCheckResult");
+            this.labelCheckResult.Name = "labelCheckResult";
+            // 
+            // buttonCheck
+            // 
+            this.buttonCheck.BackColor = System.Drawing.SystemColors.ControlLight;
+            resources.ApplyResources(this.buttonCheck, "buttonCheck");
+            this.buttonCheck.Name = "buttonCheck";
+            this.buttonCheck.UseVisualStyleBackColor = false;
+            this.buttonCheck.Click += new System.EventHandler(this.buttonCheck_Click);
+            // 
+            // label14
+            // 
+            resources.ApplyResources(this.label14, "label14");
+            this.label14.Name = "label14";
+            // 
+            // textBoxCheck
+            // 
+            resources.ApplyResources(this.textBoxCheck, "textBoxCheck");
+            this.textBoxCheck.Name = "textBoxCheck";
+            // 
+            // label12
+            // 
+            resources.ApplyResources(this.label12, "label12");
+            this.label12.Name = "label12";
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.groupBoxWordCheck);
             this.Controls.Add(this.dataGridViewAutomata);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.tabControlMain);
@@ -524,6 +578,8 @@
             this.groupBoxResetWord.ResumeLayout(false);
             this.groupBoxResetWord.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAutomata)).EndInit();
+            this.groupBoxWordCheck.ResumeLayout(false);
+            this.groupBoxWordCheck.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -581,6 +637,13 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.GroupBox groupBoxWordCheck;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label labelCheckResult;
+        private System.Windows.Forms.Button buttonCheck;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox textBoxCheck;
     }
 }
 

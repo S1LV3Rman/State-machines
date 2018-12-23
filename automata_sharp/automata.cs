@@ -32,7 +32,7 @@ namespace automata_sharp
             }
         }
 
-        public void set(int a, int b)
+        public void Set(int a, int b)
         {
             if (a < b)
             {
@@ -46,7 +46,7 @@ namespace automata_sharp
             }
         }
 
-        public bool isValid()
+        public bool IsValid()
         {
             return f != s;
         }
@@ -158,7 +158,7 @@ namespace automata_sharp
         {
             var nextPair = new Pair();
 
-            nextPair.set(_transitions[pair.f.Value][letter], _transitions[pair.s.Value][letter]);
+            nextPair.Set(_transitions[pair.f.Value][letter], _transitions[pair.s.Value][letter]);
 
             return nextPair;
         }
@@ -301,7 +301,7 @@ namespace automata_sharp
                         {
                             token.ThrowIfCancellationRequested();
                             Pair next = Delta(pair, letter);
-                            if (next.isValid())
+                            if (next.IsValid())
                                 temp.Add(next);
                         }
 
@@ -400,6 +400,17 @@ namespace automata_sharp
 
             var a = new Automata(states, letters, transitions);
             return a;
+        }
+
+        public bool Verificate(String word)
+        {
+            var states = _states;
+            states = Delta(states, word);
+
+            var reference = states[0];
+            for (int i = 0; i < states.Count; ++i)
+                if (states[i] != reference) return false;
+            return true;
         }
         /*
         public static Automata Random(int numStates, int numLetters)
