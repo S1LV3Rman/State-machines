@@ -204,9 +204,15 @@ namespace automata_sharp
                             labelShortestResetWord.Text = "Reset word is not exists";
                         }
                         else
+                        if (automata.Verificate(labelShortestResetWord.Text))
                         {
                             labelShortestResetWord.ForeColor = Color.LimeGreen;
                             labelShortestResetWord.Text += $" (reset to {automata.Delta(0, labelShortestResetWord.Text)})";
+                        }
+                        else
+                        {
+                            labelShortestResetWord.ForeColor = Color.Purple;
+                            labelShortestResetWord.Text = "Algorythm returned wrong answer";
                         }
                         buttonCancelShortResetWord.Visible = false;
                     }
