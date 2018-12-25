@@ -177,7 +177,7 @@ namespace automata_sharp
 
             return Task.Run(() =>
             {
-                var usedStates = new List<SortedSet<int>>();
+                var usedStates = new Dictionary<int, List<SortedSet<int>>>();
                 var currentStates = new List<SortedSet<int>>();
                 var nextStates = new List<SortedSet<int>>();
                 var currentWords = new List<string>();
@@ -189,12 +189,12 @@ namespace automata_sharp
 
                 currentStates.Add(start);
                 currentWords.Add("");
+                
+                usedStates.Add(start.Count, new List<SortedSet<int>>());
+                usedStates[start.Count].Add(start);
 
                 while (currentStates.Count != 0)
                 {
-                    foreach (var state in currentStates)
-                        usedStates.Add(state);
-
                     for (int i = 0, n = currentStates.Count; i < n; ++i)
                     {
                         for (int j = 0, l = _letters.Length; j < l; ++j)
@@ -202,13 +202,17 @@ namespace automata_sharp
                             SortedSet<int> temp = Delta(currentStates[i], _letters[j]);
 
                             bool isNew = true;
-                            for (int k = 0, m = usedStates.Count; isNew && k < m; ++k)
-                                isNew = !temp.SetEquals(usedStates[k]);
+                            for (int k = 0, m = usedStates.ContainsKey(temp.Count) ? usedStates[temp.Count].Count : 0; isNew && k < m; ++k)
+                                isNew = !temp.SetEquals(usedStates[temp.Count][k]);
 
                             if (isNew)
                             {
                                 nextStates.Add(temp);
                                 nextWords.Add(currentWords[i] + _letters[j]);
+
+                                if (!usedStates.ContainsKey(temp.Count))
+                                    usedStates.Add(temp.Count, new List<SortedSet<int>>());
+                                usedStates[temp.Count].Add(temp);
                             }
                         }
                         token.ThrowIfCancellationRequested();
@@ -276,68 +280,84 @@ namespace automata_sharp
 
             return Task.Run(() =>
             {
-                var pairs = new SortedSet<Pair>();
-                var word = string.Empty;
-                var usedStates = new List<SortedSet<Pair>>();
-                var nextStates = new Dictionary<char, SortedSet<Pair>>();
+                var usedPairs = new List<SortedSet<Pair>>();
+                var currentPairs = new List<SortedSet<Pair>>();
+                var nextPairs = new List<SortedSet<Pair>>();
+                var currentWords = new List<string>();
+                var nextWords = new List<string>();
+                var start = new SortedSet<Pair>();
 
                 for (int i = 0, n = _states.Count - 1; i < n; ++i)
                     for (int j = i + 1, m = n + 1; j < m; ++j)
-                    {
-                        var pair = new Pair(_states[i], _states[j]);
-                        pairs.Add(pair);
-                    }
+                        start.Add(new Pair(_states[i], _states[j]));
 
-                while (pairs.Count != 0)
+                int min = start.Count;
+
+                currentPairs.Add(start);
+                currentWords.Add("");
+                usedPairs.Add(start);
+
+                while (currentPairs.Count != 0)
                 {
-                    usedStates.Add(pairs);
-
-                    foreach (var letter in _letters)
+                    for (int i = 0, n = currentPairs.Count; i < n; ++i)
                     {
-                        token.ThrowIfCancellationRequested();
-                        var temp = new SortedSet<Pair>();
-                        
-                        foreach (var pair in pairs)
+                        for (int j = 0, m = _letters.Length; j < m; ++j)
                         {
-                            token.ThrowIfCancellationRequested();
-                            Pair next = Delta(pair, letter);
-                            if (next.IsValid())
-                                temp.Add(next);
+                            var temp = new SortedSet<Pair>();
+
+                            foreach (var pair in currentPairs[i])
+                            {
+                                Pair next = Delta(pair, _letters[j]);
+                                if (next.IsValid())
+                                    temp.Add(next);
+                            }
+
+                            bool isNew = true;
+                            for (int k = 0, s = usedPairs.Count; isNew && k < s; ++k)
+                                isNew = !temp.SetEquals(usedPairs[k]);
+                            
+                            if(isNew)
+                            {
+                                nextPairs.Add(temp);
+                                nextWords.Add(currentWords[i] + _letters[j]);
+                                usedPairs.Add(temp);
+                            }
+                        }
+                        token.ThrowIfCancellationRequested();
+                    }
+
+                    currentPairs.Clear();
+                    currentWords.Clear();
+
+                    for (int i = 0, n = nextPairs.Count; i < n; ++i)
+                        if (nextPairs[i].Count < min)
+                        {
+                            min = nextPairs[i].Count;
+                            usedPairs.Clear();
                         }
 
-                        nextStates.Add(letter, temp);
-                    }
-
-                    char nextLetter = Convert.ToChar(0);
-                    int minState = pairs.Count;
-
-                    foreach (var letter in _letters)
+                    for (int i = 0, n = nextPairs.Count; i < n; ++i)
                     {
-                        token.ThrowIfCancellationRequested();
-
-                        bool isNew = true;
-                        for (int i = 0, n = usedStates.Count; isNew && i < n; ++i)
-                            isNew = !nextStates[letter].SetEquals(usedStates[i]);
-
-                        if (isNew && nextStates[letter].Count <= minState)
+                        if (nextPairs[i].Count == min)
                         {
-                            minState = nextStates[letter].Count;
-                            nextLetter = letter;
+                            if (min == 0)
+                                return nextWords[i];
+
+                            currentPairs.Add(nextPairs[i]);
+                            currentWords.Add(nextWords[i]);
+                            usedPairs.Add(nextPairs[i]);
+
+                            if (usedPairs.Count == 1)
+                                break;
                         }
                     }
 
-                    if (nextLetter != Convert.ToChar(0))
-                    {
-                        pairs = nextStates[nextLetter];
-                        word += nextLetter;
-                    }
-                    else pairs.Clear();
-
-                    nextStates.Clear();
+                    nextPairs.Clear();
+                    nextWords.Clear();
 
                     token.ThrowIfCancellationRequested();
-                }  
-                return word;
+                }
+                return "";
             }, token);
         }
 
