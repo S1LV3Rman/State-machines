@@ -18,7 +18,8 @@ namespace automata_sharp
         Automata automata = new Automata();
         DataTable dataTable = new DataTable();
         CancellationTokenSource ResetWordCancellation, ShortResetWordCancellation;
-
+        IcdfaLogic CurrentIcdfaLogic;
+        StringBuilder StringBuilder = new StringBuilder();
 
         public Form1()
         {
@@ -481,44 +482,50 @@ namespace automata_sharp
             return lengths;
         }
 
-        
-
         private async void GeneratorCreatePartLogic(int n, int k, int part, int parts)
         {
             buttonIcdfaGenerate.Visible = false;
             labelIcdfaStatus.ForeColor = Color.DarkBlue;
             labelIcdfaStatus.Text = $"Generating result for {n}x{k}, part {part} of {parts}";
 
-            var logic = new IcdfaLogic();
+            CurrentIcdfaLogic = new IcdfaLogic();
 
-            StartView(logic);
-            await logic.StartAsync();
-            
+
+            updaterIcdfa.Enabled = true;
+            await CurrentIcdfaLogic.StartAsync();
+            updaterIcdfa.Enabled = false;
+            UpdateIcdfaOutput();
+            CurrentIcdfaLogic = null;
 
             buttonIcdfaGenerate.Visible = true;
             labelIcdfaStatus.Text = string.Empty;
         }
 
-        void StartView(IcdfaLogic logic)
-        {
-            int[] array = new int[logic.RowLength];
-
-            updaterIcdfa.Tick += (sender, args) =>
-            {
-                logic.GetTotalLenghts(array);
-                string txt = "";
-                foreach (var e in array)
-                    txt += e.ToString() + "\n";
-                richTextBoxIcdfaOutput.Text = txt;
-            };
-            updaterIcdfa.Start();
-        }
-
         private void updaterIcdfa_Tick(object sender, EventArgs e)
         {
-            
+            if (CurrentIcdfaLogic == null)
+            {
+                updaterIcdfa.Enabled = false;
+                return;
+            }
+            UpdateIcdfaOutput();
         }
-        
+
+        private void UpdateIcdfaOutput()
+        {
+            if (CurrentIcdfaLogic == null) throw new InvalidProgramException();
+
+            StringBuilder.Clear();
+            var array = CurrentIcdfaLogic.GetTotalLenghts();
+            StringBuilder.Append("Прошло времени: " + (DateTime.UtcNow - CurrentIcdfaLogic.LaunchTime).ToString(@"dd\.hh\:mm\:ss"));
+            foreach (var e in array)
+            {
+                StringBuilder.Append("\n");
+                StringBuilder.Append(e.ToString());
+            }
+
+            richTextBoxIcdfaOutput.Text = StringBuilder.ToString();
+        }
 
         private void buttonCancelResetWord_Click(object sender, EventArgs e)
         {

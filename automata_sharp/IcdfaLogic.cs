@@ -9,12 +9,14 @@ namespace automata_sharp
 {
     public class IcdfaLogic
     {
-        public readonly int n = 6;
-        public readonly int k = 2;
-        public readonly int totalParts = 12;
+        public readonly int n = 4;
+        public readonly int k = 3;
+        public readonly int totalParts = 4;
         public readonly int startPart = 1;
-        public readonly int countParts = 12;
+        public readonly int countParts = 4 ;
         public int RowLength => (n - 1) * (n - 1) + 1;
+        public DateTime LaunchTime { private set; get; }
+        private int? cachedTotalCount;
 
         public readonly Dictionary<int,int[]> Lengths;
 
@@ -24,7 +26,6 @@ namespace automata_sharp
         {
             Tasks = new Task[countParts];
             Lengths = new Dictionary<int, int[]>(countParts);
-
         }
 
         public int[] GetLengths(int part)
@@ -33,6 +34,7 @@ namespace automata_sharp
             return Lengths[part];
         }
 
+        
         public void GetTotalLenghts(int[] array)
         {
             if (array == null || array.Length != RowLength) throw new ArgumentException();
@@ -46,23 +48,26 @@ namespace automata_sharp
                     array[j] += values[i][j];
         }
 
-        //public IcdfaLogic(int n,int k,int totalParts, int startPart, int countParts)
-        //    :this()
-        //{
+        //TODO
+        public int[] GetTotalLenghts()
+        {
+            var array = new int[RowLength];
+            GetTotalLenghts(array);
+            return array;
+        }
 
-        //}
+        public async Task<int> GetTotalCount()
+        {
+            if (!cachedTotalCount.HasValue)
+                cachedTotalCount = await Task.Run(() => { return CountAll(); });
+
+            return cachedTotalCount.Value;
+        }
 
         public async Task StartAsync()
         {
             Schedule();
             await Run();
-        }
-
-        [Obsolete("Use StartAsync")]
-        public void Start()
-        {
-            Schedule();
-            Run();
         }
 
         void Schedule()
@@ -82,6 +87,7 @@ namespace automata_sharp
 
         Task Run()
         {
+            LaunchTime = DateTime.UtcNow;
             for (int i = 0; i < countParts; i++)
                 Tasks[i].Start();
             return Task.WhenAll(Tasks);
