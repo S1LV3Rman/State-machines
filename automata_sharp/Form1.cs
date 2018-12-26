@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using System.Collections;
 
 namespace automata_sharp
 {
@@ -38,18 +39,18 @@ namespace automata_sharp
             buttonImpact.Enabled = false;
             labelCheckResult.Text = String.Empty;
             buttonCheck.Enabled = false;
-            
+
             // Очистка выпадающего списка
             if (comboBoxStates.Items.Count != 0)
                 comboBoxStates.Items.Clear();
 
             // Сброс значений текстовых полей синх. слов
-            labelQuickResetWord.ForeColor = 
-                labelShortestResetWord.ForeColor = 
+            labelQuickResetWord.ForeColor =
+                labelShortestResetWord.ForeColor =
                 labelStoped.ForeColor = Color.Red;
 
-            labelQuickResetWord.Text = 
-                labelShortestResetWord.Text = 
+            labelQuickResetWord.Text =
+                labelShortestResetWord.Text =
                 labelStoped.Text = "Unknown";
         }
 
@@ -183,7 +184,7 @@ namespace automata_sharp
             {
                 flag = false;
                 DialogResult caution = MessageBox.Show("This may take a long time, are you sure?", "Confirm", MessageBoxButtons.YesNo);
-                    flag = caution == DialogResult.Yes;
+                flag = caution == DialogResult.Yes;
             }
             if (flag)
             {
@@ -385,7 +386,7 @@ namespace automata_sharp
 
         private void buttonCheck_Click(object sender, EventArgs e)
         {
-            if(automata.Verificate(textBoxCheck.Text))
+            if (automata.Verificate(textBoxCheck.Text))
             {
                 labelCheckResult.ForeColor = Color.LimeGreen;
                 labelCheckResult.Text = "Word IS the reset";
@@ -397,9 +398,9 @@ namespace automata_sharp
             }
         }
 
-        private async void buttonIcdfaGenerate_Click(object sender, EventArgs e)
+        private void buttonIcdfaGenerate_Click(object sender, EventArgs e)
         {
-            buttonIcdfaGenerate.Visible = false;
+
 
             int n = Convert.ToInt32(numericUpDownN.Value),
                 k = Convert.ToInt32(numericUpDownK.Value);
@@ -407,22 +408,22 @@ namespace automata_sharp
             int parts = Convert.ToInt32(numericUpDownParts.Value),
                 part = Convert.ToInt32(numericUpDownPart.Value);
 
-            labelIcdfaStatus.ForeColor = Color.DarkBlue;
-            labelIcdfaStatus.Text = $"Generating result for {n}x{k}, part {part} of {parts}";
 
-            lengths = await Task.Run(() => IcdfaGeneratorCreatePart(n, k, part, parts));
 
-            string path = $"Prtcl{n}x{k}_pt{part}of{parts}.txt";
+            //lengths = await Task.Run(() => IcdfaGeneratorCreatePart(n, k, part, parts));
 
-            StreamWriter stream = new StreamWriter(path);
+            GeneratorCreatePartLogic(n, k, part, parts);
 
-            foreach (var t in lengths)
-                stream.WriteLine(t);
+            //string path = $"Prtcl{n}x{k}_pt{part}of{parts}.txt";
 
-            stream.Close();
+            //StreamWriter stream = new StreamWriter(path);
 
-            buttonIcdfaGenerate.Visible = true;
-            labelIcdfaStatus.Text = string.Empty;
+            //foreach (var t in lengths)
+            //    stream.WriteLine(t);
+
+            //stream.Close();
+
+
         }
 
         private List<int> IcdfaGeneratorCreatePart(int n, int k, int part, int parts)
@@ -478,6 +479,96 @@ namespace automata_sharp
                 generator.NextFlags(nmm);
             }
             return lengths;
+        }
+
+        private async void GeneratorCreatePartLogic(int n, int k, int part, int parts)
+        {
+            buttonIcdfaGenerate.Visible = false;
+            labelIcdfaStatus.ForeColor = Color.DarkBlue;
+            labelIcdfaStatus.Text = $"Generating result for {n}x{k}, part {part} of {parts}";
+
+            foreach (var frame in IcdfaGeneratorCreatePartLoop(n, k, part, parts))
+            {
+                if (frame is Task<List<int>>)
+                {
+                    var list = await (frame as Task<List<int>>);
+                    string txt = "";
+                    foreach (var e in list)
+                    {
+                        txt += e.ToString() + "\n";
+                    }
+                    richTextBoxIcdfaOutput.Text = txt;
+                }
+            }
+
+            buttonIcdfaGenerate.Visible = true;
+            labelIcdfaStatus.Text = string.Empty;
+        }
+
+        private IEnumerable IcdfaGeneratorCreatePartLoop(int n, int k, int part, int parts)
+        {
+            List<int> lengths = new List<int>();
+
+            int nm = n - 1;
+            int km = k - 1;
+            int nmm = n - 2;
+            Generator generator = new Generator(n, k);
+            int count = 0;
+            int i = 1;
+
+            yield return Task.Run(() =>
+            {
+                Generator temp = new Generator(n, k);
+                int count_all = 0;
+                while (!temp.IsLastFlags)
+                {
+                    while (!temp.IsLastSequences)
+                    {
+                        count_all++;
+                        temp.NextICDFA(nm, km);
+                    }
+                    temp.NextFlags(nmm);
+                }
+
+                for (int j = 0, t = (n - 1) * (n - 1) + 1; j < t; ++j)
+                    lengths.Add(0);
+
+
+                while (!generator.IsLastFlags && i != part)
+                {
+                    while (!generator.IsLastSequences && i != part)
+                    {
+                        i++;
+                        generator.NextICDFA(nm, km);
+                    }
+                    generator.NextFlags(nmm);
+                }
+
+                return lengths;
+            });
+
+
+            i = 1;
+            while (!generator.IsLastFlags)
+            {
+                yield return Task.Run(() =>
+                {
+                    while (!generator.IsLastSequences)
+                    {
+                        count++;
+                        if (i == part)
+                            lengths[generator.getWordLength()]++;
+                        if (i == parts)
+                            i = 0;
+                        generator.NextICDFA(nm, km);
+                        i++;
+                    }
+                    generator.NextFlags(nmm);
+                    return lengths;
+                });
+            }
+
+
         }
 
         private void buttonCancelResetWord_Click(object sender, EventArgs e)
