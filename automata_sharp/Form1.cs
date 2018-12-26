@@ -481,95 +481,44 @@ namespace automata_sharp
             return lengths;
         }
 
+        
+
         private async void GeneratorCreatePartLogic(int n, int k, int part, int parts)
         {
             buttonIcdfaGenerate.Visible = false;
             labelIcdfaStatus.ForeColor = Color.DarkBlue;
             labelIcdfaStatus.Text = $"Generating result for {n}x{k}, part {part} of {parts}";
 
-            foreach (var frame in IcdfaGeneratorCreatePartLoop(n, k, part, parts))
-            {
-                if (frame is Task<List<int>>)
-                {
-                    var list = await (frame as Task<List<int>>);
-                    string txt = "";
-                    foreach (var e in list)
-                    {
-                        txt += e.ToString() + "\n";
-                    }
-                    richTextBoxIcdfaOutput.Text = txt;
-                }
-            }
+            var logic = new IcdfaLogic();
+
+            StartView(logic);
+            await logic.StartAsync();
+            
 
             buttonIcdfaGenerate.Visible = true;
             labelIcdfaStatus.Text = string.Empty;
         }
 
-        private IEnumerable IcdfaGeneratorCreatePartLoop(int n, int k, int part, int parts)
+        void StartView(IcdfaLogic logic)
         {
-            List<int> lengths = new List<int>();
+            int[] array = new int[logic.RowLength];
 
-            int nm = n - 1;
-            int km = k - 1;
-            int nmm = n - 2;
-            Generator generator = new Generator(n, k);
-            int count = 0;
-            int i = 1;
-
-            yield return Task.Run(() =>
+            updaterIcdfa.Tick += (sender, args) =>
             {
-                Generator temp = new Generator(n, k);
-                int count_all = 0;
-                while (!temp.IsLastFlags)
-                {
-                    while (!temp.IsLastSequences)
-                    {
-                        count_all++;
-                        temp.NextICDFA(nm, km);
-                    }
-                    temp.NextFlags(nmm);
-                }
-
-                for (int j = 0, t = (n - 1) * (n - 1) + 1; j < t; ++j)
-                    lengths.Add(0);
-
-
-                while (!generator.IsLastFlags && i != part)
-                {
-                    while (!generator.IsLastSequences && i != part)
-                    {
-                        i++;
-                        generator.NextICDFA(nm, km);
-                    }
-                    generator.NextFlags(nmm);
-                }
-
-                return lengths;
-            });
-
-
-            i = 1;
-            while (!generator.IsLastFlags)
-            {
-                yield return Task.Run(() =>
-                {
-                    while (!generator.IsLastSequences)
-                    {
-                        count++;
-                        if (i == part)
-                            lengths[generator.getWordLength()]++;
-                        if (i == parts)
-                            i = 0;
-                        generator.NextICDFA(nm, km);
-                        i++;
-                    }
-                    generator.NextFlags(nmm);
-                    return lengths;
-                });
-            }
-
-
+                logic.GetTotalLenghts(array);
+                string txt = "";
+                foreach (var e in array)
+                    txt += e.ToString() + "\n";
+                richTextBoxIcdfaOutput.Text = txt;
+            };
+            updaterIcdfa.Start();
         }
+
+        private void updaterIcdfa_Tick(object sender, EventArgs e)
+        {
+            
+        }
+        
 
         private void buttonCancelResetWord_Click(object sender, EventArgs e)
         {

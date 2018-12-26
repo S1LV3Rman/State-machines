@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageGenerate = new System.Windows.Forms.TabPage();
@@ -98,6 +99,7 @@
             this.textBoxCheck = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.richTextBoxIcdfaOutput = new System.Windows.Forms.RichTextBox();
+            this.updaterIcdfa = new System.Windows.Forms.Timer(this.components);
             this.tabControlMain.SuspendLayout();
             this.tabPageGenerate.SuspendLayout();
             this.panelGenerate.SuspendLayout();
@@ -670,6 +672,10 @@
             this.richTextBoxIcdfaOutput.Name = "richTextBoxIcdfaOutput";
             this.richTextBoxIcdfaOutput.ReadOnly = true;
             // 
+            // updaterIcdfa
+            // 
+            this.updaterIcdfa.Tick += new System.EventHandler(this.updaterIcdfa_Tick);
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -789,6 +795,7 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label labelIcdfaStatus;
         private System.Windows.Forms.RichTextBox richTextBoxIcdfaOutput;
+        private System.Windows.Forms.Timer updaterIcdfa;
     }
 }
 
