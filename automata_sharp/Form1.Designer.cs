@@ -85,6 +85,18 @@
             this.label14 = new System.Windows.Forms.Label();
             this.textBoxCheck = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.tabIcdfa = new System.Windows.Forms.TabPage();
+            this.numericUpDownPart = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownParts = new System.Windows.Forms.NumericUpDown();
+            this.buttonIcdfaGenerate = new System.Windows.Forms.Button();
+            this.numericUpDownN = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownK = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.labelIcdfaStatus = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPageGenerate.SuspendLayout();
             this.panelGenerate.SuspendLayout();
@@ -103,6 +115,11 @@
             this.groupBoxResetWord.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAutomata)).BeginInit();
             this.groupBoxWordCheck.SuspendLayout();
+            this.tabIcdfa.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownParts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownN)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownK)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -111,6 +128,7 @@
             this.tabControlMain.Controls.Add(this.tabPageGenerate);
             this.tabControlMain.Controls.Add(this.tabPageCreate);
             this.tabControlMain.Controls.Add(this.tabPageOpen);
+            this.tabControlMain.Controls.Add(this.tabIcdfa);
             this.tabControlMain.Controls.Add(this.tabPageAbout);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
@@ -545,6 +563,106 @@
             resources.ApplyResources(this.label12, "label12");
             this.label12.Name = "label12";
             // 
+            // tabIcdfa
+            // 
+            this.tabIcdfa.Controls.Add(this.labelIcdfaStatus);
+            this.tabIcdfa.Controls.Add(this.label19);
+            this.tabIcdfa.Controls.Add(this.label18);
+            this.tabIcdfa.Controls.Add(this.label15);
+            this.tabIcdfa.Controls.Add(this.label16);
+            this.tabIcdfa.Controls.Add(this.label17);
+            this.tabIcdfa.Controls.Add(this.numericUpDownK);
+            this.tabIcdfa.Controls.Add(this.numericUpDownN);
+            this.tabIcdfa.Controls.Add(this.buttonIcdfaGenerate);
+            this.tabIcdfa.Controls.Add(this.numericUpDownParts);
+            this.tabIcdfa.Controls.Add(this.numericUpDownPart);
+            resources.ApplyResources(this.tabIcdfa, "tabIcdfa");
+            this.tabIcdfa.Name = "tabIcdfa";
+            this.tabIcdfa.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDownPart
+            // 
+            resources.ApplyResources(this.numericUpDownPart, "numericUpDownPart");
+            this.numericUpDownPart.Name = "numericUpDownPart";
+            // 
+            // numericUpDownParts
+            // 
+            resources.ApplyResources(this.numericUpDownParts, "numericUpDownParts");
+            this.numericUpDownParts.Name = "numericUpDownParts";
+            // 
+            // buttonIcdfaGenerate
+            // 
+            resources.ApplyResources(this.buttonIcdfaGenerate, "buttonIcdfaGenerate");
+            this.buttonIcdfaGenerate.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.buttonIcdfaGenerate.Name = "buttonIcdfaGenerate";
+            this.buttonIcdfaGenerate.UseVisualStyleBackColor = false;
+            this.buttonIcdfaGenerate.Click += new System.EventHandler(this.buttonIcdfaGenerate_Click);
+            // 
+            // numericUpDownN
+            // 
+            resources.ApplyResources(this.numericUpDownN, "numericUpDownN");
+            this.numericUpDownN.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownN.Name = "numericUpDownN";
+            this.numericUpDownN.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDownK
+            // 
+            resources.ApplyResources(this.numericUpDownK, "numericUpDownK");
+            this.numericUpDownK.Maximum = new decimal(new int[] {
+            26,
+            0,
+            0,
+            0});
+            this.numericUpDownK.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownK.Name = "numericUpDownK";
+            this.numericUpDownK.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label15
+            // 
+            resources.ApplyResources(this.label15, "label15");
+            this.label15.Name = "label15";
+            // 
+            // label16
+            // 
+            resources.ApplyResources(this.label16, "label16");
+            this.label16.Name = "label16";
+            // 
+            // label17
+            // 
+            resources.ApplyResources(this.label17, "label17");
+            this.label17.Name = "label17";
+            // 
+            // label18
+            // 
+            resources.ApplyResources(this.label18, "label18");
+            this.label18.Name = "label18";
+            // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.Name = "label19";
+            // 
+            // labelIcdfaStatus
+            // 
+            resources.ApplyResources(this.labelIcdfaStatus, "labelIcdfaStatus");
+            this.labelIcdfaStatus.Name = "labelIcdfaStatus";
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -580,6 +698,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAutomata)).EndInit();
             this.groupBoxWordCheck.ResumeLayout(false);
             this.groupBoxWordCheck.PerformLayout();
+            this.tabIcdfa.ResumeLayout(false);
+            this.tabIcdfa.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownParts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownN)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownK)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -644,6 +768,18 @@
         private System.Windows.Forms.Button buttonCheck;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox textBoxCheck;
+        private System.Windows.Forms.TabPage tabIcdfa;
+        private System.Windows.Forms.Button buttonIcdfaGenerate;
+        private System.Windows.Forms.NumericUpDown numericUpDownParts;
+        private System.Windows.Forms.NumericUpDown numericUpDownPart;
+        private System.Windows.Forms.NumericUpDown numericUpDownK;
+        private System.Windows.Forms.NumericUpDown numericUpDownN;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label labelIcdfaStatus;
     }
 }
 

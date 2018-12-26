@@ -397,6 +397,89 @@ namespace automata_sharp
             }
         }
 
+        private async void buttonIcdfaGenerate_Click(object sender, EventArgs e)
+        {
+            buttonIcdfaGenerate.Visible = false;
+
+            int n = Convert.ToInt32(numericUpDownN.Value),
+                k = Convert.ToInt32(numericUpDownK.Value);
+            List<int> lengths = new List<int>();
+            int parts = Convert.ToInt32(numericUpDownParts.Value),
+                part = Convert.ToInt32(numericUpDownPart.Value);
+
+            labelIcdfaStatus.ForeColor = Color.DarkBlue;
+            labelIcdfaStatus.Text = $"Generating result for {n}x{k}, part {part} of {parts}";
+
+            lengths = await Task.Run(() => IcdfaGeneratorCreatePart(n, k, part, parts));
+
+            string path = $"Prtcl{n}x{k}_pt{part}of{parts}.txt";
+
+            StreamWriter stream = new StreamWriter(path);
+
+            foreach (var t in lengths)
+                stream.WriteLine(t);
+
+            stream.Close();
+
+            buttonIcdfaGenerate.Visible = true;
+            labelIcdfaStatus.Text = string.Empty;
+        }
+
+        private List<int> IcdfaGeneratorCreatePart(int n, int k, int part, int parts)
+        {
+            List<int> lengths = new List<int>();
+
+            int nm = n - 1;
+            int km = k - 1;
+            int nmm = n - 2;
+
+            Generator temp = new Generator(n, k);
+            int count_all = 0;
+            while (!temp.IsLastFlags)
+            {
+                while (!temp.IsLastSequences)
+                {
+                    count_all++;
+                    temp.NextICDFA(nm, km);
+                }
+                temp.NextFlags(nmm);
+            }
+
+            Generator generator = new Generator(n, k);
+            int count = 0;
+
+            for (int j = 0, t = (n - 1) * (n - 1) + 1; j < t; ++j)
+                lengths.Add(0);
+
+            int i = 1;
+            while (!generator.IsLastFlags && i != part)
+            {
+                while (!generator.IsLastSequences && i != part)
+                {
+                    i++;
+                    generator.NextICDFA(nm, km);
+                }
+                generator.NextFlags(nmm);
+            }
+
+            i = 1;
+            while (!generator.IsLastFlags)
+            {
+                while (!generator.IsLastSequences)
+                {
+                    count++;
+                    if (i == part)
+                        lengths[generator.getWordLength()]++;
+                    if (i == parts)
+                        i = 0;
+                    generator.NextICDFA(nm, km);
+                    i++;
+                }
+                generator.NextFlags(nmm);
+            }
+            return lengths;
+        }
+
         private void buttonCancelResetWord_Click(object sender, EventArgs e)
         {
             ResetWordCancellation?.Cancel();

@@ -101,7 +101,7 @@ namespace automata_sharp
             }
         }
 
-        Automata(List<int> states, String letters, Dictionary<int, Dictionary<char, int>> transitions)
+        public Automata(List<int> states, String letters, Dictionary<int, Dictionary<char, int>> transitions)
         {
             _states = states;
             _letters = letters;
@@ -170,7 +170,70 @@ namespace automata_sharp
                 nextState = _transitions[nextState][letter];
             return nextState;
         }
-        
+
+        public string FindShortestResetWord_WithoutAsync()
+        {
+            var usedStates = new Dictionary<int, List<SortedSet<int>>>();
+            var currentStates = new List<SortedSet<int>>();
+            var nextStates = new List<SortedSet<int>>();
+            var currentWords = new List<string>();
+            var nextWords = new List<string>();
+            var start = new SortedSet<int>();
+
+            foreach (var s in _states)
+                start.Add(s);
+
+            currentStates.Add(start);
+            currentWords.Add("");
+
+            usedStates.Add(start.Count, new List<SortedSet<int>>());
+            usedStates[start.Count].Add(start);
+
+            while (currentStates.Count != 0)
+            {
+                for (int i = 0, n = currentStates.Count; i < n; ++i)
+                {
+                    for (int j = 0, l = _letters.Length; j < l; ++j)
+                    {
+                        SortedSet<int> temp = Delta(currentStates[i], _letters[j]);
+
+                        bool isNew = true;
+                        for (int k = 0, m = usedStates.ContainsKey(temp.Count) ? usedStates[temp.Count].Count : 0; isNew && k < m; ++k)
+                            isNew = !temp.SetEquals(usedStates[temp.Count][k]);
+
+                        if (isNew)
+                        {
+                            nextStates.Add(temp);
+                            nextWords.Add(currentWords[i] + _letters[j]);
+
+                            if (!usedStates.ContainsKey(temp.Count))
+                                usedStates.Add(temp.Count, new List<SortedSet<int>>());
+                            usedStates[temp.Count].Add(temp);
+                        }
+                    }
+                }
+
+                currentStates.Clear();
+                currentWords.Clear();
+
+                for (int i = 0, n = nextStates.Count; i < n; ++i)
+                {
+                    if (nextStates[i].Count == 1)
+                        return nextWords[i];
+                    else
+                    {
+                        currentWords.Add(nextWords[i]);
+                        currentStates.Add(nextStates[i]);
+                    }
+                }
+
+                nextStates.Clear();
+                nextWords.Clear();
+                
+            }
+            return "";
+        }
+
         public Task<string> FindShortestResetWord(CancellationTokenSource cancellationTokenSource)
         {
             var token = cancellationTokenSource.Token;
@@ -273,7 +336,7 @@ namespace automata_sharp
 
     }
     */
-    
+         
         public Task<string> FindResetWord(CancellationTokenSource cancellationTokenSource)
         {
             var token = cancellationTokenSource.Token;
@@ -432,33 +495,7 @@ namespace automata_sharp
                 if (states[i] != reference) return false;
             return true;
         }
-        /*
-        public static Automata Random(int numStates, int numLetters)
-        {
-            List<int> states = new List<int>();
-            for (int i = 0; i < numStates; ++i)
-                states.Add(i);
 
-            String letters = String.Empty;
-            for (int i = 0; i < numLetters; ++i)
-                letters += Convert.ToChar(Convert.ToInt32('a') + i);
-
-            Dictionary<int, Dictionary<char, int>> transitions = new Dictionary<int, Dictionary<char, int>>();
-            Random rand = new Random();
-
-            for (int i = 0; i < numStates; ++i)
-            {
-                Dictionary<char, int> temp = new Dictionary<char, int>();
-                transitions.Add(i, temp);
-                for (int j = 0; j < numLetters; ++j)
-                    transitions[i].Add(Convert.ToChar(Convert.ToInt32('a') + j), rand.Next(numStates));
-            }
-
-            Automata generatedAutomata = new Automata(states, letters, transitions);
-            return generatedAutomata;
-            // Серега сказал так во всех учебниках пишут, хотя упростить можно
-        }
-        */
         public String OutputToString()
         {
             String output = "States: ";
