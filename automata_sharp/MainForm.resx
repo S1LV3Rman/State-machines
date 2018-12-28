@@ -1036,7 +1036,7 @@
     <value>7, 142</value>
   </data>
   <data name="buttonIcdfaGenerate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 27</value>
+    <value>467, 27</value>
   </data>
   <data name="buttonIcdfaGenerate.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1102,13 +1102,13 @@
     <value>4, 28</value>
   </data>
   <data name="tabIcdfa.Size" type="System.Drawing.Size, System.Drawing">
-    <value>443, 178</value>
+    <value>481, 178</value>
   </data>
   <data name="tabIcdfa.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="tabIcdfa.Text" xml:space="preserve">
-    <value>ICDFA</value>
+    <value>ICDFAs</value>
   </data>
   <data name="&gt;&gt;tabIcdfa.Name" xml:space="preserve">
     <value>tabIcdfa</value>
@@ -1343,7 +1343,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="tabControlMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>451, 210</value>
+    <value>489, 210</value>
   </data>
   <data name="tabControlMain.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1370,7 +1370,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>NoControl</value>
   </data>
   <data name="buttonCreateConfirm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 136</value>
+    <value>10, 235</value>
   </data>
   <data name="buttonCreateConfirm.Size" type="System.Drawing.Size, System.Drawing">
     <value>311, 27</value>
@@ -1622,7 +1622,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>7</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>457, 217</value>
+    <value>495, 217</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>327, 197</value>
@@ -1892,7 +1892,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>7</value>
   </data>
   <data name="groupBoxResetWord.Location" type="System.Drawing.Point, System.Drawing">
-    <value>457, 28</value>
+    <value>495, 28</value>
   </data>
   <data name="groupBoxResetWord.Size" type="System.Drawing.Size, System.Drawing">
     <value>327, 182</value>
@@ -1922,7 +1922,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>7, 217</value>
   </data>
   <data name="dataGridViewAutomata.Size" type="System.Drawing.Size, System.Drawing">
-    <value>442, 372</value>
+    <value>480, 471</value>
   </data>
   <data name="dataGridViewAutomata.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -2078,10 +2078,10 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>5</value>
   </data>
   <data name="groupBoxWordCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>457, 420</value>
+    <value>495, 420</value>
   </data>
   <data name="groupBoxWordCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>327, 169</value>
+    <value>327, 268</value>
   </data>
   <data name="groupBoxWordCheck.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -2101,17 +2101,23 @@ Special thanks to Sergey Davydov for consulting in C#</value>
   <data name="&gt;&gt;groupBoxWordCheck.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="richTextBoxIcdfaOutput.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <data name="richTextBoxIcdfaOutput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 226</value>
+    <value>7, 217</value>
   </data>
   <data name="richTextBoxIcdfaOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>424, 357</value>
+    <value>480, 471</value>
   </data>
   <data name="richTextBoxIcdfaOutput.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
   <data name="richTextBoxIcdfaOutput.Text" xml:space="preserve">
     <value />
+  </data>
+  <data name="richTextBoxIcdfaOutput.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;richTextBoxIcdfaOutput.Name" xml:space="preserve">
     <value>richTextBoxIcdfaOutput</value>
@@ -2138,7 +2144,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>8, 19</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>791, 601</value>
+    <value>829, 700</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Calibri, 12pt</value>
@@ -2309,7 +2315,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>Form1</value>
+    <value>MainForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
