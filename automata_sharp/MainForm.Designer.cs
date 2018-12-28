@@ -138,6 +138,7 @@
             this.tabControlMain.Controls.Add(this.tabPageAbout);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
+            this.tabControlMain.SelectedIndexChanged += new System.EventHandler(this.tabControlMain_SelectedIndexChanged);
             // 
             // tabPageGenerate
             // 
@@ -706,7 +707,7 @@
             // 
             this.updaterIcdfa.Tick += new System.EventHandler(this.updaterIcdfa_Tick);
             // 
-            // Form1
+            // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -716,7 +717,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.groupBoxResetWord);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.tabControlMain.ResumeLayout(false);
             this.tabPageGenerate.ResumeLayout(false);
             this.panelGenerate.ResumeLayout(false);

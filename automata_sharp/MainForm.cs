@@ -401,6 +401,8 @@ namespace automata_sharp
 
         private void buttonIcdfaGenerate_Click(object sender, EventArgs e)
         {
+            richTextBoxIcdfaOutput.Visible = true;
+
             int n = Convert.ToInt32(numericUpDownN.Value),
                 k = Convert.ToInt32(numericUpDownK.Value);
             int totalParts = Convert.ToInt32(numericUpDownTotalParts.Value),
@@ -497,7 +499,7 @@ namespace automata_sharp
             }
             else
             {
-                StringBuilder.Append("<Вычисляется дополнительная информация...>");
+                StringBuilder.Append("<Calculating additional information...>");
                 StringBuilder.Append("\n");
             }
 
@@ -514,40 +516,40 @@ namespace automata_sharp
 
         string GetDeltaTime(TimeSpan deltaTime)
         {
-            return "Прошло времени: " + deltaTime.ToString(@"hh\:mm\:ss");
+            return "Time elapsed: " + deltaTime.ToString(@"hh\:mm\:ss");
         }
 
         string GetRemainedTime(TimeSpan deltaTime, int totalCount , float progress)
         {
             var remainedSeconds = deltaTime.TotalSeconds * (1.0 / progress);
             var remained = new TimeSpan(0, 0, (int)Math.Round(remainedSeconds)) - deltaTime;
-            return "Приблизительно осталось: " + remained.ToString(@"hh\:mm\:ss");
+            return "Estimated calculation time: " + remained.ToString(@"hh\:mm\:ss");
         }
 
         string GetProgress(float progress)
         {
-            return "Выполнено: " + progress.ToString("P1");
+            return "Progress: " + progress.ToString("P1");
         }
 
         string GetCurrentCountOfTotalCount(int currentCount, int totalCount)
         {
-            return "Подсчитанно :" + currentCount.ToString() + " / " + totalCount.ToString();
+            return "Calculated: " + currentCount.ToString() + " / " + totalCount.ToString();
         }
 
         //TODO
         [Obsolete("Not corrected")]
         string GetTransactionPerSecond(TimeSpan deltaTime, int deltaCount)
         {
-            return "debug Транзакций в секунду: " + (deltaCount / deltaTime.TotalSeconds).ToString("N");
+            return "debug Transactions per second: " + (deltaCount / deltaTime.TotalSeconds).ToString("N");
         }
 
         //TODO
         [Obsolete("Not corrected")]
         string GetGCCallsPerSecond(TimeSpan deltaTime, int gen0, int gen1, int gen2)
         {
-            return "debug вызовов GC0 в секунду: " + (gen0 / deltaTime.TotalSeconds).ToString("N") +
-                 "\nвызовов GC1 в секунду: " + (gen1 / deltaTime.TotalSeconds).ToString("N") +
-                 "\nвызовов GC2 в секунду: " + (gen2 / deltaTime.TotalSeconds).ToString("N");
+            return "debug GC0 calls per second: " + (gen0 / deltaTime.TotalSeconds).ToString("N") +
+                 "\nGC1 calls per second: " + (gen1 / deltaTime.TotalSeconds).ToString("N") +
+                 "\nGC2 calls per second: " + (gen2 / deltaTime.TotalSeconds).ToString("N");
         }
 
         
@@ -560,6 +562,12 @@ namespace automata_sharp
         //Мне было лень делать нормально)
         //Сделаю потом
         Task<int> TotalCountTask;
+
+        private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            richTextBoxIcdfaOutput.Visible = false;
+        }
+
         private int? GetTotalCount()
         {
             if (TotalCountTask == null)
