@@ -28,14 +28,35 @@ namespace automata_sharp
             list = new List<T>(capacity);
         }
         public UniqueList(IEnumerable<T> enumerable)
+            : this(10)
         {
-            list = new List<T>(enumerable);
+            foreach (var e in enumerable)
+                Add(e);
         }
 
-        public void Add(T item)
+        public bool SetEquals(UniqueList<T> other)
         {
-            if (!list.Contains(item))
-                list.Add(item);
+            if (other.list.Count != list.Count) return false;
+
+            list.Sort();
+            other.list.Sort();
+
+            for(int i = 0; i < list.Count; i++)
+                if (!list[i].Equals(other.list[i])) return false;
+
+            return true;
+        }
+
+        public bool Add(T item)
+        {
+            if (list.Contains(item)) return false;
+            list.Add(item);
+            return true;
+        }
+
+        void ICollection<T>.Add(T item)
+        {
+            Add(item);
         }
 
         public void Clear()
