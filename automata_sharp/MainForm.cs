@@ -302,6 +302,8 @@ namespace automata_sharp
         private void buttonSave_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.AddExtension = true;
+            saveFileDialog.DefaultExt = "automata";
             if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 StreamWriter stream = new StreamWriter(saveFileDialog.OpenFile());
@@ -333,6 +335,8 @@ namespace automata_sharp
             ResetUI();
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.DefaultExt = "automata";
+            openFileDialog.AddExtension = true;
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
 
