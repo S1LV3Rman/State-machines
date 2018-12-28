@@ -52,6 +52,18 @@
             this.labelOpenSaveText = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonOpen = new System.Windows.Forms.Button();
+            this.tabIcdfa = new System.Windows.Forms.TabPage();
+            this.labelIcdfaStatus = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.numericUpDownK = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownN = new System.Windows.Forms.NumericUpDown();
+            this.buttonIcdfaGenerate = new System.Windows.Forms.Button();
+            this.numericUpDownParts = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownPart = new System.Windows.Forms.NumericUpDown();
             this.tabPageAbout = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -85,18 +97,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.textBoxCheck = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.tabIcdfa = new System.Windows.Forms.TabPage();
-            this.numericUpDownPart = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownParts = new System.Windows.Forms.NumericUpDown();
-            this.buttonIcdfaGenerate = new System.Windows.Forms.Button();
-            this.numericUpDownN = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownK = new System.Windows.Forms.NumericUpDown();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.labelIcdfaStatus = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPageGenerate.SuspendLayout();
             this.panelGenerate.SuspendLayout();
@@ -109,17 +109,17 @@
             this.tabPageOpen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabIcdfa.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownK)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownN)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownParts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPart)).BeginInit();
             this.tabPageAbout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBoxResetWord.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAutomata)).BeginInit();
             this.groupBoxWordCheck.SuspendLayout();
-            this.tabIcdfa.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownParts)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownN)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownK)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -330,6 +330,111 @@
             this.buttonOpen.Name = "buttonOpen";
             this.buttonOpen.UseVisualStyleBackColor = false;
             this.buttonOpen.Click += new System.EventHandler(this.buttonOpen_Click);
+            // 
+            // tabIcdfa
+            // 
+            this.tabIcdfa.Controls.Add(this.labelIcdfaStatus);
+            this.tabIcdfa.Controls.Add(this.label19);
+            this.tabIcdfa.Controls.Add(this.label18);
+            this.tabIcdfa.Controls.Add(this.label15);
+            this.tabIcdfa.Controls.Add(this.label16);
+            this.tabIcdfa.Controls.Add(this.label17);
+            this.tabIcdfa.Controls.Add(this.numericUpDownK);
+            this.tabIcdfa.Controls.Add(this.numericUpDownN);
+            this.tabIcdfa.Controls.Add(this.buttonIcdfaGenerate);
+            this.tabIcdfa.Controls.Add(this.numericUpDownParts);
+            this.tabIcdfa.Controls.Add(this.numericUpDownPart);
+            resources.ApplyResources(this.tabIcdfa, "tabIcdfa");
+            this.tabIcdfa.Name = "tabIcdfa";
+            this.tabIcdfa.UseVisualStyleBackColor = true;
+            // 
+            // labelIcdfaStatus
+            // 
+            resources.ApplyResources(this.labelIcdfaStatus, "labelIcdfaStatus");
+            this.labelIcdfaStatus.Name = "labelIcdfaStatus";
+            // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.Name = "label19";
+            // 
+            // label18
+            // 
+            resources.ApplyResources(this.label18, "label18");
+            this.label18.Name = "label18";
+            // 
+            // label15
+            // 
+            resources.ApplyResources(this.label15, "label15");
+            this.label15.Name = "label15";
+            // 
+            // label16
+            // 
+            resources.ApplyResources(this.label16, "label16");
+            this.label16.Name = "label16";
+            // 
+            // label17
+            // 
+            resources.ApplyResources(this.label17, "label17");
+            this.label17.Name = "label17";
+            // 
+            // numericUpDownK
+            // 
+            resources.ApplyResources(this.numericUpDownK, "numericUpDownK");
+            this.numericUpDownK.Maximum = new decimal(new int[] {
+            26,
+            0,
+            0,
+            0});
+            this.numericUpDownK.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownK.Name = "numericUpDownK";
+            this.numericUpDownK.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDownN
+            // 
+            resources.ApplyResources(this.numericUpDownN, "numericUpDownN");
+            this.numericUpDownN.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownN.Name = "numericUpDownN";
+            this.numericUpDownN.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // buttonIcdfaGenerate
+            // 
+            resources.ApplyResources(this.buttonIcdfaGenerate, "buttonIcdfaGenerate");
+            this.buttonIcdfaGenerate.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.buttonIcdfaGenerate.Name = "buttonIcdfaGenerate";
+            this.buttonIcdfaGenerate.UseVisualStyleBackColor = false;
+            this.buttonIcdfaGenerate.Click += new System.EventHandler(this.buttonIcdfaGenerate_Click);
+            // 
+            // numericUpDownParts
+            // 
+            resources.ApplyResources(this.numericUpDownParts, "numericUpDownParts");
+            this.numericUpDownParts.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericUpDownParts.Name = "numericUpDownParts";
+            // 
+            // numericUpDownPart
+            // 
+            resources.ApplyResources(this.numericUpDownPart, "numericUpDownPart");
+            this.numericUpDownPart.Name = "numericUpDownPart";
             // 
             // tabPageAbout
             // 
@@ -563,106 +668,6 @@
             resources.ApplyResources(this.label12, "label12");
             this.label12.Name = "label12";
             // 
-            // tabIcdfa
-            // 
-            this.tabIcdfa.Controls.Add(this.labelIcdfaStatus);
-            this.tabIcdfa.Controls.Add(this.label19);
-            this.tabIcdfa.Controls.Add(this.label18);
-            this.tabIcdfa.Controls.Add(this.label15);
-            this.tabIcdfa.Controls.Add(this.label16);
-            this.tabIcdfa.Controls.Add(this.label17);
-            this.tabIcdfa.Controls.Add(this.numericUpDownK);
-            this.tabIcdfa.Controls.Add(this.numericUpDownN);
-            this.tabIcdfa.Controls.Add(this.buttonIcdfaGenerate);
-            this.tabIcdfa.Controls.Add(this.numericUpDownParts);
-            this.tabIcdfa.Controls.Add(this.numericUpDownPart);
-            resources.ApplyResources(this.tabIcdfa, "tabIcdfa");
-            this.tabIcdfa.Name = "tabIcdfa";
-            this.tabIcdfa.UseVisualStyleBackColor = true;
-            // 
-            // numericUpDownPart
-            // 
-            resources.ApplyResources(this.numericUpDownPart, "numericUpDownPart");
-            this.numericUpDownPart.Name = "numericUpDownPart";
-            // 
-            // numericUpDownParts
-            // 
-            resources.ApplyResources(this.numericUpDownParts, "numericUpDownParts");
-            this.numericUpDownParts.Name = "numericUpDownParts";
-            // 
-            // buttonIcdfaGenerate
-            // 
-            resources.ApplyResources(this.buttonIcdfaGenerate, "buttonIcdfaGenerate");
-            this.buttonIcdfaGenerate.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.buttonIcdfaGenerate.Name = "buttonIcdfaGenerate";
-            this.buttonIcdfaGenerate.UseVisualStyleBackColor = false;
-            this.buttonIcdfaGenerate.Click += new System.EventHandler(this.buttonIcdfaGenerate_Click);
-            // 
-            // numericUpDownN
-            // 
-            resources.ApplyResources(this.numericUpDownN, "numericUpDownN");
-            this.numericUpDownN.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownN.Name = "numericUpDownN";
-            this.numericUpDownN.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDownK
-            // 
-            resources.ApplyResources(this.numericUpDownK, "numericUpDownK");
-            this.numericUpDownK.Maximum = new decimal(new int[] {
-            26,
-            0,
-            0,
-            0});
-            this.numericUpDownK.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownK.Name = "numericUpDownK";
-            this.numericUpDownK.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label15
-            // 
-            resources.ApplyResources(this.label15, "label15");
-            this.label15.Name = "label15";
-            // 
-            // label16
-            // 
-            resources.ApplyResources(this.label16, "label16");
-            this.label16.Name = "label16";
-            // 
-            // label17
-            // 
-            resources.ApplyResources(this.label17, "label17");
-            this.label17.Name = "label17";
-            // 
-            // label18
-            // 
-            resources.ApplyResources(this.label18, "label18");
-            this.label18.Name = "label18";
-            // 
-            // label19
-            // 
-            resources.ApplyResources(this.label19, "label19");
-            this.label19.Name = "label19";
-            // 
-            // labelIcdfaStatus
-            // 
-            resources.ApplyResources(this.labelIcdfaStatus, "labelIcdfaStatus");
-            this.labelIcdfaStatus.Name = "labelIcdfaStatus";
-            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -688,6 +693,12 @@
             this.tabPageOpen.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tabIcdfa.ResumeLayout(false);
+            this.tabIcdfa.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownK)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownN)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownParts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPart)).EndInit();
             this.tabPageAbout.ResumeLayout(false);
             this.tabPageAbout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -698,12 +709,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAutomata)).EndInit();
             this.groupBoxWordCheck.ResumeLayout(false);
             this.groupBoxWordCheck.PerformLayout();
-            this.tabIcdfa.ResumeLayout(false);
-            this.tabIcdfa.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownParts)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownN)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownK)).EndInit();
             this.ResumeLayout(false);
 
         }

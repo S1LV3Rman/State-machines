@@ -403,7 +403,7 @@ namespace automata_sharp
 
             int n = Convert.ToInt32(numericUpDownN.Value),
                 k = Convert.ToInt32(numericUpDownK.Value);
-            List<int> lengths = new List<int>();
+            List<ulong> lengths = new List<ulong>();
             int parts = Convert.ToInt32(numericUpDownParts.Value),
                 part = Convert.ToInt32(numericUpDownPart.Value);
 
@@ -425,16 +425,16 @@ namespace automata_sharp
             labelIcdfaStatus.Text = string.Empty;
         }
 
-        private List<int> IcdfaGeneratorCreatePart(int n, int k, int part, int parts)
+        private List<ulong> IcdfaGeneratorCreatePart(int n, int k, int part, int parts)
         {
-            List<int> lengths = new List<int>();
+            List<ulong> lengths = new List<ulong>();
 
             int nm = n - 1;
             int km = k - 1;
             int nmm = n - 2;
 
             Generator temp = new Generator(n, k);
-            int count_all = 0;
+            ulong count_all = 0;
             while (!temp.IsLastFlags)
             {
                 while (!temp.IsLastSequences)
@@ -446,12 +446,12 @@ namespace automata_sharp
             }
 
             Generator generator = new Generator(n, k);
-            int count = 0;
+            ulong count = 0;
 
             for (int j = 0, t = (n - 1) * (n - 1) + 1; j < t; ++j)
                 lengths.Add(0);
 
-            int i = 1;
+            uint i = 1;
             while (!generator.IsLastFlags && i != part)
             {
                 while (!generator.IsLastSequences && i != part)
