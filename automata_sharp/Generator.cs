@@ -8,12 +8,58 @@ namespace automata_sharp
 {
     class Generator
     {
-        private List<int> flags;
-        private List<int> sequence;
-        private int numStates;
-        private int numLetters;
-        public bool IsLastFlags { set;  get; }
-        public bool IsLastSequences { set; get; }
+        private List<int> flags = new List<int>();
+        private List<int> sequence = new List<int>();
+        private int numStates = 0;
+        private int numLetters = 0;
+        private Automata automata = new Automata();
+        public bool IsLastFlags { private set;  get; }
+        public bool IsLastSequences { private set; get; }
+
+        public Generator() { }
+
+        public Generator(int n, int k)
+        {
+            numStates = n;
+            numLetters = k;
+
+            for (int i = 0; i < n - 1; ++i)
+                flags.Add(0);
+
+            for (int i = 0, j = n * k; i < j; ++i)
+                sequence.Add(0);
+
+            for (int i = 1; i < n; ++i)
+                flags[i - 1] = k * i - 1;
+
+            resetSequences();
+
+            var states = new List<int>(numStates);
+            for (int i = 0; i < numStates; ++i)
+                states.Add(i);
+
+            var letters = String.Empty;
+            for (int i = 0; i < numLetters; ++i)
+                letters += Convert.ToChar('a' + i);
+
+            Dictionary<int, Dictionary<char, int>> transitions = new Dictionary<int, Dictionary<char, int>>();
+            for (int i = 0, l = numStates; i < l; ++i)
+            {
+                Dictionary<char, int> temp = new Dictionary<char, int>(numStates);
+                transitions.Add(i, temp);
+                for (int j = 0, m = numLetters; j < m; ++j)
+                    temp.Add(Convert.ToChar('a' + j), sequence[i * numLetters + j]);
+            }
+
+            automata = new Automata(states, letters, transitions);
+        }
+
+        private void updateTransitions()
+        {
+            for (int i = 0, l = numStates; i < l; ++i)
+                for (int j = 0, m = numLetters; j < m; ++j)
+                    automata._transitions[i][Convert.ToChar('a' + j)] = sequence[i * numLetters + j];
+        }
 
         private bool containe(int a)
         {
@@ -44,38 +90,6 @@ namespace automata_sharp
                     sequence[i] = 0;
             }
             IsLastSequences = false;
-        }
-
-        public Generator()
-        {
-            numStates = 0;
-            numLetters = 0;
-            IsLastFlags = false;
-            IsLastSequences = false;
-            flags = new List<int>();
-            sequence = new List<int>();
-        }
-
-        public Generator(int n, int k)
-        {
-            flags = new List<int>();
-            sequence = new List<int>();
-
-            IsLastFlags = false;
-
-            numStates = n;
-            numLetters = k;
-
-            for (int i = 0; i < n - 1; ++i)
-                flags.Add(0);
-
-            for (int i = 0, j = n * k; i < j; ++i)
-                sequence.Add(0);
-
-            for (int i = 1; i < n; ++i)
-                flags[i - 1] = k * i - 1;
-
-            resetSequences();
         }
 
         public void NextFlags(int i)
@@ -132,30 +146,11 @@ namespace automata_sharp
                     sequence[j] = sequence[j] + 1;
         }
 
-        StringBuilder letters = new StringBuilder();
-        Dictionary<int, Dictionary<char, int>> transitions = new Dictionary<int, Dictionary<char, int>>();
         public int getWordLength()
         {
-            List<int> states = new List<int>(numStates);
-            for (int i = 0; i < numStates; ++i)
-                states.Add(i);
+            updateTransitions();
 
-            letters.Clear();
-            for (int i = 0; i < numLetters; ++i)
-                letters.Append(Convert.ToChar('a' + i));
-
-            transitions.Clear();
-            for (int i = 0, n = numStates; i < n; ++i)
-            {
-                Dictionary<char, int> temp = new Dictionary<char, int>(numStates);
-                transitions.Add(i, temp);
-                for (int j = 0, m = numLetters; j < m; ++j)
-                    temp.Add(Convert.ToChar('a' + j), sequence[i * numLetters + j]);
-            }
-
-            Automata a = new Automata(states, letters.ToString(), transitions);
-
-            string word = a.FindShortestResetWord_WithoutAsync();
+            string word = automata.FindShortestResetWord_WithoutAsync();
 
             return word.Length;
         }
