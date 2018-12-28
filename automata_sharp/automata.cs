@@ -145,12 +145,17 @@ namespace automata_sharp
             return nextStates;
         }
 
-        public void Delta(SortedSet<int> result, SortedSet<int> states, char letter)
+        public void Delta(UniqueList<int> result, UniqueList<int> states, char letter)
         {
             result.Clear();
 
-            foreach (var state in states)
-                result.Add(_transitions[state][letter]);
+            for(int i = 0; i < states.Count; i++)
+            {
+                result.Add(_transitions[states[i]][letter]);
+            }
+
+            //foreach (var state in states)
+            //    result.Add(_transitions[state][letter]);
         }
 
         public List<int> Delta(List<int> states, char letter)
@@ -180,14 +185,14 @@ namespace automata_sharp
             return nextState;
         }
 
-        Dictionary<int, List<SortedSet<int>>> usedStates = new Dictionary<int, List<SortedSet<int>>>();
-        List<SortedSet<int>> currentStates = new List<SortedSet<int>>();
-        List<SortedSet<int>> nextStates = new List<SortedSet<int>>();
+        Dictionary<int, List<UniqueList<int>>> usedStates = new Dictionary<int, List<UniqueList<int>>>();
+        List<UniqueList<int>> currentStates = new List<UniqueList<int>>();
+        List<UniqueList<int>> nextStates = new List<UniqueList<int>>();
         List<string> currentWords = new List<string>();
         List<string> nextWords = new List<string>();
-        SortedSet<int> start = new SortedSet<int>();
+        UniqueList<int> start = new UniqueList<int>();
 
-        SortedSet<int> tempStates = new SortedSet<int>();
+        UniqueList<int> tempStates = new UniqueList<int>();
 
         public string FindShortestResetWord_WithoutAsync()
         {
@@ -198,13 +203,13 @@ namespace automata_sharp
             nextWords.Clear();
             start.Clear();
 
-            foreach (var s in _states)
-                start.Add(s);
+            for (int i = 0; i < _states.Count; i++)
+                start.Add(_states[i]);
 
             currentStates.Add(start);
             currentWords.Add("");
 
-            usedStates.Add(start.Count, new List<SortedSet<int>>());
+            usedStates.Add(start.Count, new List<UniqueList<int>>());
             usedStates[start.Count].Add(start);
 
             while (currentStates.Count != 0)
@@ -221,12 +226,12 @@ namespace automata_sharp
 
                         if (isNew)
                         {
-                            var temp = new SortedSet<int>(tempStates);
+                            var temp = new UniqueList<int>(tempStates);
                             nextStates.Add(temp);
                             nextWords.Add(currentWords[i] + _letters[j]);
 
                             if (!usedStates.ContainsKey(temp.Count))
-                                usedStates.Add(temp.Count, new List<SortedSet<int>>());
+                                usedStates.Add(temp.Count, new List<UniqueList<int>>(_letters.Length));
                             usedStates[temp.Count].Add(temp);
                         }
                     }
