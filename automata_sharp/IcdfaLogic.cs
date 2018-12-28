@@ -62,9 +62,14 @@ namespace automata_sharp
             Lengths = new Dictionary<int, int[]>(CountParts);
         }
 
+        /// <summary>
+        /// Возврашает одну часть
+        /// </summary>
+        /// <param name="part"></param>
+        /// <returns></returns>
         public int[] GetLengths(int part)
         {
-            if (part < 0 || part >= CountParts) throw new ArgumentOutOfRangeException();
+            if (part < StartPart || part >= CountParts + StartPart) throw new ArgumentOutOfRangeException();
             return Lengths[part];
         }
 
@@ -83,6 +88,10 @@ namespace automata_sharp
         }
 
         //TODO
+        /// <summary>
+        /// Суммирует все части
+        /// </summary>
+        /// <returns></returns>
         public int[] GetTotalLenghts()
         {
             var array = new int[RowLength];
@@ -90,7 +99,7 @@ namespace automata_sharp
             return array;
         }
 
-        //TOD
+        //TODO
         public int GetCurrentCount()
         {
             int sum = 0;
@@ -99,12 +108,19 @@ namespace automata_sharp
             return sum;
         }
 
+        /// <summary>
+        /// Запускает вычисления
+        /// </summary>
+        /// <returns>Задча вычисления</returns>
         public async Task StartAsync()
         {
             Schedule();
             await Run();
         }
 
+        /// <summary>
+        /// Планирует задачи.
+        /// </summary>
         void Schedule()
         {
             int length = RowLength;
@@ -115,24 +131,47 @@ namespace automata_sharp
             }
         }
 
+        /// <summary>
+        /// Создает задачу
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns></returns>
         Task CreateTask(int num)
         {
             return new Task(() => MainLogic(Lengths[num], num));
         }
 
+        /// <summary>
+        /// Запускает все задачи 
+        /// </summary>
+        /// <returns>Общая задача</returns>
         Task Run()
         {
             //GC.TryStartNoGCRegion(1024*1024*4);
             GCSettings.LatencyMode = GCLatencyMode.Interactive;
+            //Запоминаем время запуска
             LaunchTime = DateTime.UtcNow;
             for (int i = 0; i < CountParts; i++)
             {
-                Tasks[i].Start(PriorityScheduler.Lowest);
+                Tasks[i].Start(PriorityScheduler.Lowest);//Запускаем все задачи с помощью кастомного планировщика
+                /*Задаем минимальный приоритет по двум причинам:
+                 - Смысла ебать пользователя нету, если пользователь захочет делать что то на фоне 
+                    то он спокойно сможет это делать, хоть в игры играть, основной квант времени будет отдаваться более
+                    приоритетным задачам
+                 - Даем больше времени для потоков GC (на самом деле это очень критично, даже если мы поставим на normal то GC будет не успевать)
+                 (посмотрим что будет на оптимизированном алгоритме)
+                 */
             }
 
+            //Возвращем задачу которая будет вывполнена после завершения всех вычислительных задач
             return Task.WhenAll(Tasks);
         }
 
+        /// <summary>
+        /// Логика вычисления части
+        /// </summary>
+        /// <param name="lengths"></param>
+        /// <param name="part"></param>
         private void MainLogic(int[] lengths, int part)
         {
             var generator = new Generator(N, K);
@@ -172,6 +211,11 @@ namespace automata_sharp
             
 
         }
+
+        /// <summary>
+        /// Считает суммарное кол-во автоматов?
+        /// </summary>
+        /// <returns></returns>
         public int GetTotalCount()
         {
             Generator temp = new Generator(N, K);
