@@ -401,19 +401,17 @@ namespace automata_sharp
 
         private void buttonIcdfaGenerate_Click(object sender, EventArgs e)
         {
-
-
             int n = Convert.ToInt32(numericUpDownN.Value),
                 k = Convert.ToInt32(numericUpDownK.Value);
-            List<int> lengths = new List<int>();
-            int parts = Convert.ToInt32(numericUpDownParts.Value),
-                part = Convert.ToInt32(numericUpDownPart.Value);
+            int totalParts = Convert.ToInt32(numericUpDownTotalParts.Value),
+                startPart = Convert.ToInt32(numericUpDownStartPart.Value),
+                countParts = Convert.ToInt32(numericUpDownPartsCount.Value);
 
 
 
             //lengths = await Task.Run(() => IcdfaGeneratorCreatePart(n, k, part, parts));
 
-            GeneratorCreatePartLogic(n, k, part, parts);
+            GeneratorCreatePartLogic(n, k, totalParts, startPart,countParts);
 
             //string path = $"Prtcl{n}x{k}_pt{part}of{parts}.txt";
 
@@ -482,21 +480,27 @@ namespace automata_sharp
             return lengths;
         }
 
-        private async void GeneratorCreatePartLogic(int n, int k, int part, int parts)
+        private async void GeneratorCreatePartLogic(int n, int k,int totalParts,int startPart,int countParts)
         {
             buttonIcdfaGenerate.Visible = false;
             labelIcdfaStatus.ForeColor = Color.DarkBlue;
-            labelIcdfaStatus.Text = $"Generating result for {n}x{k}, part {part} of {parts}";
+            labelIcdfaStatus.Text = $"Generating result for {n}x{k}, parts {startPart}..{startPart + countParts-1} of {totalParts}";
 
-            CurrentIcdfaLogic = new IcdfaLogic();
-
+            CurrentIcdfaLogic = new IcdfaLogic(n,k,totalParts,startPart,countParts);
 
             updaterIcdfa.Enabled = true;
+            
             await CurrentIcdfaLogic.StartAsync();
+            
             updaterIcdfa.Enabled = false;
             UpdateIcdfaOutput();
             CurrentIcdfaLogic = null;
-
+            if (TotalCountTask != null)
+            {
+                TotalCountTask.GetAwaiter().GetResult();
+                TotalCountTask.Dispose();
+                TotalCountTask = null;
+            }
             buttonIcdfaGenerate.Visible = true;
             labelIcdfaStatus.Text = string.Empty;
         }
@@ -514,10 +518,52 @@ namespace automata_sharp
         private void UpdateIcdfaOutput()
         {
             if (CurrentIcdfaLogic == null) throw new InvalidProgramException();
-
+            
             StringBuilder.Clear();
             var array = CurrentIcdfaLogic.GetTotalLenghts();
-            StringBuilder.Append("Прошло времени: " + (DateTime.UtcNow - CurrentIcdfaLogic.LaunchTime).ToString(@"dd\.hh\:mm\:ss"));
+
+            var deltaTime = DateTime.UtcNow - CurrentIcdfaLogic.LaunchTime;
+
+            int? totalCount = GetTotalCount();
+            float? progress = null;
+
+            if (totalCount.HasValue)
+            {
+                var targetCount = totalCount.Value * (CurrentIcdfaLogic.CountParts / (float)CurrentIcdfaLogic.TotalParts);
+                progress = CurrentIcdfaLogic.GetCurrentCount() / targetCount;
+            }
+            StringBuilder.Append((GC.CollectionCount(0) /deltaTime.TotalSeconds) + " gc call/s\n");
+            if (totalCount.HasValue)
+            {
+                var currentCount = CurrentIcdfaLogic.GetCurrentCount();
+                StringBuilder.Append((currentCount / deltaTime.TotalSeconds) + " transaction/s ");
+            }
+            StringBuilder.Append("\nПрошло времени: ");
+            StringBuilder.Append(deltaTime.ToString(@"dd\.hh\:mm\:ss"));
+            //StringBuilder.Append("Осталось времени: " + (DateTime.UtcNow - CurrentIcdfaLogic.LaunchTime).ToString(@"dd\.hh\:mm\:ss"));
+            StringBuilder.Append("\nОсталось времени: ");
+            if (progress.HasValue)
+            {
+                var remainedSeconds = deltaTime.TotalSeconds * (1f / progress.Value);
+                var remained = new TimeSpan(0, 0, (int)remainedSeconds) - deltaTime;
+                StringBuilder.Append(remained.ToString(@"dd\.hh\:mm\:ss"));
+            }
+            else
+            {
+                StringBuilder.Append("<Вычисляется..>");
+            }
+            StringBuilder.Append("\nПрогресс: ");
+            if (progress.HasValue)
+            {
+                StringBuilder.Append(progress.Value.ToString("P2"));
+            }
+            else
+            {
+                StringBuilder.Append("<Вычисляется..>");
+            }
+
+            StringBuilder.Append("\n");
+
             foreach (var e in array)
             {
                 StringBuilder.Append("\n");
@@ -531,5 +577,23 @@ namespace automata_sharp
         {
             ResetWordCancellation?.Cancel();
         }
+
+        Task<int> TotalCountTask;
+        private int? GetTotalCount()
+        {
+            if(TotalCountTask == null )
+            {
+                if (CurrentIcdfaLogic != null)
+                    TotalCountTask = Task.Factory.StartNew(() => CurrentIcdfaLogic.GetTotalCount(), TaskCreationOptions.LongRunning);
+            }
+            else
+            {
+                if (TotalCountTask.IsCompleted)
+                    return TotalCountTask.GetAwaiter().GetResult();
+            }
+            return null;
+        }
+
     }
+
 }

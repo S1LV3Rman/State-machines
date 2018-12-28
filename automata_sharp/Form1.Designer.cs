@@ -54,6 +54,8 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonOpen = new System.Windows.Forms.Button();
             this.tabIcdfa = new System.Windows.Forms.TabPage();
+            this.label20 = new System.Windows.Forms.Label();
+            this.numericUpDownPartsCount = new System.Windows.Forms.NumericUpDown();
             this.labelIcdfaStatus = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -63,8 +65,8 @@
             this.numericUpDownK = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownN = new System.Windows.Forms.NumericUpDown();
             this.buttonIcdfaGenerate = new System.Windows.Forms.Button();
-            this.numericUpDownParts = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownPart = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownTotalParts = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownStartPart = new System.Windows.Forms.NumericUpDown();
             this.tabPageAbout = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -113,10 +115,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabIcdfa.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPartsCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownN)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownParts)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTotalParts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartPart)).BeginInit();
             this.tabPageAbout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -336,6 +339,8 @@
             // 
             // tabIcdfa
             // 
+            this.tabIcdfa.Controls.Add(this.label20);
+            this.tabIcdfa.Controls.Add(this.numericUpDownPartsCount);
             this.tabIcdfa.Controls.Add(this.labelIcdfaStatus);
             this.tabIcdfa.Controls.Add(this.label19);
             this.tabIcdfa.Controls.Add(this.label18);
@@ -345,11 +350,26 @@
             this.tabIcdfa.Controls.Add(this.numericUpDownK);
             this.tabIcdfa.Controls.Add(this.numericUpDownN);
             this.tabIcdfa.Controls.Add(this.buttonIcdfaGenerate);
-            this.tabIcdfa.Controls.Add(this.numericUpDownParts);
-            this.tabIcdfa.Controls.Add(this.numericUpDownPart);
+            this.tabIcdfa.Controls.Add(this.numericUpDownTotalParts);
+            this.tabIcdfa.Controls.Add(this.numericUpDownStartPart);
             resources.ApplyResources(this.tabIcdfa, "tabIcdfa");
             this.tabIcdfa.Name = "tabIcdfa";
             this.tabIcdfa.UseVisualStyleBackColor = true;
+            // 
+            // label20
+            // 
+            resources.ApplyResources(this.label20, "label20");
+            this.label20.Name = "label20";
+            // 
+            // numericUpDownPartsCount
+            // 
+            resources.ApplyResources(this.numericUpDownPartsCount, "numericUpDownPartsCount");
+            this.numericUpDownPartsCount.Name = "numericUpDownPartsCount";
+            this.numericUpDownPartsCount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // labelIcdfaStatus
             // 
@@ -396,7 +416,7 @@
             0});
             this.numericUpDownK.Name = "numericUpDownK";
             this.numericUpDownK.Value = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -411,7 +431,7 @@
             0});
             this.numericUpDownN.Name = "numericUpDownN";
             this.numericUpDownN.Value = new decimal(new int[] {
-            1,
+            6,
             0,
             0,
             0});
@@ -424,15 +444,25 @@
             this.buttonIcdfaGenerate.UseVisualStyleBackColor = false;
             this.buttonIcdfaGenerate.Click += new System.EventHandler(this.buttonIcdfaGenerate_Click);
             // 
-            // numericUpDownParts
+            // numericUpDownTotalParts
             // 
-            resources.ApplyResources(this.numericUpDownParts, "numericUpDownParts");
-            this.numericUpDownParts.Name = "numericUpDownParts";
+            resources.ApplyResources(this.numericUpDownTotalParts, "numericUpDownTotalParts");
+            this.numericUpDownTotalParts.Name = "numericUpDownTotalParts";
+            this.numericUpDownTotalParts.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
-            // numericUpDownPart
+            // numericUpDownStartPart
             // 
-            resources.ApplyResources(this.numericUpDownPart, "numericUpDownPart");
-            this.numericUpDownPart.Name = "numericUpDownPart";
+            resources.ApplyResources(this.numericUpDownStartPart, "numericUpDownStartPart");
+            this.numericUpDownStartPart.Name = "numericUpDownStartPart";
+            this.numericUpDownStartPart.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // tabPageAbout
             // 
@@ -704,10 +734,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabIcdfa.ResumeLayout(false);
             this.tabIcdfa.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPartsCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownN)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownParts)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTotalParts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartPart)).EndInit();
             this.tabPageAbout.ResumeLayout(false);
             this.tabPageAbout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -784,8 +815,8 @@
         private System.Windows.Forms.TextBox textBoxCheck;
         private System.Windows.Forms.TabPage tabIcdfa;
         private System.Windows.Forms.Button buttonIcdfaGenerate;
-        private System.Windows.Forms.NumericUpDown numericUpDownParts;
-        private System.Windows.Forms.NumericUpDown numericUpDownPart;
+        private System.Windows.Forms.NumericUpDown numericUpDownTotalParts;
+        private System.Windows.Forms.NumericUpDown numericUpDownStartPart;
         private System.Windows.Forms.NumericUpDown numericUpDownK;
         private System.Windows.Forms.NumericUpDown numericUpDownN;
         private System.Windows.Forms.Label label19;
@@ -796,6 +827,8 @@
         private System.Windows.Forms.Label labelIcdfaStatus;
         private System.Windows.Forms.RichTextBox richTextBoxIcdfaOutput;
         private System.Windows.Forms.Timer updaterIcdfa;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.NumericUpDown numericUpDownPartsCount;
     }
 }
 
