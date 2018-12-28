@@ -258,11 +258,6 @@ namespace automata_sharp
             return "";
         }
 
-        public class UnicaleList<T> : List<T>
-        {
-
-        }
-
         public Task<string> FindShortestResetWord(CancellationTokenSource cancellationTokenSource)
         {
             var token = cancellationTokenSource.Token;
