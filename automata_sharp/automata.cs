@@ -155,6 +155,14 @@ namespace automata_sharp
             return nextStates;
         }
 
+        public void Delta(SortedSet<int> result, SortedSet<int> states, char letter)
+        {
+            result.Clear();
+
+            foreach (var state in states)
+                result.Add(_transitions[state][letter]);
+        }
+
         public List<int> Delta(List<int> states, char letter)
         {
             List<int> nextStates = new List<int>();
@@ -181,12 +189,15 @@ namespace automata_sharp
                 nextState = _transitions[nextState][letter];
             return nextState;
         }
+
         Dictionary<int, List<SortedSet<int>>> usedStates = new Dictionary<int, List<SortedSet<int>>>();
         List<SortedSet<int>> currentStates = new List<SortedSet<int>>();
         List<SortedSet<int>> nextStates = new List<SortedSet<int>>();
         List<string> currentWords = new List<string>();
         List<string> nextWords = new List<string>();
         SortedSet<int> start = new SortedSet<int>();
+
+        SortedSet<int> tempStates = new SortedSet<int>();
 
         public string FindShortestResetWord_WithoutAsync()
         {
@@ -212,14 +223,15 @@ namespace automata_sharp
                 {
                     for (int j = 0, l = _letters.Length; j < l; ++j)
                     {
-                        SortedSet<int> temp = Delta(currentStates[i], _letters[j]);
+                        Delta(tempStates, currentStates[i], _letters[j]);
 
                         bool isNew = true;
-                        for (int k = 0, m = usedStates.ContainsKey(temp.Count) ? usedStates[temp.Count].Count : 0; isNew && k < m; ++k)
-                            isNew = !temp.SetEquals(usedStates[temp.Count][k]);
+                        for (int k = 0, m = usedStates.ContainsKey(tempStates.Count) ? usedStates[tempStates.Count].Count : 0; isNew && k < m; ++k)
+                            isNew = !tempStates.SetEquals(usedStates[tempStates.Count][k]);
 
                         if (isNew)
                         {
+                            var temp = new SortedSet<int>(tempStates);
                             nextStates.Add(temp);
                             nextWords.Add(currentWords[i] + _letters[j]);
 
