@@ -198,8 +198,8 @@ namespace automata_sharp
             nextWords.Clear();
             start.Clear();
 
-            foreach (var s in _states)
-                start.Add(s);
+            for (int i = 0; i < _states.Count; i++)
+                start.Add(_states[i]);
 
             currentStates.Add(start);
             currentWords.Add("");
@@ -226,7 +226,7 @@ namespace automata_sharp
                             nextWords.Add(currentWords[i] + _letters[j]);
 
                             if (!usedStates.ContainsKey(temp.Count))
-                                usedStates.Add(temp.Count, new List<SortedSet<int>>());
+                                usedStates.Add(temp.Count, new List<SortedSet<int>>(_letters.Length));
                             usedStates[temp.Count].Add(temp);
                         }
                     }
@@ -251,6 +251,11 @@ namespace automata_sharp
                 
             }
             return "";
+        }
+
+        public class UnicaleList<T> : List<T>
+        {
+
         }
 
         public Task<string> FindShortestResetWord(CancellationTokenSource cancellationTokenSource)
