@@ -63,7 +63,7 @@ namespace automata_sharp
             buttonImpact.Enabled = true;
             buttonCheck.Enabled = true;
 
-            List<int> states = automata.GetStates();
+            List<int> states = automata._states;
             foreach (var i in states)
                 comboBoxStates.Items.Add(i);
 
@@ -98,7 +98,7 @@ namespace automata_sharp
             bool flag = true;
 
             string input = textBoxWord.Text;
-            string letters = automata.GetLetters();
+            string letters = automata._letters;
 
             for (int i = 0; i < input.Count() && flag; ++i)
                 if (!letters.Contains(input[i])) flag = false;
@@ -181,7 +181,7 @@ namespace automata_sharp
         private async void buttonShortResetWordCalculate_Click(object sender, EventArgs e)
         {
             bool flag = true;
-            if (automata.GetStates().Count > 10)
+            if (automata._states.Count > 10)
             {
                 flag = false;
                 DialogResult caution = MessageBox.Show("This may take a long time, are you sure?", "Confirm", MessageBoxButtons.YesNo);
