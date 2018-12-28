@@ -132,26 +132,28 @@ namespace automata_sharp
                     sequence[j] = sequence[j] + 1;
         }
 
+        StringBuilder letters = new StringBuilder();
+        Dictionary<int, Dictionary<char, int>> transitions = new Dictionary<int, Dictionary<char, int>>();
         public int getWordLength()
         {
-            List<int> states = new List<int>();
+            List<int> states = new List<int>(numStates);
             for (int i = 0; i < numStates; ++i)
                 states.Add(i);
 
-            string letters = String.Empty;
+            letters.Clear();
             for (int i = 0; i < numLetters; ++i)
-                letters += Convert.ToChar('a' + i);
+                letters.Append(Convert.ToChar('a' + i));
 
-            Dictionary<int, Dictionary<char, int>> transitions = new Dictionary<int, Dictionary<char, int>>();
+            transitions.Clear();
             for (int i = 0, n = numStates; i < n; ++i)
             {
-                Dictionary<char, int> temp = new Dictionary<char, int>();
+                Dictionary<char, int> temp = new Dictionary<char, int>(numStates);
                 transitions.Add(i, temp);
                 for (int j = 0, m = numLetters; j < m; ++j)
                     temp.Add(Convert.ToChar('a' + j), sequence[i * numLetters + j]);
             }
 
-            Automata a = new Automata(states, letters, transitions);
+            Automata a = new Automata(states, letters.ToString(), transitions);
 
             string word = a.FindShortestResetWord_WithoutAsync();
 

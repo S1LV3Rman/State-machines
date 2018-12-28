@@ -750,6 +750,57 @@
   <data name="&gt;&gt;tabPageOpen.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="label20.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label20.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
+    <value>205, 103</value>
+  </data>
+  <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 19</value>
+  </data>
+  <data name="label20.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="label20.Text" xml:space="preserve">
+    <value>Parts Count</value>
+  </data>
+  <data name="&gt;&gt;label20.Name" xml:space="preserve">
+    <value>label20</value>
+  </data>
+  <data name="&gt;&gt;label20.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label20.Parent" xml:space="preserve">
+    <value>tabIcdfa</value>
+  </data>
+  <data name="&gt;&gt;label20.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="numericUpDownPartsCount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>295, 101</value>
+  </data>
+  <data name="numericUpDownPartsCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 27</value>
+  </data>
+  <data name="numericUpDownPartsCount.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownPartsCount.Name" xml:space="preserve">
+    <value>numericUpDownPartsCount</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownPartsCount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownPartsCount.Parent" xml:space="preserve">
+    <value>tabIcdfa</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownPartsCount.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="labelIcdfaStatus.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -775,7 +826,7 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;labelIcdfaStatus.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="label19.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -784,16 +835,16 @@
     <value>NoControl</value>
   </data>
   <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 79</value>
+    <value>205, 37</value>
   </data>
   <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 19</value>
+    <value>78, 19</value>
   </data>
   <data name="label19.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="label19.Text" xml:space="preserve">
-    <value>Parts</value>
+    <value>Total Parts</value>
   </data>
   <data name="&gt;&gt;label19.Name" xml:space="preserve">
     <value>label19</value>
@@ -805,7 +856,7 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;label19.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="label18.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -814,16 +865,16 @@
     <value>NoControl</value>
   </data>
   <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>304, 37</value>
+    <value>205, 70</value>
   </data>
   <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 19</value>
+    <value>69, 19</value>
   </data>
   <data name="label18.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
   <data name="label18.Text" xml:space="preserve">
-    <value>Part</value>
+    <value>Start Part</value>
   </data>
   <data name="&gt;&gt;label18.Name" xml:space="preserve">
     <value>label18</value>
@@ -835,7 +886,7 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;label18.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="label15.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -868,7 +919,7 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="label16.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -898,7 +949,7 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;label16.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="label17.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -907,7 +958,7 @@
     <value>NoControl</value>
   </data>
   <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 79</value>
+    <value>8, 72</value>
   </data>
   <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 19</value>
@@ -928,13 +979,13 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;label17.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="numericUpDownK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 77</value>
+    <value>111, 70</value>
   </data>
   <data name="numericUpDownK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 27</value>
+    <value>74, 27</value>
   </data>
   <data name="numericUpDownK.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -949,13 +1000,13 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;numericUpDownK.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="numericUpDownN.Location" type="System.Drawing.Point, System.Drawing">
     <value>111, 35</value>
   </data>
   <data name="numericUpDownN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 27</value>
+    <value>74, 27</value>
   </data>
   <data name="numericUpDownN.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -970,7 +1021,7 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;numericUpDownN.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="buttonIcdfaGenerate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -982,10 +1033,10 @@
     <value>NoControl</value>
   </data>
   <data name="buttonIcdfaGenerate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 117</value>
+    <value>7, 142</value>
   </data>
   <data name="buttonIcdfaGenerate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>433, 27</value>
+    <value>429, 27</value>
   </data>
   <data name="buttonIcdfaGenerate.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1003,49 +1054,49 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;buttonIcdfaGenerate.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
-  <data name="numericUpDownParts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>344, 77</value>
+  <data name="numericUpDownTotalParts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>295, 35</value>
   </data>
-  <data name="numericUpDownParts.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="numericUpDownTotalParts.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 27</value>
   </data>
-  <data name="numericUpDownParts.TabIndex" type="System.Int32, mscorlib">
+  <data name="numericUpDownTotalParts.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;numericUpDownParts.Name" xml:space="preserve">
-    <value>numericUpDownParts</value>
+  <data name="&gt;&gt;numericUpDownTotalParts.Name" xml:space="preserve">
+    <value>numericUpDownTotalParts</value>
   </data>
-  <data name="&gt;&gt;numericUpDownParts.Type" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDownTotalParts.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;numericUpDownParts.Parent" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDownTotalParts.Parent" xml:space="preserve">
     <value>tabIcdfa</value>
   </data>
-  <data name="&gt;&gt;numericUpDownParts.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="&gt;&gt;numericUpDownTotalParts.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
-  <data name="numericUpDownPart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>345, 35</value>
+  <data name="numericUpDownStartPart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>295, 68</value>
   </data>
-  <data name="numericUpDownPart.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="numericUpDownStartPart.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 27</value>
   </data>
-  <data name="numericUpDownPart.TabIndex" type="System.Int32, mscorlib">
+  <data name="numericUpDownStartPart.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;numericUpDownPart.Name" xml:space="preserve">
-    <value>numericUpDownPart</value>
+  <data name="&gt;&gt;numericUpDownStartPart.Name" xml:space="preserve">
+    <value>numericUpDownStartPart</value>
   </data>
-  <data name="&gt;&gt;numericUpDownPart.Type" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDownStartPart.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;numericUpDownPart.Parent" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDownStartPart.Parent" xml:space="preserve">
     <value>tabIcdfa</value>
   </data>
-  <data name="&gt;&gt;numericUpDownPart.ZOrder" xml:space="preserve">
-    <value>10</value>
+  <data name="&gt;&gt;numericUpDownStartPart.ZOrder" xml:space="preserve">
+    <value>12</value>
   </data>
   <data name="tabIcdfa.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 28</value>
@@ -1307,7 +1358,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tabControlMain.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="buttonCreateConfirm.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -1592,7 +1643,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="groupBoxResetWord.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1862,7 +1913,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBoxResetWord.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="dataGridViewAutomata.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1886,7 +1937,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;dataGridViewAutomata.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="groupBoxWordCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
@@ -2048,10 +2099,40 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBoxWordCheck.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="richTextBoxIcdfaOutput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 226</value>
+  </data>
+  <data name="richTextBoxIcdfaOutput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>424, 357</value>
+  </data>
+  <data name="richTextBoxIcdfaOutput.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="richTextBoxIcdfaOutput.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;richTextBoxIcdfaOutput.Name" xml:space="preserve">
+    <value>richTextBoxIcdfaOutput</value>
+  </data>
+  <data name="&gt;&gt;richTextBoxIcdfaOutput.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;richTextBoxIcdfaOutput.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;richTextBoxIcdfaOutput.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="updaterIcdfa.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>89</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>8, 19</value>
@@ -2220,6 +2301,12 @@ Special thanks to Sergey Davydov for consulting in C#</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Automs | Synchronizable Deterministic Finite Automata</value>
+  </data>
+  <data name="&gt;&gt;updaterIcdfa.Name" xml:space="preserve">
+    <value>updaterIcdfa</value>
+  </data>
+  <data name="&gt;&gt;updaterIcdfa.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Form1</value>

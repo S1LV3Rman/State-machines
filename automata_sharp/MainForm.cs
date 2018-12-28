@@ -9,17 +9,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using System.Collections;
 
 namespace automata_sharp
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         Automata automata = new Automata();
         DataTable dataTable = new DataTable();
         CancellationTokenSource ResetWordCancellation, ShortResetWordCancellation;
+        IcdfaLogic CurrentIcdfaLogic;
+        StringBuilder StringBuilder = new StringBuilder();
 
-
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             buttonResetWordCalculate.Enabled = false;
@@ -38,18 +40,18 @@ namespace automata_sharp
             buttonImpact.Enabled = false;
             labelCheckResult.Text = String.Empty;
             buttonCheck.Enabled = false;
-            
+
             // Очистка выпадающего списка
             if (comboBoxStates.Items.Count != 0)
                 comboBoxStates.Items.Clear();
 
             // Сброс значений текстовых полей синх. слов
-            labelQuickResetWord.ForeColor = 
-                labelShortestResetWord.ForeColor = 
+            labelQuickResetWord.ForeColor =
+                labelShortestResetWord.ForeColor =
                 labelStoped.ForeColor = Color.Red;
 
-            labelQuickResetWord.Text = 
-                labelShortestResetWord.Text = 
+            labelQuickResetWord.Text =
+                labelShortestResetWord.Text =
                 labelStoped.Text = "Unknown";
         }
 
@@ -183,7 +185,7 @@ namespace automata_sharp
             {
                 flag = false;
                 DialogResult caution = MessageBox.Show("This may take a long time, are you sure?", "Confirm", MessageBoxButtons.YesNo);
-                    flag = caution == DialogResult.Yes;
+                flag = caution == DialogResult.Yes;
             }
             if (flag)
             {
@@ -385,7 +387,7 @@ namespace automata_sharp
 
         private void buttonCheck_Click(object sender, EventArgs e)
         {
-            if(automata.Verificate(textBoxCheck.Text))
+            if (automata.Verificate(textBoxCheck.Text))
             {
                 labelCheckResult.ForeColor = Color.LimeGreen;
                 labelCheckResult.Text = "Word IS the reset";
@@ -397,92 +399,182 @@ namespace automata_sharp
             }
         }
 
-        private async void buttonIcdfaGenerate_Click(object sender, EventArgs e)
+        private void buttonIcdfaGenerate_Click(object sender, EventArgs e)
         {
-            buttonIcdfaGenerate.Visible = false;
-
             int n = Convert.ToInt32(numericUpDownN.Value),
                 k = Convert.ToInt32(numericUpDownK.Value);
-            List<ulong> lengths = new List<ulong>();
-            int parts = Convert.ToInt32(numericUpDownParts.Value),
-                part = Convert.ToInt32(numericUpDownPart.Value);
+            int totalParts = Convert.ToInt32(numericUpDownTotalParts.Value),
+                startPart = Convert.ToInt32(numericUpDownStartPart.Value),
+                countParts = Convert.ToInt32(numericUpDownPartsCount.Value);
 
+            GeneratorCreatePartLogic(n, k, totalParts, startPart, countParts);
+        }
+
+        private async void GeneratorCreatePartLogic(int n, int k, int totalParts, int startPart, int countParts)
+        {
+            buttonIcdfaGenerate.Visible = false;
             labelIcdfaStatus.ForeColor = Color.DarkBlue;
-            labelIcdfaStatus.Text = $"Generating result for {n}x{k}, part {part} of {parts}";
+            labelIcdfaStatus.Text = $"Generating result for {n}x{k}, parts {startPart}..{startPart + countParts - 1} of {totalParts}";
 
-            lengths = await Task.Run(() => IcdfaGeneratorCreatePart(n, k, part, parts));
+            CurrentIcdfaLogic = new IcdfaLogic(n, k, totalParts, startPart, countParts);
 
-            string path = $"Prtcl{n}x{k}_pt{part}of{parts}.txt";
+            updaterIcdfa.Enabled = true;//Запускаем таймер который подтягивает изменения в CurrentIcdfaLogic
 
-            StreamWriter stream = new StreamWriter(path);
+            await CurrentIcdfaLogic.StartAsync();//Запускаем вычисления и ждем их завершения
+            /* Вычисления закончены */
 
-            foreach (var t in lengths)
-                stream.WriteLine(t);
+            updaterIcdfa.Enabled = false;//Отключаем таймер который подтягивает изменения в CurrentIcdfaLogic
+            UpdateIcdfaOutput();//Обновляем вывод  
+            CurrentIcdfaLogic = null;//Сбрасываем CurrentIcdfaLogic
 
-            stream.Close();
+            //Если задача подсчета сумарного кол-ва автоматов не завершена
+            //TODO В идеале сделать через CancellationToken
+            if (TotalCountTask != null)
+            {
+                TotalCountTask.GetAwaiter().GetResult();//Ожидаем завершения подсчета 
+                TotalCountTask.Dispose();//Освобождаем системные ресурсы связанные с задачей
+                TotalCountTask = null;//Сброс
+            }
 
+            //Восстанавливаем интерфейс
             buttonIcdfaGenerate.Visible = true;
             labelIcdfaStatus.Text = string.Empty;
         }
 
-        private List<ulong> IcdfaGeneratorCreatePart(int n, int k, int part, int parts)
+        private void updaterIcdfa_Tick(object sender, EventArgs e)
         {
-            List<ulong> lengths = new List<ulong>();
-
-            int nm = n - 1;
-            int km = k - 1;
-            int nmm = n - 2;
-
-            Generator temp = new Generator(n, k);
-            ulong count_all = 0;
-            while (!temp.IsLastFlags)
+            //Если CurrentIcdfaLogic не задан
+            if (CurrentIcdfaLogic == null)
             {
-                while (!temp.IsLastSequences)
-                {
-                    count_all++;
-                    temp.NextICDFA(nm, km);
-                }
-                temp.NextFlags(nmm);
+                updaterIcdfa.Enabled = false;//отключаем таймер
+                return;
             }
-
-            Generator generator = new Generator(n, k);
-            ulong count = 0;
-
-            for (int j = 0, t = (n - 1) * (n - 1) + 1; j < t; ++j)
-                lengths.Add(0);
-
-            uint i = 1;
-            while (!generator.IsLastFlags && i != part)
-            {
-                while (!generator.IsLastSequences && i != part)
-                {
-                    i++;
-                    generator.NextICDFA(nm, km);
-                }
-                generator.NextFlags(nmm);
-            }
-
-            i = 1;
-            while (!generator.IsLastFlags)
-            {
-                while (!generator.IsLastSequences)
-                {
-                    count++;
-                    if (i == part)
-                        lengths[generator.getWordLength()]++;
-                    if (i == parts)
-                        i = 0;
-                    generator.NextICDFA(nm, km);
-                    i++;
-                }
-                generator.NextFlags(nmm);
-            }
-            return lengths;
+            //Иначе обновляем вывод 
+            UpdateIcdfaOutput();
         }
+
+        /// <summary>
+        /// Обновляет вывод связанный с Icdfa
+        /// </summary>
+        private void UpdateIcdfaOutput()
+        {
+            if (CurrentIcdfaLogic == null) throw new InvalidProgramException();
+
+            StringBuilder.Clear();//Юзам StringBuilder для экономии памяти и времени cpu
+            var array = CurrentIcdfaLogic.GetTotalLenghts();//Суммируем все части
+
+            var deltaTime = DateTime.UtcNow - CurrentIcdfaLogic.LaunchTime;//Получаем время работы
+
+            int? totalCount = GetTotalCount();
+
+            StringBuilder.Append(GetDeltaTime(deltaTime));
+            StringBuilder.Append("\n");
+
+            if (totalCount.HasValue)
+            {
+                var totalParts = CurrentIcdfaLogic.TotalParts;
+                var countParts = CurrentIcdfaLogic.CountParts;
+
+                totalCount = (int)Math.Round(totalCount.Value * (countParts / (double)totalParts));
+
+                var currentCount = CurrentIcdfaLogic.GetCurrentCount();
+                var progress = currentCount / (float)totalCount.Value;
+
+                StringBuilder.Append(GetRemainedTime(deltaTime,totalCount.Value,progress));
+                StringBuilder.Append("\n");
+
+                StringBuilder.Append(GetCurrentCountOfTotalCount(currentCount,totalCount.Value));
+                StringBuilder.Append("\n");
+
+                StringBuilder.Append(GetProgress(progress));
+                StringBuilder.Append("\n");
+
+                //StringBuilder.Append(GetTransactionPerSecond(deltaTime,currentCount));
+                //StringBuilder.Append("\n");
+
+                //StringBuilder.Append(GetGCCallsPerSecond(deltaTime, GC.CollectionCount(0), GC.CollectionCount(1), GC.CollectionCount(2)));
+                //StringBuilder.Append("\n");
+            }
+            else
+            {
+                StringBuilder.Append("<Вычисляется дополнительная информация...>");
+                StringBuilder.Append("\n");
+            }
+
+            for(int i = 0; i < array.Length; i++)
+            {
+                StringBuilder.Append("\n");
+                StringBuilder.Append(i.ToString("D2"));
+                StringBuilder.Append(" - ");
+                StringBuilder.Append(array[i].ToString());
+            }
+
+            richTextBoxIcdfaOutput.Text = StringBuilder.ToString();
+        }
+
+        string GetDeltaTime(TimeSpan deltaTime)
+        {
+            return "Прошло времени: " + deltaTime.ToString(@"hh\:mm\:ss");
+        }
+
+        string GetRemainedTime(TimeSpan deltaTime, int totalCount , float progress)
+        {
+            var remainedSeconds = deltaTime.TotalSeconds * (1.0 / progress);
+            var remained = new TimeSpan(0, 0, (int)Math.Round(remainedSeconds)) - deltaTime;
+            return "Приблизительно осталось: " + remained.ToString(@"hh\:mm\:ss");
+        }
+
+        string GetProgress(float progress)
+        {
+            return "Выполнено: " + progress.ToString("P1");
+        }
+
+        string GetCurrentCountOfTotalCount(int currentCount, int totalCount)
+        {
+            return "Подсчитанно :" + currentCount.ToString() + " / " + totalCount.ToString();
+        }
+
+        //TODO
+        [Obsolete("Not corrected")]
+        string GetTransactionPerSecond(TimeSpan deltaTime, int deltaCount)
+        {
+            return "debug Транзакций в секунду: " + (deltaCount / deltaTime.TotalSeconds).ToString("N");
+        }
+
+        //TODO
+        [Obsolete("Not corrected")]
+        string GetGCCallsPerSecond(TimeSpan deltaTime, int gen0, int gen1, int gen2)
+        {
+            return "debug вызовов GC0 в секунду: " + (gen0 / deltaTime.TotalSeconds).ToString("N") +
+                 "\nвызовов GC1 в секунду: " + (gen1 / deltaTime.TotalSeconds).ToString("N") +
+                 "\nвызовов GC2 в секунду: " + (gen2 / deltaTime.TotalSeconds).ToString("N");
+        }
+
+        
 
         private void buttonCancelResetWord_Click(object sender, EventArgs e)
         {
             ResetWordCancellation?.Cancel();
         }
+
+        //Мне было лень делать нормально)
+        //Сделаю потом
+        Task<int> TotalCountTask;
+        private int? GetTotalCount()
+        {
+            if (TotalCountTask == null)
+            {
+                if (CurrentIcdfaLogic != null)
+                    TotalCountTask = Task.Factory.StartNew(() => CurrentIcdfaLogic.GetTotalCount(), new CancellationToken() ,TaskCreationOptions.None, PriorityScheduler.BelowNormal);
+            }
+            else
+            {
+                if (TotalCountTask.IsCompleted)
+                    return TotalCountTask.GetAwaiter().GetResult();
+            }
+            return null;
+        }
+
     }
+
 }

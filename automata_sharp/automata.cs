@@ -68,6 +68,17 @@ namespace automata_sharp
             else
                 return this.f.Value.CompareTo(p.f.Value);
         }
+
+        public override bool Equals(object obj)
+        {
+            var pair = obj as Pair;
+            return pair != null && pair == this;
+        }
+
+        public override int GetHashCode()
+        {
+            return f.GetHashCode() + s.GetHashCode();
+        }
     }
 
     public class Automata
@@ -91,10 +102,10 @@ namespace automata_sharp
             for (int i = 0; i < letters; ++i)
                 _letters += Convert.ToChar('a' + i);
 
-            _transitions = new Dictionary<int, Dictionary<char, int>>();
+            _transitions = new Dictionary<int, Dictionary<char, int>>(states);
             for (int i = 0, n = states; i < n; ++i)
             {
-                Dictionary<char, int> temp = new Dictionary<char, int>();
+                Dictionary<char, int> temp = new Dictionary<char, int>(letters);
                 _transitions.Add(i, temp);
                 for (int j = 0, m = letters; j < m; ++j)
                     temp.Add(Convert.ToChar('a' + j), Convert.ToInt32(dataTable.Rows[i][j + 1]));
@@ -122,7 +133,7 @@ namespace automata_sharp
         {
             foreach (var letter in word)
                 states = Delta(states, letter);
-
+            
             return states;
         }
 
@@ -142,6 +153,14 @@ namespace automata_sharp
                 nextStates.Add(_transitions[state][letter]);
 
             return nextStates;
+        }
+
+        public void Delta(SortedSet<int> result, SortedSet<int> states, char letter)
+        {
+            result.Clear();
+
+            foreach (var state in states)
+                result.Add(_transitions[state][letter]);
         }
 
         public List<int> Delta(List<int> states, char letter)
@@ -171,14 +190,23 @@ namespace automata_sharp
             return nextState;
         }
 
+        Dictionary<int, List<SortedSet<int>>> usedStates = new Dictionary<int, List<SortedSet<int>>>();
+        List<SortedSet<int>> currentStates = new List<SortedSet<int>>();
+        List<SortedSet<int>> nextStates = new List<SortedSet<int>>();
+        List<string> currentWords = new List<string>();
+        List<string> nextWords = new List<string>();
+        SortedSet<int> start = new SortedSet<int>();
+
+        SortedSet<int> tempStates = new SortedSet<int>();
+
         public string FindShortestResetWord_WithoutAsync()
         {
-            var usedStates = new Dictionary<int, List<SortedSet<int>>>();
-            var currentStates = new List<SortedSet<int>>();
-            var nextStates = new List<SortedSet<int>>();
-            var currentWords = new List<string>();
-            var nextWords = new List<string>();
-            var start = new SortedSet<int>();
+            usedStates.Clear();
+            currentStates.Clear();
+            nextStates.Clear();
+            currentWords.Clear();
+            nextWords.Clear();
+            start.Clear();
 
             foreach (var s in _states)
                 start.Add(s);
@@ -195,14 +223,15 @@ namespace automata_sharp
                 {
                     for (int j = 0, l = _letters.Length; j < l; ++j)
                     {
-                        SortedSet<int> temp = Delta(currentStates[i], _letters[j]);
+                        Delta(tempStates, currentStates[i], _letters[j]);
 
                         bool isNew = true;
-                        for (int k = 0, m = usedStates.ContainsKey(temp.Count) ? usedStates[temp.Count].Count : 0; isNew && k < m; ++k)
-                            isNew = !temp.SetEquals(usedStates[temp.Count][k]);
+                        for (int k = 0, m = usedStates.ContainsKey(tempStates.Count) ? usedStates[tempStates.Count].Count : 0; isNew && k < m; ++k)
+                            isNew = !tempStates.SetEquals(usedStates[tempStates.Count][k]);
 
                         if (isNew)
                         {
+                            var temp = new SortedSet<int>(tempStates);
                             nextStates.Add(temp);
                             nextWords.Add(currentWords[i] + _letters[j]);
 
