@@ -1,6 +1,6 @@
 ﻿namespace automata_sharp
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageGenerate = new System.Windows.Forms.TabPage();
             this.panelGenerate = new System.Windows.Forms.Panel();

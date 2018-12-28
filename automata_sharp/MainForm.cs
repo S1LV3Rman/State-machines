@@ -13,7 +13,7 @@ using System.Collections;
 
 namespace automata_sharp
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         Automata automata = new Automata();
         DataTable dataTable = new DataTable();
@@ -21,7 +21,7 @@ namespace automata_sharp
         IcdfaLogic CurrentIcdfaLogic;
         StringBuilder StringBuilder = new StringBuilder();
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             buttonResetWordCalculate.Enabled = false;
@@ -501,10 +501,12 @@ namespace automata_sharp
                 StringBuilder.Append("\n");
             }
 
-            foreach (var e in array)
+            for(int i = 0; i < array.Length; i++)
             {
                 StringBuilder.Append("\n");
-                StringBuilder.Append(e.ToString());
+                StringBuilder.Append(i.ToString("D2"));
+                StringBuilder.Append(" - ");
+                StringBuilder.Append(array[i].ToString());
             }
 
             richTextBoxIcdfaOutput.Text = StringBuilder.ToString();
