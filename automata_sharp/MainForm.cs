@@ -492,8 +492,8 @@ namespace automata_sharp
                 //StringBuilder.Append(GetTransactionPerSecond(deltaTime,currentCount));
                 //StringBuilder.Append("\n");
 
-                //StringBuilder.Append(GetGCCallsPerSecond(deltaTime, GC.CollectionCount(0), GC.CollectionCount(1), GC.CollectionCount(2)));
-                //StringBuilder.Append("\n");
+                StringBuilder.Append(GetGCCallsPerSecond(deltaTime, GC.CollectionCount(0), GC.CollectionCount(1), GC.CollectionCount(2)));
+                StringBuilder.Append("\n");
             }
             else
             {
