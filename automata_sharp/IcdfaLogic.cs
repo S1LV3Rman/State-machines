@@ -10,20 +10,39 @@ using System.Threading.Tasks;
 
 namespace automata_sharp
 {
+    /// <summary>
+    /// Класс содержащий логику исполнения эксперемета Icdfa
+    /// </summary>
     public class IcdfaLogic
     {
         public readonly int N;
         public readonly int K;
+        /// <summary>
+        /// Суммарное кол-во частей
+        /// </summary>
         public readonly int TotalParts;
+        /// <summary>
+        /// Часть с которой необходимо начать выполнение
+        /// </summary>
         public readonly int StartPart;
+        /// <summary>
+        /// Кол-во частей которые необходимо посчитать начиная c StartPart 
+        /// </summary>
         public readonly int CountParts;
 
         public int RowLength => (N - 1) * (N - 1) + 1;
+        /// <summary>
+        /// Начало подсчета (Время вызова метода Run)
+        /// </summary>
         public DateTime LaunchTime { private set; get; }
 
+        /// <summary>
+        /// Ключ - часть
+        /// Значение - Подсчитанные значения для этой части
+        /// </summary>
         public readonly Dictionary<int,int[]> Lengths;
 
-        private Thread[] Threads;
+        private Task[] Tasks;
 
         IcdfaLogic()
             :this(1,1,1,1,1)
@@ -39,9 +58,7 @@ namespace automata_sharp
             StartPart = startPart;
             CountParts = countParts;
 
-            
-
-            Threads = new Thread[countParts];
+            Tasks = new Task[countParts];
             Lengths = new Dictionary<int, int[]>(CountParts);
         }
 
@@ -94,18 +111,13 @@ namespace automata_sharp
             for (int i = 0; i < CountParts; i++)
             {
                 Lengths.Add(i + StartPart, new int[length]);
-                Threads[i] = CreateThread(i + StartPart);
+                Tasks[i] = CreateTask(i + StartPart);
             }
         }
 
-        Thread CreateThread(int num)
+        Task CreateTask(int num)
         {
-            return new Thread(() => MainLogic(Lengths[num], num))
-            {
-                IsBackground = true,
-                Priority = ThreadPriority.Lowest,
-                Name = $"{nameof(IcdfaLogic)} Thread, Part№ {num} of {StartPart + CountParts - 1}"
-            };
+            return new Task(() => MainLogic(Lengths[num], num));
         }
 
         Task Run()
@@ -115,10 +127,10 @@ namespace automata_sharp
             LaunchTime = DateTime.UtcNow;
             for (int i = 0; i < CountParts; i++)
             {
-                Threads[i].Start();
+                Tasks[i].Start(PriorityScheduler.Lowest);
             }
 
-            return new Task(()=> { Thread.Sleep(15000); });
+            return Task.WhenAll(Tasks);
         }
 
         private void MainLogic(int[] lengths, int part)
