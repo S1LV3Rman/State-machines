@@ -83,9 +83,9 @@ namespace automata_sharp
 
     public class Automata
     {
-        private List<int> _states;
-        private String _letters;
-        Dictionary<int, Dictionary<char, int>> _transitions;
+        public List<int> _states { private set; get; }
+        public String _letters { private set; get; }
+        public Dictionary<int, Dictionary<char, int>> _transitions { set; get; }
 
         public Automata() { }
 
@@ -117,16 +117,6 @@ namespace automata_sharp
             _states = states;
             _letters = letters;
             _transitions = transitions;
-        }
-
-        public List<int> GetStates()
-        {
-            return _states;
-        }
-
-        public String GetLetters()
-        {
-            return _letters;
         }
 
         public SortedSet<int> Delta(SortedSet<int> states, String word)
@@ -332,39 +322,6 @@ namespace automata_sharp
                 return "";
             }, token);
         }
-
-        /*
-        Функция нахождения кратчайшего синхр.слова
-        {
-            N - список множеств состояний, которые уже были рассмотрены (изначально пустое)
-
-        C - список множеств состояний, которые рассматриваются на данном шаге
-
-        W - список слов, которыми получены соответствующие множества состояний из C
-
-
-        Добавляем в C множество всех состояний
-
-
-        Цикл пока(C не пусто)
-        {
-            Копируем все множества из C в N
-
-            Поочерёдно действуем каждой буквой алфавита на все множества из C
-                и добавляем в T каждое полученное множество, не находящееся в N
-
-            Для добавленных множеств дописываем в W слова, которыми они получены
-
-
-            Если в T есть множество из 1 элемента, то возвращаем слово, которым мы его получили
-
-                иначе заменяем C на T и очищаем T
-
-        }
-        Автомат несинхронизируемый!
-
-    }
-    */
          
         public Task<string> FindResetWord(CancellationTokenSource cancellationTokenSource)
         {
@@ -452,30 +409,6 @@ namespace automata_sharp
                 return "";
             }, token);
         }
-
-        /*
-        Функция нахождения синхр. слова
-        {
-            P - множество пар состояний
-            W - синхр. слово
-            U - использованные множества пар состояний
-
-            Записываем в P все пары состояний
-
-            Цикл пока(P не пусто)
-            {
-                Записываем P в U
-
-                Применяем каждую букву алфавита к парам из P записывая результаты в T
-
-                Выбираем из T последнее, не находящееся в U, множество с наименьшим кол-вом
-                    пар и дописываем в W букву, которой оно было получено (если выбрать нечего => автомат не синхр.)
-
-                Заменяем P на выбранное слово и очищаем T
-            }
-            Возвращаем W
-        }
-        */
 
         public static Automata Random(int numStates, int numLetters)
         {
