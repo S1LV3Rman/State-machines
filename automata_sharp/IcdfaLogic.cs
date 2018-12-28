@@ -182,17 +182,6 @@ namespace automata_sharp
             int i = 1;
             int total = TotalParts;
 
-            
-            while (!generator.IsLastFlags && i != part)
-            {
-                while (!generator.IsLastSequences && i != part)
-                {
-                    i++;
-                    generator.NextICDFA(nm, km);
-                }
-                generator.NextFlags(nmm);
-            }
-
             i = 1;
             while (!generator.IsLastFlags)
             {
