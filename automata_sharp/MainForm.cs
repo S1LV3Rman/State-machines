@@ -392,7 +392,7 @@ namespace automata_sharp
 
             updaterIcdfa.Enabled = false;//Отключаем таймер который подтягивает изменения в CurrentIcdfaLogic
             UpdateIcdfaOutput();//Обновляем вывод  
-            CurrentIcdfaLogic = null;//Сбрасываем CurrentIcdfaLogic
+            
 
             //Если задача подсчета сумарного кол-ва автоматов не завершена
             //TODO В идеале сделать через CancellationToken
@@ -407,6 +407,15 @@ namespace automata_sharp
             tabControlMain.Enabled = true;
             progressBar1.Visible = false;
             progressBar1.Value = 0;
+
+            // Запись в файл
+            var result = CurrentIcdfaLogic.GetTotalLenghts();
+            var stream = new StreamWriter($"Prtcl{n}x{k}_pts{startPart}-{startPart + countParts - 1}of{totalParts}.txt");
+            foreach (var record in result)
+                stream.WriteLine(record);
+            stream.Close();
+
+            CurrentIcdfaLogic = null;//Сбрасываем CurrentIcdfaLogic
         }
 
         private void updaterIcdfa_Tick(object sender, EventArgs e)
