@@ -302,6 +302,8 @@ namespace automata_sharp
         private void buttonSave_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.AddExtension = true;
+            saveFileDialog.DefaultExt = "automata";
             if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 StreamWriter stream = new StreamWriter(saveFileDialog.OpenFile());
@@ -333,6 +335,8 @@ namespace automata_sharp
             ResetUI();
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.DefaultExt = "automata";
+            openFileDialog.AddExtension = true;
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
 
@@ -479,13 +483,16 @@ namespace automata_sharp
 
                 totalCount = (ulong)Math.Round(totalCount.Value * (countParts / (double)totalParts));
 
-                var currentCount = CurrentIcdfaLogic.GetCurrentCount();
-                var progress = currentCount / (float)totalCount.Value;
+                var totalPartCount = (ulong)Math.Round(totalCount.Value * (countParts / (double)totalParts));
 
-                StringBuilder.Append(GetRemainedTime(deltaTime,totalCount.Value,progress));
+
+                var currentCount = CurrentIcdfaLogic.GetCurrentCount();
+                var progress = currentCount / (float)totalPartCount;
+
+                StringBuilder.Append(GetRemainedTime(deltaTime,totalPartCount,progress));
                 StringBuilder.Append("\n");
 
-                StringBuilder.Append(GetCurrentCountOfTotalCount(currentCount,totalCount.Value));
+                StringBuilder.Append(GetCurrentCountOfTotalCount(currentCount,totalPartCount,totalCount.Value));
                 StringBuilder.Append("\n");
 
                 StringBuilder.Append(GetProgress(progress));
@@ -531,9 +538,10 @@ namespace automata_sharp
             return "Progress: " + progress.ToString("P1");
         }
 
-        string GetCurrentCountOfTotalCount(ulong currentCount, ulong totalCount)
+
+        string GetCurrentCountOfTotalCount(ulong currentCount, ulong totalPartCount, ulong totalCount)
         {
-            return "Calculated: " + currentCount.ToString() + " / " + totalCount.ToString();
+            return "Calculated: " + currentCount.ToString() + " / " + totalPartCount.ToString() + " (total:" + totalCount + ")";
         }
 
         //TODO
