@@ -328,7 +328,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="tabPageGenerate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>443, 178</value>
+    <value>481, 178</value>
   </data>
   <data name="tabPageGenerate.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -535,33 +535,33 @@
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
-    <value>tabPageCreate</value>
+    <value>tabPageConstructor</value>
   </data>
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="tabPageCreate.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tabPageConstructor.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 28</value>
   </data>
-  <data name="tabPageCreate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>443, 178</value>
+  <data name="tabPageConstructor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>481, 178</value>
   </data>
-  <data name="tabPageCreate.TabIndex" type="System.Int32, mscorlib">
+  <data name="tabPageConstructor.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="tabPageCreate.Text" xml:space="preserve">
-    <value>Create</value>
+  <data name="tabPageConstructor.Text" xml:space="preserve">
+    <value>Constuctor</value>
   </data>
-  <data name="&gt;&gt;tabPageCreate.Name" xml:space="preserve">
-    <value>tabPageCreate</value>
+  <data name="&gt;&gt;tabPageConstructor.Name" xml:space="preserve">
+    <value>tabPageConstructor</value>
   </data>
-  <data name="&gt;&gt;tabPageCreate.Type" xml:space="preserve">
+  <data name="&gt;&gt;tabPageConstructor.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tabPageCreate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tabPageConstructor.Parent" xml:space="preserve">
     <value>tabControlMain</value>
   </data>
-  <data name="&gt;&gt;tabPageCreate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tabPageConstructor.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="pictureBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -589,7 +589,7 @@
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
-    <value>tabPageOpen</value>
+    <value>tabPageFile</value>
   </data>
   <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -619,7 +619,7 @@
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
-    <value>tabPageOpen</value>
+    <value>tabPageFile</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -649,7 +649,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelOpenSaveText.Parent" xml:space="preserve">
-    <value>tabPageOpen</value>
+    <value>tabPageFile</value>
   </data>
   <data name="&gt;&gt;labelOpenSaveText.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -682,7 +682,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonSave.Parent" xml:space="preserve">
-    <value>tabPageOpen</value>
+    <value>tabPageFile</value>
   </data>
   <data name="&gt;&gt;buttonSave.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -715,39 +715,39 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonOpen.Parent" xml:space="preserve">
-    <value>tabPageOpen</value>
+    <value>tabPageFile</value>
   </data>
   <data name="&gt;&gt;buttonOpen.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="tabPageOpen.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tabPageFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 28</value>
   </data>
-  <data name="tabPageOpen.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tabPageFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="tabPageOpen.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tabPageFile.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="tabPageOpen.Size" type="System.Drawing.Size, System.Drawing">
-    <value>443, 178</value>
+  <data name="tabPageFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>481, 178</value>
   </data>
-  <data name="tabPageOpen.TabIndex" type="System.Int32, mscorlib">
+  <data name="tabPageFile.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="tabPageOpen.Text" xml:space="preserve">
-    <value>From File</value>
+  <data name="tabPageFile.Text" xml:space="preserve">
+    <value>File</value>
   </data>
-  <data name="&gt;&gt;tabPageOpen.Name" xml:space="preserve">
-    <value>tabPageOpen</value>
+  <data name="&gt;&gt;tabPageFile.Name" xml:space="preserve">
+    <value>tabPageFile</value>
   </data>
-  <data name="&gt;&gt;tabPageOpen.Type" xml:space="preserve">
+  <data name="&gt;&gt;tabPageFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tabPageOpen.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tabPageFile.Parent" xml:space="preserve">
     <value>tabControlMain</value>
   </data>
-  <data name="&gt;&gt;tabPageOpen.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tabPageFile.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="label20.AutoSize" type="System.Boolean, mscorlib">
@@ -760,13 +760,13 @@
     <value>205, 103</value>
   </data>
   <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 19</value>
+    <value>87, 19</value>
   </data>
   <data name="label20.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
   <data name="label20.Text" xml:space="preserve">
-    <value>Parts Count</value>
+    <value>Caclulate to</value>
   </data>
   <data name="&gt;&gt;label20.Name" xml:space="preserve">
     <value>label20</value>
@@ -780,25 +780,25 @@
   <data name="&gt;&gt;label20.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="numericUpDownPartsCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>295, 101</value>
+  <data name="numericUpDownCaclulateTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>345, 101</value>
   </data>
-  <data name="numericUpDownPartsCount.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="numericUpDownCaclulateTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 27</value>
   </data>
-  <data name="numericUpDownPartsCount.TabIndex" type="System.Int32, mscorlib">
+  <data name="numericUpDownCaclulateTo.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="&gt;&gt;numericUpDownPartsCount.Name" xml:space="preserve">
-    <value>numericUpDownPartsCount</value>
+  <data name="&gt;&gt;numericUpDownCaclulateTo.Name" xml:space="preserve">
+    <value>numericUpDownCaclulateTo</value>
   </data>
-  <data name="&gt;&gt;numericUpDownPartsCount.Type" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDownCaclulateTo.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;numericUpDownPartsCount.Parent" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDownCaclulateTo.Parent" xml:space="preserve">
     <value>tabIcdfa</value>
   </data>
-  <data name="&gt;&gt;numericUpDownPartsCount.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDownCaclulateTo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelIcdfaStatus.AutoSize" type="System.Boolean, mscorlib">
@@ -838,13 +838,13 @@
     <value>205, 37</value>
   </data>
   <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 19</value>
+    <value>134, 19</value>
   </data>
   <data name="label19.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="label19.Text" xml:space="preserve">
-    <value>Total Parts</value>
+    <value>Total segmentation</value>
   </data>
   <data name="&gt;&gt;label19.Name" xml:space="preserve">
     <value>label19</value>
@@ -868,13 +868,13 @@
     <value>205, 70</value>
   </data>
   <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 19</value>
+    <value>104, 19</value>
   </data>
   <data name="label18.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
   <data name="label18.Text" xml:space="preserve">
-    <value>Start Part</value>
+    <value>Calculate from</value>
   </data>
   <data name="&gt;&gt;label18.Name" xml:space="preserve">
     <value>label18</value>
@@ -901,13 +901,13 @@
     <value>8, 7</value>
   </data>
   <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>428, 19</value>
+    <value>292, 19</value>
   </data>
   <data name="label15.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="label15.Text" xml:space="preserve">
-    <value>Type number of states and size of alpabet, then push "Generate"</value>
+    <value>Reset word length experiment using ICDFAs</value>
   </data>
   <data name="&gt;&gt;label15.Name" xml:space="preserve">
     <value>label15</value>
@@ -1042,7 +1042,7 @@
     <value>6</value>
   </data>
   <data name="buttonIcdfaGenerate.Text" xml:space="preserve">
-    <value>Generate</value>
+    <value>Calculate</value>
   </data>
   <data name="&gt;&gt;buttonIcdfaGenerate.Name" xml:space="preserve">
     <value>buttonIcdfaGenerate</value>
@@ -1057,7 +1057,7 @@
     <value>10</value>
   </data>
   <data name="numericUpDownTotalParts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>295, 35</value>
+    <value>345, 35</value>
   </data>
   <data name="numericUpDownTotalParts.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 27</value>
@@ -1077,25 +1077,25 @@
   <data name="&gt;&gt;numericUpDownTotalParts.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="numericUpDownStartPart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>295, 68</value>
+  <data name="numericUpDownCalculateFrom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>345, 68</value>
   </data>
-  <data name="numericUpDownStartPart.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="numericUpDownCalculateFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 27</value>
   </data>
-  <data name="numericUpDownStartPart.TabIndex" type="System.Int32, mscorlib">
+  <data name="numericUpDownCalculateFrom.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;numericUpDownStartPart.Name" xml:space="preserve">
-    <value>numericUpDownStartPart</value>
+  <data name="&gt;&gt;numericUpDownCalculateFrom.Name" xml:space="preserve">
+    <value>numericUpDownCalculateFrom</value>
   </data>
-  <data name="&gt;&gt;numericUpDownStartPart.Type" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDownCalculateFrom.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;numericUpDownStartPart.Parent" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDownCalculateFrom.Parent" xml:space="preserve">
     <value>tabIcdfa</value>
   </data>
-  <data name="&gt;&gt;numericUpDownStartPart.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDownCalculateFrom.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
   <data name="tabIcdfa.Location" type="System.Drawing.Point, System.Drawing">
@@ -1108,7 +1108,7 @@
     <value>4</value>
   </data>
   <data name="tabIcdfa.Text" xml:space="preserve">
-    <value>ICDFAs</value>
+    <value>Reset word experiment</value>
   </data>
   <data name="&gt;&gt;tabIcdfa.Name" xml:space="preserve">
     <value>tabIcdfa</value>
@@ -1316,7 +1316,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>4, 28</value>
   </data>
   <data name="tabPageAbout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>443, 178</value>
+    <value>481, 178</value>
   </data>
   <data name="tabPageAbout.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>

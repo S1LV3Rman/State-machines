@@ -15,6 +15,9 @@ namespace automata_sharp
 {
     public partial class MainForm : Form
     {
+        const bool deactivate = false; // Во имя читабельности кода
+        const bool activate = true;
+
         Automata automata = new Automata();
         DataTable dataTable = new DataTable();
         CancellationTokenSource ResetWordCancellation, ShortResetWordCancellation;
@@ -26,50 +29,9 @@ namespace automata_sharp
             InitializeComponent();
             buttonResetWordCalculate.Enabled = false;
             buttonShortResetWordCalculate.Enabled = false;
-            ResetUI();
+            RightPanel(deactivate);
         }
-
-        /// <summary>
-        /// Сброс интерфейса в холодное
-        /// </summary>
-        private void ResetUI()
-        {
-            // Отключение кнопок
-            buttonResetWordCalculate.Visible = true;
-            buttonShortResetWordCalculate.Visible = true;
-            buttonImpact.Enabled = false;
-            labelCheckResult.Text = String.Empty;
-            buttonCheck.Enabled = false;
-
-            // Очистка выпадающего списка
-            if (comboBoxStates.Items.Count != 0)
-                comboBoxStates.Items.Clear();
-
-            // Сброс значений текстовых полей синх. слов
-            labelQuickResetWord.ForeColor =
-                labelShortestResetWord.ForeColor =
-                labelStoped.ForeColor = Color.Red;
-
-            labelQuickResetWord.Text =
-                labelShortestResetWord.Text =
-                labelStoped.Text = "Unknown";
-        }
-
-        private void ActivateUI()
-        {
-            dataGridViewAutomata.ReadOnly = true;
-            buttonResetWordCalculate.Enabled = true;
-            buttonShortResetWordCalculate.Enabled = true;
-            buttonImpact.Enabled = true;
-            buttonCheck.Enabled = true;
-
-            List<int> states = automata._states;
-            foreach (var i in states)
-                comboBoxStates.Items.Add(i);
-
-            dataGridViewAutomata.DataSource = dataTable;
-        }
-
+        
         /// <summary>
         /// Нажатие клавиши генерации нового автомата
         /// </summary>
@@ -77,15 +39,14 @@ namespace automata_sharp
         /// <param name="e"></param>
         private void buttonGenerate_Click(object sender, EventArgs e)
         {
-            // Сброс интерфейса, т.к. создается новый автомат
-            ResetUI();
-
+            RightPanel(deactivate);
             automata = Automata.Random(
                 Convert.ToInt32(numericUpDownStates.Value),
                 Convert.ToInt32(numericUpDownAlphabet.Value));
 
             dataTable = automata.OutputToDataTable();
-            ActivateUI();
+            dataGridViewAutomata.DataSource = dataTable;
+            RightPanel(activate);
         }
 
         /// <summary>
@@ -247,7 +208,7 @@ namespace automata_sharp
         /// <param name="e"></param>
         private void buttonCreateTable_Click(object sender, EventArgs e)
         {
-            ResetUI();
+            RightPanel(deactivate);
 
             tabControlMain.Enabled = false;
 
@@ -285,7 +246,7 @@ namespace automata_sharp
             buttonCreateConfirm.Visible = false;
             labelCreateInfo.Text = "Select size, then push \"Create Table\"";
 
-            ActivateUI();
+            RightPanel(activate);
         }
 
         /// <summary>
@@ -332,7 +293,7 @@ namespace automata_sharp
 
         private void buttonOpen_Click(object sender, EventArgs e)
         {
-            ResetUI();
+            RightPanel(deactivate);
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.DefaultExt = "automata";
@@ -367,8 +328,9 @@ namespace automata_sharp
                 }
 
                 automata = new Automata(dataTable);
+                dataGridViewAutomata.DataSource = dataTable;
 
-                ActivateUI();
+                RightPanel(activate);
             }
         }
 
@@ -405,15 +367,17 @@ namespace automata_sharp
 
         private void buttonIcdfaGenerate_Click(object sender, EventArgs e)
         {
-            richTextBoxIcdfaOutput.Visible = true;
+            tabControlMain.Enabled = false;
 
             int n = Convert.ToInt32(numericUpDownN.Value),
                 k = Convert.ToInt32(numericUpDownK.Value);
             int totalParts = Convert.ToInt32(numericUpDownTotalParts.Value),
-                startPart = Convert.ToInt32(numericUpDownStartPart.Value),
-                countParts = Convert.ToInt32(numericUpDownPartsCount.Value);
+                startPart = Convert.ToInt32(numericUpDownCalculateFrom.Value),
+                countParts = Convert.ToInt32(numericUpDownCaclulateTo.Value - startPart + 1);
 
             GeneratorCreatePartLogic(n, k, totalParts, startPart, countParts);
+
+            tabControlMain.Enabled = true;
         }
 
         private async void GeneratorCreatePartLogic(int n, int k, int totalParts, int startPart, int countParts)
@@ -490,6 +454,7 @@ namespace automata_sharp
                 StringBuilder.Append("\n");
 
                 StringBuilder.Append(GetCurrentCountOfTotalCount(currentCount,totalCount.Value));
+                StringBuilder.Append($" of total {totalCount} automatas");
                 StringBuilder.Append("\n");
 
                 StringBuilder.Append(GetProgress(progress));
@@ -567,9 +532,36 @@ namespace automata_sharp
         //Сделаю потом
         Task<int> TotalCountTask;
 
+        /// <summary>
+        /// Переключение между вкладками
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
         {
-            richTextBoxIcdfaOutput.Visible = false;
+            buttonResetWordCalculate.Visible = true;
+            buttonShortResetWordCalculate.Visible = true;
+
+            switch (tabControlMain.SelectedTab.Text)
+            {
+                case "Generator":
+                    RightPanel(deactivate);
+                    richTextBoxIcdfaOutput.Visible = false;
+                    break;
+                case "Constuctor":
+                    RightPanel(deactivate);
+                    richTextBoxIcdfaOutput.Visible = false;
+                    break;
+                case "File":
+                    richTextBoxIcdfaOutput.Visible = false;
+                    break;
+                case "Reset word experiment":
+                    richTextBoxIcdfaOutput.Visible = true;
+                    break;
+                case "About":
+                    richTextBoxIcdfaOutput.Visible = false;
+                    break;
+            }
         }
 
         private int? GetTotalCount()
@@ -587,6 +579,32 @@ namespace automata_sharp
             return null;
         }
 
+        private void RightPanel(bool state)
+        {
+            // При любом изменении состояния сброс строк
+            labelCheckResult.Text = String.Empty;
+
+            labelQuickResetWord.ForeColor =
+                labelShortestResetWord.ForeColor =
+                labelStoped.ForeColor = Color.Red;
+
+            labelQuickResetWord.Text =
+                labelShortestResetWord.Text =
+                labelStoped.Text = "Unknown";
+
+            buttonResetWordCalculate.Enabled = state;
+            buttonShortResetWordCalculate.Enabled = state;
+            buttonImpact.Enabled = state;
+            buttonCheck.Enabled = state;
+
+            if (state)
+            {
+                List<int> states = automata._states;
+                foreach (var i in states)
+                    comboBoxStates.Items.Add(i);
+            }
+            else comboBoxStates.Items.Clear();
+        }
     }
 
 }

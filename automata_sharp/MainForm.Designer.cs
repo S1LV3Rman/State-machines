@@ -39,7 +39,7 @@
             this.labelGenerateInfo2 = new System.Windows.Forms.Label();
             this.numericUpDownStates = new System.Windows.Forms.NumericUpDown();
             this.buttonGenerate = new System.Windows.Forms.Button();
-            this.tabPageCreate = new System.Windows.Forms.TabPage();
+            this.tabPageConstructor = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.labelCreateInfo = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -47,7 +47,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.numericUpDownCreateStates = new System.Windows.Forms.NumericUpDown();
             this.buttonCreateTable = new System.Windows.Forms.Button();
-            this.tabPageOpen = new System.Windows.Forms.TabPage();
+            this.tabPageFile = new System.Windows.Forms.TabPage();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelOpenSaveText = new System.Windows.Forms.Label();
@@ -55,7 +55,7 @@
             this.buttonOpen = new System.Windows.Forms.Button();
             this.tabIcdfa = new System.Windows.Forms.TabPage();
             this.label20 = new System.Windows.Forms.Label();
-            this.numericUpDownPartsCount = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownCaclulateTo = new System.Windows.Forms.NumericUpDown();
             this.labelIcdfaStatus = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -66,7 +66,7 @@
             this.numericUpDownN = new System.Windows.Forms.NumericUpDown();
             this.buttonIcdfaGenerate = new System.Windows.Forms.Button();
             this.numericUpDownTotalParts = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownStartPart = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownCalculateFrom = new System.Windows.Forms.NumericUpDown();
             this.tabPageAbout = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -107,19 +107,19 @@
             this.panelGenerate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAlphabet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStates)).BeginInit();
-            this.tabPageCreate.SuspendLayout();
+            this.tabPageConstructor.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCreateAlphabet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCreateStates)).BeginInit();
-            this.tabPageOpen.SuspendLayout();
+            this.tabPageFile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabIcdfa.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPartsCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCaclulateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTotalParts)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartPart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCalculateFrom)).BeginInit();
             this.tabPageAbout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -132,8 +132,8 @@
             // 
             resources.ApplyResources(this.tabControlMain, "tabControlMain");
             this.tabControlMain.Controls.Add(this.tabPageGenerate);
-            this.tabControlMain.Controls.Add(this.tabPageCreate);
-            this.tabControlMain.Controls.Add(this.tabPageOpen);
+            this.tabControlMain.Controls.Add(this.tabPageConstructor);
+            this.tabControlMain.Controls.Add(this.tabPageFile);
             this.tabControlMain.Controls.Add(this.tabIcdfa);
             this.tabControlMain.Controls.Add(this.tabPageAbout);
             this.tabControlMain.Name = "tabControlMain";
@@ -216,12 +216,12 @@
             this.buttonGenerate.UseVisualStyleBackColor = false;
             this.buttonGenerate.Click += new System.EventHandler(this.buttonGenerate_Click);
             // 
-            // tabPageCreate
+            // tabPageConstructor
             // 
-            this.tabPageCreate.Controls.Add(this.panel2);
-            resources.ApplyResources(this.tabPageCreate, "tabPageCreate");
-            this.tabPageCreate.Name = "tabPageCreate";
-            this.tabPageCreate.UseVisualStyleBackColor = true;
+            this.tabPageConstructor.Controls.Add(this.panel2);
+            resources.ApplyResources(this.tabPageConstructor, "tabPageConstructor");
+            this.tabPageConstructor.Name = "tabPageConstructor";
+            this.tabPageConstructor.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -292,16 +292,16 @@
             this.buttonCreateTable.UseVisualStyleBackColor = false;
             this.buttonCreateTable.Click += new System.EventHandler(this.buttonCreateTable_Click);
             // 
-            // tabPageOpen
+            // tabPageFile
             // 
-            this.tabPageOpen.Controls.Add(this.pictureBox2);
-            this.tabPageOpen.Controls.Add(this.pictureBox1);
-            this.tabPageOpen.Controls.Add(this.labelOpenSaveText);
-            this.tabPageOpen.Controls.Add(this.buttonSave);
-            this.tabPageOpen.Controls.Add(this.buttonOpen);
-            resources.ApplyResources(this.tabPageOpen, "tabPageOpen");
-            this.tabPageOpen.Name = "tabPageOpen";
-            this.tabPageOpen.UseVisualStyleBackColor = true;
+            this.tabPageFile.Controls.Add(this.pictureBox2);
+            this.tabPageFile.Controls.Add(this.pictureBox1);
+            this.tabPageFile.Controls.Add(this.labelOpenSaveText);
+            this.tabPageFile.Controls.Add(this.buttonSave);
+            this.tabPageFile.Controls.Add(this.buttonOpen);
+            resources.ApplyResources(this.tabPageFile, "tabPageFile");
+            this.tabPageFile.Name = "tabPageFile";
+            this.tabPageFile.UseVisualStyleBackColor = true;
             // 
             // pictureBox2
             // 
@@ -341,7 +341,7 @@
             // tabIcdfa
             // 
             this.tabIcdfa.Controls.Add(this.label20);
-            this.tabIcdfa.Controls.Add(this.numericUpDownPartsCount);
+            this.tabIcdfa.Controls.Add(this.numericUpDownCaclulateTo);
             this.tabIcdfa.Controls.Add(this.labelIcdfaStatus);
             this.tabIcdfa.Controls.Add(this.label19);
             this.tabIcdfa.Controls.Add(this.label18);
@@ -352,7 +352,7 @@
             this.tabIcdfa.Controls.Add(this.numericUpDownN);
             this.tabIcdfa.Controls.Add(this.buttonIcdfaGenerate);
             this.tabIcdfa.Controls.Add(this.numericUpDownTotalParts);
-            this.tabIcdfa.Controls.Add(this.numericUpDownStartPart);
+            this.tabIcdfa.Controls.Add(this.numericUpDownCalculateFrom);
             resources.ApplyResources(this.tabIcdfa, "tabIcdfa");
             this.tabIcdfa.Name = "tabIcdfa";
             this.tabIcdfa.UseVisualStyleBackColor = true;
@@ -362,11 +362,16 @@
             resources.ApplyResources(this.label20, "label20");
             this.label20.Name = "label20";
             // 
-            // numericUpDownPartsCount
+            // numericUpDownCaclulateTo
             // 
-            resources.ApplyResources(this.numericUpDownPartsCount, "numericUpDownPartsCount");
-            this.numericUpDownPartsCount.Name = "numericUpDownPartsCount";
-            this.numericUpDownPartsCount.Value = new decimal(new int[] {
+            resources.ApplyResources(this.numericUpDownCaclulateTo, "numericUpDownCaclulateTo");
+            this.numericUpDownCaclulateTo.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numericUpDownCaclulateTo.Name = "numericUpDownCaclulateTo";
+            this.numericUpDownCaclulateTo.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -448,6 +453,11 @@
             // numericUpDownTotalParts
             // 
             resources.ApplyResources(this.numericUpDownTotalParts, "numericUpDownTotalParts");
+            this.numericUpDownTotalParts.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.numericUpDownTotalParts.Name = "numericUpDownTotalParts";
             this.numericUpDownTotalParts.Value = new decimal(new int[] {
             1,
@@ -455,11 +465,11 @@
             0,
             0});
             // 
-            // numericUpDownStartPart
+            // numericUpDownCalculateFrom
             // 
-            resources.ApplyResources(this.numericUpDownStartPart, "numericUpDownStartPart");
-            this.numericUpDownStartPart.Name = "numericUpDownStartPart";
-            this.numericUpDownStartPart.Value = new decimal(new int[] {
+            resources.ApplyResources(this.numericUpDownCalculateFrom, "numericUpDownCalculateFrom");
+            this.numericUpDownCalculateFrom.Name = "numericUpDownCalculateFrom";
+            this.numericUpDownCalculateFrom.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -724,22 +734,22 @@
             this.panelGenerate.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAlphabet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStates)).EndInit();
-            this.tabPageCreate.ResumeLayout(false);
+            this.tabPageConstructor.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCreateAlphabet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCreateStates)).EndInit();
-            this.tabPageOpen.ResumeLayout(false);
-            this.tabPageOpen.PerformLayout();
+            this.tabPageFile.ResumeLayout(false);
+            this.tabPageFile.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabIcdfa.ResumeLayout(false);
             this.tabIcdfa.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPartsCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCaclulateTo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTotalParts)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartPart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCalculateFrom)).EndInit();
             this.tabPageAbout.ResumeLayout(false);
             this.tabPageAbout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -758,7 +768,7 @@
 
         private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage tabPageGenerate;
-        private System.Windows.Forms.TabPage tabPageOpen;
+        private System.Windows.Forms.TabPage tabPageFile;
         private System.Windows.Forms.Button buttonGenerate;
         private System.Windows.Forms.Label labelGenerateInfo2;
         private System.Windows.Forms.Label labelGenerateInfo1;
@@ -783,7 +793,7 @@
         private System.Windows.Forms.Panel panelGenerate;
         private System.Windows.Forms.Button buttonShortResetWordCalculate;
         private System.Windows.Forms.Button buttonResetWordCalculate;
-        private System.Windows.Forms.TabPage tabPageCreate;
+        private System.Windows.Forms.TabPage tabPageConstructor;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label labelCreateInfo;
         private System.Windows.Forms.Label label7;
@@ -817,7 +827,7 @@
         private System.Windows.Forms.TabPage tabIcdfa;
         private System.Windows.Forms.Button buttonIcdfaGenerate;
         private System.Windows.Forms.NumericUpDown numericUpDownTotalParts;
-        private System.Windows.Forms.NumericUpDown numericUpDownStartPart;
+        private System.Windows.Forms.NumericUpDown numericUpDownCalculateFrom;
         private System.Windows.Forms.NumericUpDown numericUpDownK;
         private System.Windows.Forms.NumericUpDown numericUpDownN;
         private System.Windows.Forms.Label label19;
@@ -829,7 +839,7 @@
         private System.Windows.Forms.RichTextBox richTextBoxIcdfaOutput;
         private System.Windows.Forms.Timer updaterIcdfa;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.NumericUpDown numericUpDownPartsCount;
+        private System.Windows.Forms.NumericUpDown numericUpDownCaclulateTo;
     }
 }
 
