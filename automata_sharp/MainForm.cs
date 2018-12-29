@@ -443,7 +443,7 @@ namespace automata_sharp
             var deltaTime = DateTime.UtcNow - CurrentIcdfaLogic.LaunchTime;//Получаем время работы
 
             ulong? totalCount = GetTotalCount();
-            
+
             StringBuilder.Append(GetDeltaTime(deltaTime));
             StringBuilder.Append("\n");
 
@@ -452,7 +452,10 @@ namespace automata_sharp
                 var totalParts = CurrentIcdfaLogic.TotalParts;
                 var countParts = CurrentIcdfaLogic.CountParts;
 
+                totalCount = (ulong)Math.Round(totalCount.Value * (countParts / (double)totalParts));
+
                 var totalPartCount = (ulong)Math.Round(totalCount.Value * (countParts / (double)totalParts));
+
 
                 var currentCount = CurrentIcdfaLogic.GetCurrentCount();
                 var progress = currentCount / (float)totalPartCount;
@@ -493,20 +496,21 @@ namespace automata_sharp
 
         string GetDeltaTime(TimeSpan deltaTime)
         {
-            return "Time elapsed: " + deltaTime.ToString(@"hh\:mm\:ss");
+            return "Time elapsed: " + deltaTime.ToString(@"dd\.hh\:mm\:ss");
         }
 
         string GetRemainedTime(TimeSpan deltaTime, ulong totalCount , float progress)
         {
             var remainedSeconds = deltaTime.TotalSeconds * (1.0 / progress);
             var remained = new TimeSpan(0, 0, (int)Math.Round(remainedSeconds)) - deltaTime;
-            return "Estimated calculation time: " + remained.ToString(@"hh\:mm\:ss");
+            return "Estimated calculation time: " + remained.ToString(@"dd\.hh\:mm\:ss");
         }
 
         string GetProgress(float progress)
         {
             return "Progress: " + progress.ToString("P1");
         }
+
 
         string GetCurrentCountOfTotalCount(ulong currentCount, ulong totalPartCount, ulong totalCount)
         {
