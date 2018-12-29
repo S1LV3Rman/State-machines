@@ -445,16 +445,15 @@ namespace automata_sharp
                 var totalParts = CurrentIcdfaLogic.TotalParts;
                 var countParts = CurrentIcdfaLogic.CountParts;
 
-                totalCount = (int)Math.Round(totalCount.Value * (countParts / (double)totalParts));
+                var totalPartCount = (int)Math.Round(totalCount.Value * (countParts / (double)totalParts));
 
                 var currentCount = CurrentIcdfaLogic.GetCurrentCount();
-                var progress = currentCount / (float)totalCount.Value;
+                var progress = currentCount / (float)totalPartCount;
 
-                StringBuilder.Append(GetRemainedTime(deltaTime,totalCount.Value,progress));
+                StringBuilder.Append(GetRemainedTime(deltaTime,totalPartCount,progress));
                 StringBuilder.Append("\n");
 
-                StringBuilder.Append(GetCurrentCountOfTotalCount(currentCount,totalCount.Value));
-                StringBuilder.Append($" of total {totalCount} automatas");
+                StringBuilder.Append(GetCurrentCountOfTotalCount(currentCount,totalPartCount,totalCount.Value));
                 StringBuilder.Append("\n");
 
                 StringBuilder.Append(GetProgress(progress));
@@ -500,9 +499,9 @@ namespace automata_sharp
             return "Progress: " + progress.ToString("P1");
         }
 
-        string GetCurrentCountOfTotalCount(int currentCount, int totalCount)
+        string GetCurrentCountOfTotalCount(int currentCount, int totalPartCount, int totalCount)
         {
-            return "Calculated: " + currentCount.ToString() + " / " + totalCount.ToString();
+            return "Calculated: " + currentCount.ToString() + " / " + totalPartCount.ToString() + " (total:" + totalCount + ")";
         }
 
         //TODO
