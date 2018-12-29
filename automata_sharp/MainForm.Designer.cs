@@ -56,7 +56,6 @@
             this.tabIcdfa = new System.Windows.Forms.TabPage();
             this.label20 = new System.Windows.Forms.Label();
             this.numericUpDownCaclulateTo = new System.Windows.Forms.NumericUpDown();
-            this.labelIcdfaStatus = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -102,6 +101,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.richTextBoxIcdfaOutput = new System.Windows.Forms.RichTextBox();
             this.updaterIcdfa = new System.Windows.Forms.Timer(this.components);
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.tabControlMain.SuspendLayout();
             this.tabPageGenerate.SuspendLayout();
             this.panelGenerate.SuspendLayout();
@@ -340,9 +340,9 @@
             // 
             // tabIcdfa
             // 
+            this.tabIcdfa.Controls.Add(this.progressBar1);
             this.tabIcdfa.Controls.Add(this.label20);
             this.tabIcdfa.Controls.Add(this.numericUpDownCaclulateTo);
-            this.tabIcdfa.Controls.Add(this.labelIcdfaStatus);
             this.tabIcdfa.Controls.Add(this.label19);
             this.tabIcdfa.Controls.Add(this.label18);
             this.tabIcdfa.Controls.Add(this.label15);
@@ -376,11 +376,6 @@
             0,
             0,
             0});
-            // 
-            // labelIcdfaStatus
-            // 
-            resources.ApplyResources(this.labelIcdfaStatus, "labelIcdfaStatus");
-            this.labelIcdfaStatus.Name = "labelIcdfaStatus";
             // 
             // label19
             // 
@@ -717,6 +712,13 @@
             // 
             this.updaterIcdfa.Tick += new System.EventHandler(this.updaterIcdfa_Tick);
             // 
+            // progressBar1
+            // 
+            resources.ApplyResources(this.progressBar1, "progressBar1");
+            this.progressBar1.Maximum = 1000;
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Step = 1;
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -835,11 +837,11 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label labelIcdfaStatus;
         private System.Windows.Forms.RichTextBox richTextBoxIcdfaOutput;
         private System.Windows.Forms.Timer updaterIcdfa;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.NumericUpDown numericUpDownCaclulateTo;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 

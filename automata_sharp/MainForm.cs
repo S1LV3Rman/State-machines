@@ -368,6 +368,7 @@ namespace automata_sharp
         private void buttonIcdfaGenerate_Click(object sender, EventArgs e)
         {
             tabControlMain.Enabled = false;
+            progressBar1.Visible = true;
 
             int n = Convert.ToInt32(numericUpDownN.Value),
                 k = Convert.ToInt32(numericUpDownK.Value);
@@ -376,15 +377,11 @@ namespace automata_sharp
                 countParts = Convert.ToInt32(numericUpDownCaclulateTo.Value - startPart + 1);
 
             GeneratorCreatePartLogic(n, k, totalParts, startPart, countParts);
-
-            tabControlMain.Enabled = true;
         }
 
         private async void GeneratorCreatePartLogic(int n, int k, int totalParts, int startPart, int countParts)
         {
             buttonIcdfaGenerate.Visible = false;
-            labelIcdfaStatus.ForeColor = Color.DarkBlue;
-            labelIcdfaStatus.Text = $"Generating result for {n}x{k}, parts {startPart}..{startPart + countParts - 1} of {totalParts}";
 
             CurrentIcdfaLogic = new IcdfaLogic(n, k, totalParts, startPart, countParts);
 
@@ -407,8 +404,9 @@ namespace automata_sharp
             }
 
             //Восстанавливаем интерфейс
-            buttonIcdfaGenerate.Visible = true;
-            labelIcdfaStatus.Text = string.Empty;
+            tabControlMain.Enabled = true;
+            progressBar1.Visible = false;
+            progressBar1.Value = 0;
         }
 
         private void updaterIcdfa_Tick(object sender, EventArgs e)
@@ -435,8 +433,8 @@ namespace automata_sharp
 
             var deltaTime = DateTime.UtcNow - CurrentIcdfaLogic.LaunchTime;//Получаем время работы
 
-            int? totalCount = GetTotalCount();
-
+            ulong? totalCount = GetTotalCount();
+            
             StringBuilder.Append(GetDeltaTime(deltaTime));
             StringBuilder.Append("\n");
 
@@ -445,15 +443,17 @@ namespace automata_sharp
                 var totalParts = CurrentIcdfaLogic.TotalParts;
                 var countParts = CurrentIcdfaLogic.CountParts;
 
-                var totalPartCount = (int)Math.Round(totalCount.Value * (countParts / (double)totalParts));
+                var totalPartCount = (ulong)Math.Round(totalCount.Value * (countParts / (double)totalParts));
 
                 var currentCount = CurrentIcdfaLogic.GetCurrentCount();
                 var progress = currentCount / (float)totalPartCount;
 
-                StringBuilder.Append(GetRemainedTime(deltaTime,totalPartCount,progress));
+                progressBar1.Value = Convert.ToInt32(Math.Round(progress * 1000, 1));
+
+                StringBuilder.Append(GetRemainedTime(deltaTime, totalPartCount, progress));
                 StringBuilder.Append("\n");
 
-                StringBuilder.Append(GetCurrentCountOfTotalCount(currentCount,totalPartCount,totalCount.Value));
+                StringBuilder.Append(GetCurrentCountOfTotalCount(currentCount, totalPartCount, totalCount.Value));
                 StringBuilder.Append("\n");
 
                 StringBuilder.Append(GetProgress(progress));
@@ -487,7 +487,7 @@ namespace automata_sharp
             return "Time elapsed: " + deltaTime.ToString(@"hh\:mm\:ss");
         }
 
-        string GetRemainedTime(TimeSpan deltaTime, int totalCount , float progress)
+        string GetRemainedTime(TimeSpan deltaTime, ulong totalCount , float progress)
         {
             var remainedSeconds = deltaTime.TotalSeconds * (1.0 / progress);
             var remained = new TimeSpan(0, 0, (int)Math.Round(remainedSeconds)) - deltaTime;
@@ -499,9 +499,9 @@ namespace automata_sharp
             return "Progress: " + progress.ToString("P1");
         }
 
-        string GetCurrentCountOfTotalCount(int currentCount, int totalPartCount, int totalCount)
+        string GetCurrentCountOfTotalCount(ulong currentCount, ulong totalPartCount, ulong totalCount)
         {
-            return "Calculated: " + currentCount.ToString() + " / " + totalPartCount.ToString() + " (total:" + totalCount + ")";
+            return "Calculated: " + currentCount.ToString() + " / " + totalPartCount.ToString() + " of total " + totalCount + " ICDFA(0)";
         }
 
         //TODO
@@ -518,9 +518,7 @@ namespace automata_sharp
             return "debug GC0 calls per second: " + (gen0 / deltaTime.TotalSeconds).ToString("N") +
                  "\nGC1 calls per second: " + (gen1 / deltaTime.TotalSeconds).ToString("N") +
                  "\nGC2 calls per second: " + (gen2 / deltaTime.TotalSeconds).ToString("N");
-        }
-
-        
+        }        
 
         private void buttonCancelResetWord_Click(object sender, EventArgs e)
         {
@@ -529,7 +527,7 @@ namespace automata_sharp
 
         //Мне было лень делать нормально)
         //Сделаю потом
-        Task<int> TotalCountTask;
+        Task<ulong> TotalCountTask;
 
         /// <summary>
         /// Переключение между вкладками
@@ -563,7 +561,7 @@ namespace automata_sharp
             }
         }
 
-        private int? GetTotalCount()
+        private ulong? GetTotalCount()
         {
             if (TotalCountTask == null)
             {

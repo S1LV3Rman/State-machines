@@ -74,7 +74,7 @@ namespace automata_sharp
         }
 
         //TODO: REMOVE. USE AND IMPROVE GetTotalLenghts
-        public void GetTotalLenghts(int[] array)
+        public void GetTotalLenghts(ulong[] array)
         {
             if (array == null || array.Length != RowLength) throw new ArgumentException();
             var values = Lengths.Values.ToArray();
@@ -84,7 +84,7 @@ namespace automata_sharp
 
             for (int i = 0; i < CountParts; i++)
                 for(int j = 0; j < RowLength; j++)
-                    array[j] += values[i][j];
+                    array[j] += Convert.ToUInt64(values[i][j]);
         }
 
         //TODO
@@ -92,17 +92,17 @@ namespace automata_sharp
         /// Суммирует все части
         /// </summary>
         /// <returns></returns>
-        public int[] GetTotalLenghts()
+        public ulong[] GetTotalLenghts()
         {
-            var array = new int[RowLength];
+            var array = new ulong[RowLength];
             GetTotalLenghts(array);
             return array;
         }
 
         //TODO
-        public int GetCurrentCount()
+        public ulong GetCurrentCount()
         {
-            int sum = 0;
+            ulong sum = 0;
             foreach (var e in GetTotalLenghts())
                 sum += e;
             return sum;
@@ -202,16 +202,16 @@ namespace automata_sharp
         }
 
         /// <summary>
-        /// Считает суммарное кол-во автоматов?
+        /// Считает суммарное кол-во автоматов
         /// </summary>
         /// <returns></returns>
-        public int GetTotalCount()
+        public ulong GetTotalCount()
         {
             Generator temp = new Generator(N, K);
             int nm = N - 1;
             int km = K - 1;
             int nmm = N - 2;
-            int count_all = 0;
+            ulong count_all = 0;
 
             while (!temp.IsLastFlags)
             {
