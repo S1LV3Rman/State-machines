@@ -219,7 +219,7 @@ namespace automata_sharp
             int nm = N - 1;
             int km = K - 1;
             int nmm = N - 2;
-            int count_all = 0;
+            ulong count_all = 0;
 
             while (!temp.IsLastFlags)
             {
