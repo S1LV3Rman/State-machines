@@ -369,6 +369,7 @@ namespace automata_sharp
         {
             tabControlMain.Enabled = false;
             progressBar1.Visible = true;
+            progressBar1.Style = ProgressBarStyle.Marquee;
 
             int n = Convert.ToInt32(numericUpDownN.Value),
                 k = Convert.ToInt32(numericUpDownK.Value);
@@ -404,6 +405,7 @@ namespace automata_sharp
             }
 
             //Восстанавливаем интерфейс
+            buttonIcdfaGenerate.Visible = true;
             tabControlMain.Enabled = true;
             progressBar1.Visible = false;
             progressBar1.Value = 0;
@@ -452,14 +454,12 @@ namespace automata_sharp
                 var totalParts = CurrentIcdfaLogic.TotalParts;
                 var countParts = CurrentIcdfaLogic.CountParts;
 
-                totalCount = (ulong)Math.Round(totalCount.Value * (countParts / (double)totalParts));
-
                 var totalPartCount = (ulong)Math.Round(totalCount.Value * (countParts / (double)totalParts));
-
 
                 var currentCount = CurrentIcdfaLogic.GetCurrentCount();
                 var progress = currentCount / (float)totalPartCount;
 
+                progressBar1.Style = ProgressBarStyle.Blocks;
                 progressBar1.Value = Convert.ToInt32(Math.Round(progress * 1000, 1));
 
                 StringBuilder.Append(GetRemainedTime(deltaTime, totalPartCount, progress));
