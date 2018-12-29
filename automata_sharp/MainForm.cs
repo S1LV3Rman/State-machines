@@ -467,7 +467,7 @@ namespace automata_sharp
 
             var deltaTime = DateTime.UtcNow - CurrentIcdfaLogic.LaunchTime;//Получаем время работы
 
-            int? totalCount = GetTotalCount();
+            ulong? totalCount = GetTotalCount();
 
             StringBuilder.Append(GetDeltaTime(deltaTime));
             StringBuilder.Append("\n");
@@ -477,7 +477,7 @@ namespace automata_sharp
                 var totalParts = CurrentIcdfaLogic.TotalParts;
                 var countParts = CurrentIcdfaLogic.CountParts;
 
-                totalCount = (int)Math.Round(totalCount.Value * (countParts / (double)totalParts));
+                totalCount = (ulong)Math.Round(totalCount.Value * (countParts / (double)totalParts));
 
                 var currentCount = CurrentIcdfaLogic.GetCurrentCount();
                 var progress = currentCount / (float)totalCount.Value;
@@ -516,14 +516,14 @@ namespace automata_sharp
 
         string GetDeltaTime(TimeSpan deltaTime)
         {
-            return "Time elapsed: " + deltaTime.ToString(@"hh\:mm\:ss");
+            return "Time elapsed: " + deltaTime.ToString(@"dd\.hh\:mm\:ss");
         }
 
-        string GetRemainedTime(TimeSpan deltaTime, int totalCount , float progress)
+        string GetRemainedTime(TimeSpan deltaTime, ulong totalCount , float progress)
         {
             var remainedSeconds = deltaTime.TotalSeconds * (1.0 / progress);
             var remained = new TimeSpan(0, 0, (int)Math.Round(remainedSeconds)) - deltaTime;
-            return "Estimated calculation time: " + remained.ToString(@"hh\:mm\:ss");
+            return "Estimated calculation time: " + remained.ToString(@"dd\.hh\:mm\:ss");
         }
 
         string GetProgress(float progress)
@@ -531,7 +531,7 @@ namespace automata_sharp
             return "Progress: " + progress.ToString("P1");
         }
 
-        string GetCurrentCountOfTotalCount(int currentCount, int totalCount)
+        string GetCurrentCountOfTotalCount(ulong currentCount, ulong totalCount)
         {
             return "Calculated: " + currentCount.ToString() + " / " + totalCount.ToString();
         }
@@ -561,14 +561,14 @@ namespace automata_sharp
 
         //Мне было лень делать нормально)
         //Сделаю потом
-        Task<int> TotalCountTask;
+        Task<ulong> TotalCountTask;
 
         private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
         {
             richTextBoxIcdfaOutput.Visible = false;
         }
 
-        private int? GetTotalCount()
+        private ulong? GetTotalCount()
         {
             if (TotalCountTask == null)
             {
