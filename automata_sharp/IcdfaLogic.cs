@@ -190,7 +190,6 @@ namespace automata_sharp
             {
                 while (!generator.IsLastSequences)
                 {
-                    
                     if (i == part)
                         lengths[generator.getWordLength()]++;
                     if (i == total)
@@ -201,7 +200,6 @@ namespace automata_sharp
                         count++;
                     }
                     i++;
-                    
                 }
                 generator.NextFlags(nmm);
             }

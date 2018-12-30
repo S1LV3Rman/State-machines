@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Threading;
+using System.Diagnostics;
 
 namespace automata_sharp
 {
@@ -110,6 +111,8 @@ namespace automata_sharp
                 for (int j = 0, m = letters; j < m; ++j)
                     temp.Add(Convert.ToChar('a' + j), Convert.ToInt32(dataTable.Rows[i][j + 1]));
             }
+            ListUniqueListPool = new CollectionPool<List<UniqueList<int>>, UniqueList<int>>(() => new List<UniqueList<int>>());
+            UniqueListPool = new CollectionPool<UniqueList<int>, int>(() => new UniqueList<int>());
         }
 
         public Automata(List<int> states, String letters, Dictionary<int, Dictionary<char, int>> transitions)
@@ -117,6 +120,8 @@ namespace automata_sharp
             _states = states;
             _letters = letters;
             _transitions = transitions;
+            ListUniqueListPool = new CollectionPool<List<UniqueList<int>>, UniqueList<int>>(() => new List<UniqueList<int>>());
+            UniqueListPool = new CollectionPool<UniqueList<int>, int>(() => new UniqueList<int>());
         }
 
         public SortedSet<int> Delta(SortedSet<int> states, String word)
@@ -150,9 +155,7 @@ namespace automata_sharp
             result.Clear();
 
             for(int i = 0; i < states.Count; i++)
-            {
                 result.Add(_transitions[states[i]][letter]);
-            }
 
             //foreach (var state in states)
             //    result.Add(_transitions[state][letter]);
@@ -190,18 +193,35 @@ namespace automata_sharp
         List<UniqueList<int>> nextStates = new List<UniqueList<int>>();
         List<string> currentWords = new List<string>();
         List<string> nextWords = new List<string>();
-        UniqueList<int> start = new UniqueList<int>();
+        //UniqueList<int> start = new UniqueList<int>();
 
         UniqueList<int> tempStates = new UniqueList<int>();
 
+        CollectionPool<List<UniqueList<int>>, UniqueList<int>> ListUniqueListPool;
+        CollectionPool<UniqueList<int>, int> UniqueListPool;
+
         public string FindShortestResetWord_WithoutAsync()
         {
+            foreach (var e in usedStates)
+            {
+                var list = e.Value;
+                for (int i = 0; i < list.Count; i++)
+                {
+                    UniqueListPool.Push(list[i]);
+                }
+
+                ListUniqueListPool.Push(list);
+            }
             usedStates.Clear();
+
             currentStates.Clear();
             nextStates.Clear();
             currentWords.Clear();
             nextWords.Clear();
-            start.Clear();
+            
+            tempStates.Clear();
+
+            var start = UniqueListPool.Pop();
 
             for (int i = 0; i < _states.Count; i++)
                 start.Add(_states[i]);
@@ -209,7 +229,7 @@ namespace automata_sharp
             currentStates.Add(start);
             currentWords.Add("");
 
-            usedStates.Add(start.Count, new List<UniqueList<int>>());
+            usedStates.Add(start.Count, ListUniqueListPool.Pop());
             usedStates[start.Count].Add(start);
 
             while (currentStates.Count != 0)
@@ -226,12 +246,14 @@ namespace automata_sharp
 
                         if (isNew)
                         {
-                            var temp = new UniqueList<int>(tempStates);
+                            var temp = UniqueListPool.Pop();
+                            temp.Override(tempStates);
+
                             nextStates.Add(temp);
                             nextWords.Add(currentWords[i] + _letters[j]);
 
                             if (!usedStates.ContainsKey(temp.Count))
-                                usedStates.Add(temp.Count, new List<UniqueList<int>>(_letters.Length));
+                                usedStates.Add(temp.Count, ListUniqueListPool.Pop());
                             usedStates[temp.Count].Add(temp);
                         }
                     }
@@ -243,7 +265,9 @@ namespace automata_sharp
                 for (int i = 0, n = nextStates.Count; i < n; ++i)
                 {
                     if (nextStates[i].Count == 1)
+                    {
                         return nextWords[i];
+                    }
                     else
                     {
                         currentWords.Add(nextWords[i]);
@@ -255,6 +279,7 @@ namespace automata_sharp
                 nextWords.Clear();
                 
             }
+            
             return "";
         }
 

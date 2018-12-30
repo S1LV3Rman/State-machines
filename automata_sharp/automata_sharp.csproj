@@ -74,6 +74,7 @@
     </Compile>
     <Compile Include="Generator.cs" />
     <Compile Include="IcdfaLogic.cs" />
+    <Compile Include="CollectionPool.cs" />
     <Compile Include="PriorityScheduler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,7 +104,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="open.png" />

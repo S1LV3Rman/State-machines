@@ -47,6 +47,14 @@ namespace automata_sharp
             return true;
         }
 
+        public void Override(UniqueList<T> other)
+        {
+            list.Clear();
+            var otherlist = other.list;
+            for (int i = 0; i < otherlist.Count; i++)
+                list.Add(otherlist[i]);
+        }
+
         public bool Add(T item)
         {
             if (list.Contains(item)) return false;
