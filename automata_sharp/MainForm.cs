@@ -403,7 +403,19 @@ namespace automata_sharp
 
                         GeneratorCreatePartLogic(n, k, totalParts, startPart, countParts);
                     }
-                }                
+                }
+                else
+                {
+                    tabControlMain.Enabled = false;
+                    progressBar1.Visible = true;
+                    progressBar1.Style = ProgressBarStyle.Marquee;
+
+                    int n = Convert.ToInt32(numericUpDownN.Value),
+                        k = Convert.ToInt32(numericUpDownK.Value);
+
+
+                    GeneratorCreatePartLogic(n, k, totalParts, startPart, countParts);
+                }
             }
             else
             {
