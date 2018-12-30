@@ -54,9 +54,10 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonOpen = new System.Windows.Forms.Button();
             this.tabIcdfa = new System.Windows.Forms.TabPage();
+            this.checkBoxShutdown = new System.Windows.Forms.CheckBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label20 = new System.Windows.Forms.Label();
-            this.numericUpDownCaclulateTo = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownCalculateTo = new System.Windows.Forms.NumericUpDown();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -102,7 +103,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.richTextBoxIcdfaOutput = new System.Windows.Forms.RichTextBox();
             this.updaterIcdfa = new System.Windows.Forms.Timer(this.components);
-            this.checkBoxShutdown = new System.Windows.Forms.CheckBox();
             this.tabControlMain.SuspendLayout();
             this.tabPageGenerate.SuspendLayout();
             this.panelGenerate.SuspendLayout();
@@ -116,7 +116,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabIcdfa.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCaclulateTo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCalculateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTotalParts)).BeginInit();
@@ -344,7 +344,7 @@
             this.tabIcdfa.Controls.Add(this.checkBoxShutdown);
             this.tabIcdfa.Controls.Add(this.progressBar1);
             this.tabIcdfa.Controls.Add(this.label20);
-            this.tabIcdfa.Controls.Add(this.numericUpDownCaclulateTo);
+            this.tabIcdfa.Controls.Add(this.numericUpDownCalculateTo);
             this.tabIcdfa.Controls.Add(this.label19);
             this.tabIcdfa.Controls.Add(this.label18);
             this.tabIcdfa.Controls.Add(this.label15);
@@ -359,6 +359,13 @@
             this.tabIcdfa.Name = "tabIcdfa";
             this.tabIcdfa.UseVisualStyleBackColor = true;
             // 
+            // checkBoxShutdown
+            // 
+            resources.ApplyResources(this.checkBoxShutdown, "checkBoxShutdown");
+            this.checkBoxShutdown.Name = "checkBoxShutdown";
+            this.checkBoxShutdown.UseVisualStyleBackColor = true;
+            this.checkBoxShutdown.CheckedChanged += new System.EventHandler(this.checkBoxShutdown_CheckedChanged);
+            // 
             // progressBar1
             // 
             resources.ApplyResources(this.progressBar1, "progressBar1");
@@ -372,16 +379,16 @@
             resources.ApplyResources(this.label20, "label20");
             this.label20.Name = "label20";
             // 
-            // numericUpDownCaclulateTo
+            // numericUpDownCalculateTo
             // 
-            resources.ApplyResources(this.numericUpDownCaclulateTo, "numericUpDownCaclulateTo");
-            this.numericUpDownCaclulateTo.Maximum = new decimal(new int[] {
+            resources.ApplyResources(this.numericUpDownCalculateTo, "numericUpDownCalculateTo");
+            this.numericUpDownCalculateTo.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.numericUpDownCaclulateTo.Name = "numericUpDownCaclulateTo";
-            this.numericUpDownCaclulateTo.Value = new decimal(new int[] {
+            this.numericUpDownCalculateTo.Name = "numericUpDownCalculateTo";
+            this.numericUpDownCalculateTo.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -727,13 +734,6 @@
             // 
             this.updaterIcdfa.Tick += new System.EventHandler(this.updaterIcdfa_Tick);
             // 
-            // checkBoxShutdown
-            // 
-            resources.ApplyResources(this.checkBoxShutdown, "checkBoxShutdown");
-            this.checkBoxShutdown.Name = "checkBoxShutdown";
-            this.checkBoxShutdown.UseVisualStyleBackColor = true;
-            this.checkBoxShutdown.CheckedChanged += new System.EventHandler(this.checkBoxShutdown_CheckedChanged);
-            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -762,7 +762,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabIcdfa.ResumeLayout(false);
             this.tabIcdfa.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCaclulateTo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCalculateTo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTotalParts)).EndInit();
@@ -855,7 +855,7 @@
         private System.Windows.Forms.RichTextBox richTextBoxIcdfaOutput;
         private System.Windows.Forms.Timer updaterIcdfa;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.NumericUpDown numericUpDownCaclulateTo;
+        private System.Windows.Forms.NumericUpDown numericUpDownCalculateTo;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.CheckBox checkBoxShutdown;
     }

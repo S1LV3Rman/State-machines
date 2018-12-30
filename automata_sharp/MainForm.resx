@@ -831,25 +831,25 @@
   <data name="&gt;&gt;label20.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="numericUpDownCaclulateTo.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="numericUpDownCalculateTo.Location" type="System.Drawing.Point, System.Drawing">
     <value>345, 101</value>
   </data>
-  <data name="numericUpDownCaclulateTo.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="numericUpDownCalculateTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 27</value>
   </data>
-  <data name="numericUpDownCaclulateTo.TabIndex" type="System.Int32, mscorlib">
+  <data name="numericUpDownCalculateTo.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="&gt;&gt;numericUpDownCaclulateTo.Name" xml:space="preserve">
-    <value>numericUpDownCaclulateTo</value>
+  <data name="&gt;&gt;numericUpDownCalculateTo.Name" xml:space="preserve">
+    <value>numericUpDownCalculateTo</value>
   </data>
-  <data name="&gt;&gt;numericUpDownCaclulateTo.Type" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDownCalculateTo.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;numericUpDownCaclulateTo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDownCalculateTo.Parent" xml:space="preserve">
     <value>tabIcdfa</value>
   </data>
-  <data name="&gt;&gt;numericUpDownCaclulateTo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDownCalculateTo.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="label19.AutoSize" type="System.Boolean, mscorlib">

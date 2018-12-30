@@ -29,8 +29,7 @@ namespace automata_sharp
             buttonShortResetWordCalculate.Enabled = false;
             RightPanel(deactivate);
             numericUpDownTotalParts.Value =
-                numericUpDownCaclulateTo.Value =
-                numericUpDownCaclulateTo.Maximum = Environment.ProcessorCount;
+                numericUpDownCalculateTo.Value = Environment.ProcessorCount;
         }
         
         /// <summary>
@@ -382,17 +381,34 @@ namespace automata_sharp
 
         private void buttonIcdfaGenerate_Click(object sender, EventArgs e)
         {
-            tabControlMain.Enabled = false;
-            progressBar1.Visible = true;
-            progressBar1.Style = ProgressBarStyle.Marquee;
-
-            int n = Convert.ToInt32(numericUpDownN.Value),
-                k = Convert.ToInt32(numericUpDownK.Value);
             int totalParts = Convert.ToInt32(numericUpDownTotalParts.Value),
-                startPart = Convert.ToInt32(numericUpDownCalculateFrom.Value),
-                countParts = Convert.ToInt32(numericUpDownCaclulateTo.Value - startPart + 1);
+              startPart = Convert.ToInt32(numericUpDownCalculateFrom.Value),
+              endPart = Convert.ToInt32(numericUpDownCalculateTo.Value),
+              countParts = endPart - startPart + 1;
 
-            GeneratorCreatePartLogic(n, k, totalParts, startPart, countParts);
+            if (totalParts >= endPart && endPart >= startPart)
+            {
+                if (countParts > Environment.ProcessorCount)
+                {
+                    DialogResult dialog = MessageBox.Show($"Your count parts ({countParts}) is more then CPU threads ({Environment.ProcessorCount})\nAre you sure?", "Confirm", MessageBoxButtons.OKCancel);
+                    if(dialog == DialogResult.OK)
+                    {
+                        tabControlMain.Enabled = false;
+                        progressBar1.Visible = true;
+                        progressBar1.Style = ProgressBarStyle.Marquee;
+
+                        int n = Convert.ToInt32(numericUpDownN.Value),
+                            k = Convert.ToInt32(numericUpDownK.Value);
+
+
+                        GeneratorCreatePartLogic(n, k, totalParts, startPart, countParts);
+                    }
+                }                
+            }
+            else
+            {
+                DialogResult dialog = MessageBox.Show("Wrong input\nTotal >= CalcTo >= CalcFrom", "Input", MessageBoxButtons.OK);
+            }
         }
 
         private async void GeneratorCreatePartLogic(int n, int k, int totalParts, int startPart, int countParts)
@@ -645,7 +661,7 @@ namespace automata_sharp
                 comboBoxStates.Text = string.Empty;
             }
         }
-
+        
         void Shutdown()
         {
             System.Diagnostics.Process.Start("Shutdown", "-s -t 60");
