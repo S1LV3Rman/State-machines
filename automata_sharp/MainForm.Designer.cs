@@ -102,6 +102,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.richTextBoxIcdfaOutput = new System.Windows.Forms.RichTextBox();
             this.updaterIcdfa = new System.Windows.Forms.Timer(this.components);
+            this.checkBoxShutdown = new System.Windows.Forms.CheckBox();
             this.tabControlMain.SuspendLayout();
             this.tabPageGenerate.SuspendLayout();
             this.panelGenerate.SuspendLayout();
@@ -340,6 +341,7 @@
             // 
             // tabIcdfa
             // 
+            this.tabIcdfa.Controls.Add(this.checkBoxShutdown);
             this.tabIcdfa.Controls.Add(this.progressBar1);
             this.tabIcdfa.Controls.Add(this.label20);
             this.tabIcdfa.Controls.Add(this.numericUpDownCaclulateTo);
@@ -433,6 +435,11 @@
             // numericUpDownN
             // 
             resources.ApplyResources(this.numericUpDownN, "numericUpDownN");
+            this.numericUpDownN.Maximum = new decimal(new int[] {
+            9,
+            0,
+            0,
+            0});
             this.numericUpDownN.Minimum = new decimal(new int[] {
             1,
             0,
@@ -720,6 +727,13 @@
             // 
             this.updaterIcdfa.Tick += new System.EventHandler(this.updaterIcdfa_Tick);
             // 
+            // checkBoxShutdown
+            // 
+            resources.ApplyResources(this.checkBoxShutdown, "checkBoxShutdown");
+            this.checkBoxShutdown.Name = "checkBoxShutdown";
+            this.checkBoxShutdown.UseVisualStyleBackColor = true;
+            this.checkBoxShutdown.CheckedChanged += new System.EventHandler(this.checkBoxShutdown_CheckedChanged);
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -843,6 +857,7 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.NumericUpDown numericUpDownCaclulateTo;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.CheckBox checkBoxShutdown;
     }
 }
 

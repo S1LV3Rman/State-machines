@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -9,7 +8,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
-using System.Collections;
 
 namespace automata_sharp
 {
@@ -30,6 +28,9 @@ namespace automata_sharp
             buttonResetWordCalculate.Enabled = false;
             buttonShortResetWordCalculate.Enabled = false;
             RightPanel(deactivate);
+            numericUpDownTotalParts.Value =
+                numericUpDownCaclulateTo.Value =
+                numericUpDownCaclulateTo.Maximum = Environment.ProcessorCount;
         }
         
         /// <summary>
@@ -432,6 +433,7 @@ namespace automata_sharp
             stream.Close();
 
             CurrentIcdfaLogic = null;//Сбрасываем CurrentIcdfaLogic
+            if (checkBoxShutdown.Checked) Shutdown();
         }
 
         private void updaterIcdfa_Tick(object sender, EventArgs e)
@@ -603,6 +605,16 @@ namespace automata_sharp
             return null;
         }
 
+        private void checkBoxShutdown_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxShutdown.Checked)
+            {
+                DialogResult dialogResult = MessageBox.Show("Your PC will automaticly shutdown after completing caluclation, are you sure?", "Confirm", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.No)
+                    checkBoxShutdown.Checked = false;
+            }
+        }
+
         private void RightPanel(bool state)
         {
             // При любом изменении состояния сброс строк
@@ -632,6 +644,13 @@ namespace automata_sharp
                 comboBoxStates.Items.Clear();
                 comboBoxStates.Text = string.Empty;
             }
+        }
+
+        void Shutdown()
+        {
+            System.Diagnostics.Process.Start("Shutdown", "-s -t 60");
+            DialogResult dialogResult = MessageBox.Show("Cancel shutdown?", "Shutdown", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes) System.Diagnostics.Process.Start("Shutdown", "-a");
         }
     }
 
