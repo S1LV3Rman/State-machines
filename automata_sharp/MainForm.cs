@@ -676,9 +676,9 @@ namespace automata_sharp
         
         void Shutdown()
         {
-            System.Diagnostics.Process.Start("Shutdown", "-s -t 60");
-            DialogResult dialogResult = MessageBox.Show("Cancel shutdown?", "Shutdown", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes) System.Diagnostics.Process.Start("Shutdown", "-a");
+            //System.Diagnostics.Process.Start("Shutdown", "-s -t 60");
+            //DialogResult dialogResult = MessageBox.Show("Cancel shutdown?", "Shutdown", MessageBoxButtons.YesNo);
+            //if (dialogResult == DialogResult.Yes) System.Diagnostics.Process.Start("Shutdown", "-a");
         }
     }
 
