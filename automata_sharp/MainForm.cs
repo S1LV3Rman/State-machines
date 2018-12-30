@@ -66,12 +66,19 @@ namespace automata_sharp
 
             if (!flag)
             {
-                DialogResult dialog = MessageBox.Show("Wrong input word!", "Input word", MessageBoxButtons.OK);
+                DialogResult dialog = MessageBox.Show("Invalid input word", "Input word", MessageBoxButtons.OK);
             }
             else
             {
-                labelStoped.Text = automata.Delta(Convert.ToInt32(comboBoxStates.SelectedItem.ToString()), textBoxWord.Text).ToString();
-                labelStoped.ForeColor = Color.LimeGreen;
+                try
+                {
+                    labelStoped.Text = automata.Delta(Convert.ToInt32(comboBoxStates.Text), textBoxWord.Text).ToString();
+                    labelStoped.ForeColor = Color.LimeGreen;
+                }
+                catch
+                {
+                    DialogResult dialog = MessageBox.Show("Invalid input state", "Input state", MessageBoxButtons.OK);
+                }
             }
         }
 
@@ -353,15 +360,22 @@ namespace automata_sharp
 
         private void buttonCheck_Click(object sender, EventArgs e)
         {
-            if (automata.Verificate(textBoxCheck.Text))
+            try
             {
-                labelCheckResult.ForeColor = Color.LimeGreen;
-                labelCheckResult.Text = "Word IS the reset";
+                if (automata.Verificate(textBoxCheck.Text))
+                {
+                    labelCheckResult.ForeColor = Color.LimeGreen;
+                    labelCheckResult.Text = "Word IS the reset";
+                }
+                else
+                {
+                    labelCheckResult.ForeColor = Color.Red;
+                    labelCheckResult.Text = "Word NOT the reset";
+                }
             }
-            else
+            catch
             {
-                labelCheckResult.ForeColor = Color.Red;
-                labelCheckResult.Text = "Word NOT the reset";
+                DialogResult dialog = MessageBox.Show("Invalid input word", "Reset word", MessageBoxButtons.OK);
             }
         }
 
@@ -613,7 +627,11 @@ namespace automata_sharp
                 foreach (var i in states)
                     comboBoxStates.Items.Add(i);
             }
-            else comboBoxStates.Items.Clear();
+            else
+            {
+                comboBoxStates.Items.Clear();
+                comboBoxStates.Text = string.Empty;
+            }
         }
     }
 
