@@ -485,6 +485,11 @@
             // numericUpDownCalculateFrom
             // 
             resources.ApplyResources(this.numericUpDownCalculateFrom, "numericUpDownCalculateFrom");
+            this.numericUpDownCalculateFrom.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.numericUpDownCalculateFrom.Name = "numericUpDownCalculateFrom";
             this.numericUpDownCalculateFrom.Value = new decimal(new int[] {
             1,
