@@ -89,7 +89,7 @@ namespace automata_sharp
         /// <param name="e"></param>
         private async void buttonResetWordCalculate_Click(object sender, EventArgs e)
         {
-
+            
             //Используем токен только в теле using, в конце у этого токена будет вызвано 
             using (ResetWordCancellation = new CancellationTokenSource())
             {
@@ -118,15 +118,13 @@ namespace automata_sharp
                             labelQuickResetWord.Text = "Algorythm returned wrong answer";
                         }
                     }
-                    buttonCancelResetWord.Visible = false;
                 }
                 //Если прилител OperationCanceledException  
                 catch (OperationCanceledException)
                 {
                     labelQuickResetWord.ForeColor = Color.Red;
                     labelQuickResetWord.Text = "Canceled";
-                    buttonResetWordCalculate.Visible = true;
-                    buttonCancelResetWord.Visible = false;//Выключаем кнопку отмены 
+                    
                 }
                 //Если прилитело что-то, чего мы не ожидали, пробрасываем исключение наверх
                 catch
@@ -137,6 +135,8 @@ namespace automata_sharp
                 {
                     //В любом случае нам нужно
                     ResetWordCancellation = null;//убрать токен
+                    buttonResetWordCalculate.Visible = true;
+                    buttonCancelResetWord.Visible = false;//Выключаем кнопку отмены 
                 }
             }
         }
@@ -184,15 +184,13 @@ namespace automata_sharp
                             labelShortestResetWord.ForeColor = Color.Purple;
                             labelShortestResetWord.Text = "Algorythm returned wrong answer";
                         }
-                        buttonCancelShortResetWord.Visible = false;
                     }
                     //Если прилител OperationCanceledException  
                     catch (OperationCanceledException)
                     {
                         labelShortestResetWord.ForeColor = Color.Red;
                         labelShortestResetWord.Text = "Canceled";
-                        buttonShortResetWordCalculate.Visible = true;
-                        buttonCancelShortResetWord.Visible = false;//Выключаем кнопку отмены 
+                        
                     }
                     //Если прилитело что-то, чего мы не ожидали, пробрасываем исключение наверх
                     catch
@@ -203,6 +201,8 @@ namespace automata_sharp
                     {
                         //В любом случае нам нужно
                         ShortResetWordCancellation = null;//убрать токен
+                        buttonShortResetWordCalculate.Visible = true;
+                        buttonCancelShortResetWord.Visible = false;//Выключаем кнопку отмены 
                     }
                 }
             }
