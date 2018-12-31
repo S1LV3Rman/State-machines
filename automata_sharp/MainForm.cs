@@ -620,20 +620,32 @@ namespace automata_sharp
 
         private ulong? GetTotalCount()
         {
+            //if (TotalCountTask == null)
+            //{
+            //    if (CurrentIcdfaLogic != null)
+            //        TotalCountTask = Task.Factory.StartNew(() => CurrentIcdfaLogic.GetTotalCount(), new CancellationToken() ,TaskCreationOptions.None, PriorityScheduler.BelowNormal);
+            //}
+            //else
+            //{
+            //    if (TotalCountTask.IsCompleted)
+            //        return TotalCountTask.GetAwaiter().GetResult();
+            //}
+            //return null;
             if (TotalCountTask == null)
             {
                 if (CurrentIcdfaLogic != null)
-                    TotalCountTask = Task.Factory.StartNew(() => CurrentIcdfaLogic.GetTotalCount(), new CancellationToken() ,TaskCreationOptions.None, PriorityScheduler.BelowNormal);
+                    TotalCountTask = IcdfaHelper.GetTotalCountAsync(CurrentIcdfaLogic.N, CurrentIcdfaLogic.K);
             }
             else
             {
                 if (TotalCountTask.IsCompleted)
                     return TotalCountTask.GetAwaiter().GetResult();
             }
+
             return null;
         }
 
-        private void checkBoxShutdown_CheckedChanged(object sender, EventArgs e)
+            private void checkBoxShutdown_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxShutdown.Checked)
             {

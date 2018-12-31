@@ -13,7 +13,7 @@ namespace automata_sharp
     /// <summary>
     /// Класс содержащий логику исполнения эксперемета Icdfa
     /// </summary>
-    public class IcdfaLogic
+    public sealed class IcdfaLogic
     {
         public readonly int N;
         public readonly int K;
@@ -252,6 +252,56 @@ namespace automata_sharp
             int nm = N - 1;
             int km = K - 1;
             int nmm = N - 2;
+            ulong count_all = 0;
+
+            while (!temp.IsLastFlags)
+            {
+                while (!temp.IsLastSequences)
+                {
+                    checked
+                    {
+                        count_all++;
+                        temp.NextICDFA(nm, km);
+                    }
+                }
+                temp.NextFlags(nmm);
+            }
+
+            return count_all;
+        }
+    }
+
+    public static class IcdfaHelper
+    {
+        readonly static IDictionary<(int n, int k), ulong> CachedTotalCounts;
+
+        static IcdfaHelper()
+        {
+            CachedTotalCounts = new Dictionary<(int n, int k), ulong>(10);
+        }
+
+        public static async Task<ulong> GetTotalCountAsync(int n, int k)
+        {
+            if (n < 0 || k < 0) throw new ArgumentException();
+
+            var key = (n, k);
+            if(CachedTotalCounts.ContainsKey(key))
+                return CachedTotalCounts[key];
+
+            var task = new Task<ulong>(() => GetTotalCount(n,k));
+            task.Start(PriorityScheduler.AboveNormal);
+            var result = await task;
+
+            CachedTotalCounts.Add(key, result);
+            return result;
+        }
+
+        private static ulong GetTotalCount(int n, int k)
+        {
+            Generator temp = new Generator(n, k);
+            int nm = n - 1;
+            int km = k - 1;
+            int nmm = n - 2;
             ulong count_all = 0;
 
             while (!temp.IsLastFlags)
