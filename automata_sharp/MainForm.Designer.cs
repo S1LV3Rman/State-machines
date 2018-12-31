@@ -103,6 +103,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.richTextBoxIcdfaOutput = new System.Windows.Forms.RichTextBox();
             this.updaterIcdfa = new System.Windows.Forms.Timer(this.components);
+            this.buttonIcdfaCancel = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageGenerate.SuspendLayout();
             this.panelGenerate.SuspendLayout();
@@ -341,8 +342,8 @@
             // 
             // tabIcdfa
             // 
+            this.tabIcdfa.Controls.Add(this.buttonIcdfaCancel);
             this.tabIcdfa.Controls.Add(this.checkBoxShutdown);
-            this.tabIcdfa.Controls.Add(this.progressBar1);
             this.tabIcdfa.Controls.Add(this.label20);
             this.tabIcdfa.Controls.Add(this.numericUpDownCalculateTo);
             this.tabIcdfa.Controls.Add(this.label19);
@@ -355,6 +356,7 @@
             this.tabIcdfa.Controls.Add(this.buttonIcdfaGenerate);
             this.tabIcdfa.Controls.Add(this.numericUpDownTotalParts);
             this.tabIcdfa.Controls.Add(this.numericUpDownCalculateFrom);
+            this.tabIcdfa.Controls.Add(this.progressBar1);
             resources.ApplyResources(this.tabIcdfa, "tabIcdfa");
             this.tabIcdfa.Name = "tabIcdfa";
             this.tabIcdfa.UseVisualStyleBackColor = true;
@@ -739,6 +741,13 @@
             // 
             this.updaterIcdfa.Tick += new System.EventHandler(this.updaterIcdfa_Tick);
             // 
+            // buttonIcdfaCancel
+            // 
+            resources.ApplyResources(this.buttonIcdfaCancel, "buttonIcdfaCancel");
+            this.buttonIcdfaCancel.Name = "buttonIcdfaCancel";
+            this.buttonIcdfaCancel.UseVisualStyleBackColor = true;
+            this.buttonIcdfaCancel.Click += new System.EventHandler(this.buttonIcdfaCancel_Click);
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -863,6 +872,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDownCalculateTo;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.CheckBox checkBoxShutdown;
+        private System.Windows.Forms.Button buttonIcdfaCancel;
     }
 }
 

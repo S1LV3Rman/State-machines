@@ -393,7 +393,7 @@ namespace automata_sharp
                     DialogResult dialog = MessageBox.Show($"Your count parts ({countParts}) is more then CPU threads ({Environment.ProcessorCount})\nAre you sure?", "Confirm", MessageBoxButtons.OKCancel);
                     if(dialog == DialogResult.OK)
                     {
-                        tabControlMain.Enabled = false;
+                        //tabControlMain.Enabled = false;
                         progressBar1.Visible = true;
                         progressBar1.Style = ProgressBarStyle.Marquee;
 
@@ -406,7 +406,7 @@ namespace automata_sharp
                 }
                 else
                 {
-                    tabControlMain.Enabled = false;
+                    //tabControlMain.Enabled = false;
                     progressBar1.Visible = true;
                     progressBar1.Style = ProgressBarStyle.Marquee;
 
@@ -673,7 +673,12 @@ namespace automata_sharp
                 comboBoxStates.Text = string.Empty;
             }
         }
-        
+
+        private void buttonIcdfaCancel_Click(object sender, EventArgs e)
+        {
+            CurrentIcdfaLogic?.CancellationToken.Cancel();
+        }
+
         void Shutdown()
         {
             //System.Diagnostics.Process.Start("Shutdown", "-s -t 60");

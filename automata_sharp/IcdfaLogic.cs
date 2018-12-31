@@ -30,6 +30,8 @@ namespace automata_sharp
         /// </summary>
         public readonly int CountParts;
 
+        public readonly CancellationTokenSource CancellationToken;
+
         public int RowLength => (N - 1) * (N - 1) + 1;
         /// <summary>
         /// Начало подсчета (Время вызова метода Run)
@@ -41,6 +43,7 @@ namespace automata_sharp
         /// Значение - Подсчитанные значения для этой части
         /// </summary>
         public readonly Dictionary<int, ulong[]> Lengths;
+
 
         private Task[] Tasks;
 
@@ -60,6 +63,8 @@ namespace automata_sharp
 
             Tasks = new Task[countParts];
             Lengths = new Dictionary<int, ulong[]>(CountParts);
+
+            CancellationToken = new CancellationTokenSource();
         }
 
         /// <summary>
@@ -141,7 +146,7 @@ namespace automata_sharp
         /// <returns></returns>
         Task CreateTask(int num)
         {
-            return new Task(() => MainLogic(Lengths[num], num));
+            return new Task(() => MainLogic(Lengths[num], num, CancellationToken.Token));
         }
 
         /// <summary>
@@ -203,8 +208,38 @@ namespace automata_sharp
                 }
                 generator.NextFlags(nmm);
             }
-            
+        }
 
+        private void MainLogic(ulong[] lengths, int part, CancellationToken cancellationToken)
+        {
+            var generator = new Generator(N, K);
+            int nm = N - 1;
+            int km = K - 1;
+            int nmm = N - 2;
+            ulong count = 0;
+            int i = 1;
+            int total = TotalParts;
+
+            i = 1;
+            while (!generator.IsLastFlags)
+            {
+                while (!generator.IsLastSequences)
+                {
+                    if (i == part)
+                        lengths[generator.getWordLength()]++;
+                    if (i == total)
+                        i = 0;
+                    generator.NextICDFA(nm, km);
+                    checked
+                    {
+                        count++;
+                    }
+                    i++;
+                }
+                generator.NextFlags(nmm);
+                if (CancellationToken.IsCancellationRequested)
+                    return;
+            }
         }
 
         /// <summary>
