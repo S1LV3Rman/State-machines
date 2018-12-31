@@ -1,6 +1,6 @@
 # Automs
 
-Warning! Microsoft .NET Framework 4.6.1 or higher is required to run Automs
+Warning! Microsoft .NET Framework 4.0 or higher is required to run Automs, but for better performance, Microsoft .NET 4.5 or higher is required
 
 
 
