@@ -7,6 +7,7 @@ using System.Runtime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace automata_sharp
 {
@@ -246,6 +247,7 @@ namespace automata_sharp
         /// Считает суммарное кол-во автоматов
         /// </summary>
         /// <returns></returns>
+        [Obsolete("Use IcdfaHelper.GetTotalCountAsync")]
         public ulong GetTotalCount()
         {
             Generator temp = new Generator(N, K);
@@ -273,12 +275,15 @@ namespace automata_sharp
 
     public static class IcdfaHelper
     {
+        const string FILENAME_CACHE = "CachedTotalCounts.cache";
         readonly static IDictionary<(int n, int k), ulong> CachedTotalCounts;
 
         static IcdfaHelper()
         {
             CachedTotalCounts = new Dictionary<(int n, int k), ulong>(10);
+            LoadCache();
         }
+
 
         public static async Task<ulong> GetTotalCountAsync(int n, int k)
         {
@@ -293,6 +298,7 @@ namespace automata_sharp
             var result = await task;
 
             CachedTotalCounts.Add(key, result);
+            SaveCache();
             return result;
         }
 
@@ -318,6 +324,40 @@ namespace automata_sharp
             }
 
             return count_all;
+        }
+
+        private static void SaveCache()
+        {
+            StreamWriter writer = null;
+            try
+            {
+                writer = new StreamWriter(new FileStream(FILENAME_CACHE,FileMode.Create));
+                foreach(var e in CachedTotalCounts.ToArray())
+                    writer.WriteLine($"{e.Key.n},{e.Key.k},{e.Value}");
+            }
+            finally { writer?.Dispose(); }
+        }
+        private static void LoadCache()
+        {
+            StreamReader reader = null;
+            try
+            {
+                reader = new StreamReader(new FileStream(FILENAME_CACHE, FileMode.OpenOrCreate));
+                var temp = new Dictionary<(int n, int k), ulong>(10);
+                var readed = reader.ReadToEnd().Split('\n');
+                reader.Close();
+                
+                foreach (var e in readed)
+                {
+                    var args = e.Split(',');
+                    if (args.Length != 3) continue;
+                    temp.Add((int.Parse(args[0]), int.Parse(args[1])), ulong.Parse(args[2]));
+                }
+
+                foreach(var e in temp)
+                    CachedTotalCounts.Add(e.Key, e.Value);
+            }
+            finally { reader?.Dispose(); }
         }
     }
 }
