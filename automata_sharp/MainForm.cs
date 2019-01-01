@@ -558,7 +558,7 @@ namespace automata_sharp
 
         string GetCurrentCountOfTotalCount(ulong currentCount, ulong totalPartCount, ulong totalCount)
         {
-            return "Calculated: " + currentCount.ToString() + " / " + totalPartCount.ToString() + " of total " + totalCount + " ICDFA(0)";
+            return "Calculated: " + currentCount.ToString() + " / " + totalPartCount.ToString() + " of total " + totalCount + " ICDFAØ";
         }
 
         //TODO
