@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace automata_sharp
 {
@@ -395,6 +396,7 @@ namespace automata_sharp
                     {
                         //tabControlMain.Enabled = false;
                         progressBar1.Visible = true;
+                        buttonIcdfaCancel.Visible = true;
                         progressBar1.Style = ProgressBarStyle.Marquee;
 
                         int n = Convert.ToInt32(numericUpDownN.Value),
@@ -408,6 +410,7 @@ namespace automata_sharp
                 {
                     //tabControlMain.Enabled = false;
                     progressBar1.Visible = true;
+                    buttonIcdfaCancel.Visible = true;
                     progressBar1.Style = ProgressBarStyle.Marquee;
 
                     int n = Convert.ToInt32(numericUpDownN.Value),
@@ -513,27 +516,32 @@ namespace automata_sharp
                 StringBuilder.Append("\n");
 
                 StringBuilder.Append(GetProgress(progress));
-                StringBuilder.Append("\n");
+                //StringBuilder.Append("\n");
 
                 //StringBuilder.Append(GetTransactionPerSecond(deltaTime,currentCount));
                 //StringBuilder.Append("\n");
 
-                StringBuilder.Append(GetGCCallsPerSecond(deltaTime, GC.CollectionCount(0), GC.CollectionCount(1), GC.CollectionCount(2)));
-                StringBuilder.Append("\n");
+                //StringBuilder.Append(GetGCCallsPerSecond(deltaTime, GC.CollectionCount(0), GC.CollectionCount(1), GC.CollectionCount(2)));
+                //StringBuilder.Append("\n");
             }
             else
             {
                 StringBuilder.Append("<Calculating additional information...>");
                 StringBuilder.Append("\n");
             }
-
-            for(int i = 0; i < array.Length; i++)
+            chartICDFA.Series[0].Points.Clear();
+            for (int i = 0; i < array.Length; i++)
             {
-                StringBuilder.Append("\n");
-                StringBuilder.Append(i.ToString("D2"));
-                StringBuilder.Append(" - ");
-                StringBuilder.Append(array[i].ToString());
+                //StringBuilder.Append("\n");
+                //StringBuilder.Append(i.ToString("D2"));
+                //StringBuilder.Append(" - ");
+                //StringBuilder.Append(array[i].ToString());
+                
+                chartICDFA.Series[0].Points.Add(array[i], i);
             }
+
+            chartICDFA.Update();
+            chartICDFA.Series.Invalidate();
 
             richTextBoxIcdfaOutput.Text = StringBuilder.ToString();
         }
@@ -600,19 +608,24 @@ namespace automata_sharp
             {
                 case "Generator":
                     RightPanel(deactivate);
+                    chartICDFA.Visible = false;
                     richTextBoxIcdfaOutput.Visible = false;
                     break;
                 case "Constuctor":
+                    chartICDFA.Visible = false;
                     RightPanel(deactivate);
                     richTextBoxIcdfaOutput.Visible = false;
                     break;
                 case "File":
+                    chartICDFA.Visible = false;
                     richTextBoxIcdfaOutput.Visible = false;
                     break;
                 case "Reset word experiment":
                     richTextBoxIcdfaOutput.Visible = true;
+                    chartICDFA.Visible = true;
                     break;
                 case "About":
+                    chartICDFA.Visible = false;
                     richTextBoxIcdfaOutput.Visible = false;
                     break;
             }
