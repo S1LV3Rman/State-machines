@@ -276,29 +276,39 @@ namespace automata_sharp
     public static class IcdfaHelper
     {
         const string FILENAME_CACHE = "CachedTotalCounts.cache";
-        readonly static IDictionary<(int n, int k), ulong> CachedTotalCounts;
+        readonly static IDictionary<(int n, int k), Task<ulong>> CachedTotalCounts;
 
         static IcdfaHelper()
         {
-            CachedTotalCounts = new Dictionary<(int n, int k), ulong>(10);
+            CachedTotalCounts = new Dictionary<(int n, int k), Task<ulong>>(10);
             LoadCache();
         }
 
+        public static ulong? GetTotalCountNullable(int n, int k)
+        {
+            var task = GetTotalCountTask(n, k);
+            return task.IsCompleted ? (ulong?)task.GetAwaiter().GetResult() : null;
+        }
 
-        public static async Task<ulong> GetTotalCountAsync(int n, int k)
+        public static Task<ulong> GetTotalCountTask(int n, int k)
         {
             if (n < 0 || k < 0) throw new ArgumentException();
 
+            //Пытаемся получить данные из кэша 
             var key = (n, k);
             if(CachedTotalCounts.ContainsKey(key))
+                //Если получается то возвращаем таску 
                 return CachedTotalCounts[key];
 
+            //Иначе создаем задачу, запускаем и возврщаем ее
             var task = new Task<ulong>(() => GetTotalCount(n,k));
             task.Start(PriorityScheduler.AboveNormal);
-            var result = await task;
-
+            var result = task;
+            
             CachedTotalCounts.Add(key, result);
-            SaveCache();
+
+            task.GetAwaiter().OnCompleted(SaveCache);//По завершению сохраняем кэш
+
             return result;
         }
 
@@ -332,8 +342,11 @@ namespace automata_sharp
             try
             {
                 writer = new StreamWriter(new FileStream(FILENAME_CACHE,FileMode.Create));
-                foreach(var e in CachedTotalCounts.ToArray())
-                    writer.WriteLine($"{e.Key.n},{e.Key.k},{e.Value}");
+                foreach (var e in CachedTotalCounts.ToArray())
+                {
+                    if(e.Value.IsCompleted)
+                        writer.WriteLine($"{e.Key.n},{e.Key.k},{e.Value.GetAwaiter().GetResult()}");
+                }
             }
             finally { writer?.Dispose(); }
         }
@@ -355,7 +368,7 @@ namespace automata_sharp
                 }
 
                 foreach(var e in temp)
-                    CachedTotalCounts.Add(e.Key, e.Value);
+                    CachedTotalCounts.Add(e.Key, Task.FromResult(e.Value));
             }
             finally { reader?.Dispose(); }
         }
