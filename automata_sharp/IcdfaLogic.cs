@@ -7,13 +7,14 @@ using System.Runtime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace automata_sharp
 {
     /// <summary>
     /// Класс содержащий логику исполнения эксперемета Icdfa
     /// </summary>
-    public class IcdfaLogic
+    public sealed class IcdfaLogic
     {
         public readonly int N;
         public readonly int K;
@@ -30,6 +31,8 @@ namespace automata_sharp
         /// </summary>
         public readonly int CountParts;
 
+        public readonly CancellationTokenSource CancellationTokenSource;
+
         public int RowLength => (N - 1) * (N - 1) + 1;
         /// <summary>
         /// Начало подсчета (Время вызова метода Run)
@@ -41,6 +44,7 @@ namespace automata_sharp
         /// Значение - Подсчитанные значения для этой части
         /// </summary>
         public readonly Dictionary<int, ulong[]> Lengths;
+
 
         private Task[] Tasks;
 
@@ -60,6 +64,8 @@ namespace automata_sharp
 
             Tasks = new Task[countParts];
             Lengths = new Dictionary<int, ulong[]>(CountParts);
+
+            CancellationTokenSource = new CancellationTokenSource();
         }
 
         /// <summary>
@@ -141,7 +147,7 @@ namespace automata_sharp
         /// <returns></returns>
         Task CreateTask(int num)
         {
-            return new Task(() => MainLogic(Lengths[num], num));
+            return new Task(() => MainLogic(Lengths[num], num, CancellationTokenSource.Token));
         }
 
         /// <summary>
@@ -203,14 +209,53 @@ namespace automata_sharp
                 }
                 generator.NextFlags(nmm);
             }
-            
+        }
 
+        private void MainLogic(ulong[] lengths, int part, CancellationToken cancellationToken)
+        {
+            var generator = new Generator(N, K);
+            int nm = N - 1;
+            int km = K - 1;
+            int nmm = N - 2;
+            ulong count = 0;
+            int i = 1;
+            int total = TotalParts;
+
+            i = 1;
+            while (!generator.IsLastFlags)
+            {
+                while (!generator.IsLastSequences)
+                {
+                    if (i == part)
+                        lengths[generator.getWordLength()]++;
+                    if (i == total)
+                    {
+                        i = 0;
+                        if (cancellationToken.IsCancellationRequested)
+                            return;
+                    }
+                    generator.NextICDFA(nm, km);
+                    checked
+                    {
+                        count++;
+                    }
+                    i++;   
+                }
+                generator.NextFlags(nmm);
+                
+            }
+        }
+
+        public void Cancel()
+        {
+            CancellationTokenSource.Cancel();
         }
 
         /// <summary>
         /// Считает суммарное кол-во автоматов
         /// </summary>
         /// <returns></returns>
+        [Obsolete("Use IcdfaHelper.GetTotalCountAsync")]
         public ulong GetTotalCount()
         {
             Generator temp = new Generator(N, K);
@@ -233,6 +278,107 @@ namespace automata_sharp
             }
 
             return count_all;
+        }
+    }
+
+    public static class IcdfaHelper
+    {
+        const string FILENAME_CACHE = "CachedTotalCounts.cache";
+        readonly static IDictionary<(int n, int k), Task<ulong>> CachedTotalCounts;
+
+        static IcdfaHelper()
+        {
+            CachedTotalCounts = new Dictionary<(int n, int k), Task<ulong>>(10);
+            LoadCache();
+        }
+
+        public static ulong? GetTotalCountNullable(int n, int k)
+        {
+            var task = GetTotalCountTask(n, k);
+            return task.IsCompleted ? (ulong?)task.GetAwaiter().GetResult() : null;
+        }
+
+        public static Task<ulong> GetTotalCountTask(int n, int k)
+        {
+            if (n < 0 || k < 0) throw new ArgumentException();
+
+            //Пытаемся получить данные из кэша 
+            var key = (n, k);
+            if(CachedTotalCounts.ContainsKey(key))
+                //Если получается то возвращаем таску 
+                return CachedTotalCounts[key];
+
+            //Иначе создаем задачу, запускаем и возврщаем ее
+            var task = new Task<ulong>(() => GetTotalCount(n,k));
+            task.Start(PriorityScheduler.AboveNormal);
+            var result = task;
+            
+            CachedTotalCounts.Add(key, result);
+
+            task.GetAwaiter().OnCompleted(SaveCache);//По завершению сохраняем кэш
+
+            return result;
+        }
+
+        private static ulong GetTotalCount(int n, int k)
+        {
+            Generator temp = new Generator(n, k);
+            int nm = n - 1;
+            int km = k - 1;
+            int nmm = n - 2;
+            ulong count_all = 0;
+
+            while (!temp.IsLastFlags)
+            {
+                while (!temp.IsLastSequences)
+                {
+                    checked
+                    {
+                        count_all++;
+                        temp.NextICDFA(nm, km);
+                    }
+                }
+                temp.NextFlags(nmm);
+            }
+
+            return count_all;
+        }
+
+        private static void SaveCache()
+        {
+            StreamWriter writer = null;
+            try
+            {
+                writer = new StreamWriter(new FileStream(FILENAME_CACHE,FileMode.Create));
+                foreach (var e in CachedTotalCounts.ToArray())
+                {
+                    if(e.Value.IsCompleted)
+                        writer.WriteLine($"{e.Key.n},{e.Key.k},{e.Value.GetAwaiter().GetResult()}");
+                }
+            }
+            finally { writer?.Dispose(); }
+        }
+        private static void LoadCache()
+        {
+            StreamReader reader = null;
+            try
+            {
+                reader = new StreamReader(new FileStream(FILENAME_CACHE, FileMode.OpenOrCreate));
+                var temp = new Dictionary<(int n, int k), ulong>(10);
+                var readed = reader.ReadToEnd().Split('\n');
+                reader.Close();
+                
+                foreach (var e in readed)
+                {
+                    var args = e.Split(',');
+                    if (args.Length != 3) continue;
+                    temp.Add((int.Parse(args[0]), int.Parse(args[1])), ulong.Parse(args[2]));
+                }
+
+                foreach(var e in temp)
+                    CachedTotalCounts.Add(e.Key, Task.FromResult(e.Value));
+            }
+            finally { reader?.Dispose(); }
         }
     }
 }

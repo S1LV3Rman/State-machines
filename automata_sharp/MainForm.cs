@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace automata_sharp
 {
@@ -89,7 +90,7 @@ namespace automata_sharp
         /// <param name="e"></param>
         private async void buttonResetWordCalculate_Click(object sender, EventArgs e)
         {
-
+            
             //Используем токен только в теле using, в конце у этого токена будет вызвано 
             using (ResetWordCancellation = new CancellationTokenSource())
             {
@@ -118,15 +119,13 @@ namespace automata_sharp
                             labelQuickResetWord.Text = "Algorythm returned wrong answer";
                         }
                     }
-                    buttonCancelResetWord.Visible = false;
                 }
                 //Если прилител OperationCanceledException  
                 catch (OperationCanceledException)
                 {
                     labelQuickResetWord.ForeColor = Color.Red;
                     labelQuickResetWord.Text = "Canceled";
-                    buttonResetWordCalculate.Visible = true;
-                    buttonCancelResetWord.Visible = false;//Выключаем кнопку отмены 
+                    
                 }
                 //Если прилитело что-то, чего мы не ожидали, пробрасываем исключение наверх
                 catch
@@ -137,6 +136,8 @@ namespace automata_sharp
                 {
                     //В любом случае нам нужно
                     ResetWordCancellation = null;//убрать токен
+                    buttonResetWordCalculate.Visible = true;
+                    buttonCancelResetWord.Visible = false;//Выключаем кнопку отмены 
                 }
             }
         }
@@ -184,15 +185,13 @@ namespace automata_sharp
                             labelShortestResetWord.ForeColor = Color.Purple;
                             labelShortestResetWord.Text = "Algorythm returned wrong answer";
                         }
-                        buttonCancelShortResetWord.Visible = false;
                     }
                     //Если прилител OperationCanceledException  
                     catch (OperationCanceledException)
                     {
                         labelShortestResetWord.ForeColor = Color.Red;
                         labelShortestResetWord.Text = "Canceled";
-                        buttonShortResetWordCalculate.Visible = true;
-                        buttonCancelShortResetWord.Visible = false;//Выключаем кнопку отмены 
+                        
                     }
                     //Если прилитело что-то, чего мы не ожидали, пробрасываем исключение наверх
                     catch
@@ -203,6 +202,8 @@ namespace automata_sharp
                     {
                         //В любом случае нам нужно
                         ShortResetWordCancellation = null;//убрать токен
+                        buttonShortResetWordCalculate.Visible = true;
+                        buttonCancelShortResetWord.Visible = false;//Выключаем кнопку отмены 
                     }
                 }
             }
@@ -393,8 +394,9 @@ namespace automata_sharp
                     DialogResult dialog = MessageBox.Show($"Your count parts ({countParts}) is more then CPU threads ({Environment.ProcessorCount})\nAre you sure?", "Confirm", MessageBoxButtons.OKCancel);
                     if(dialog == DialogResult.OK)
                     {
-                        tabControlMain.Enabled = false;
+                        //tabControlMain.Enabled = false;
                         progressBar1.Visible = true;
+                        buttonIcdfaCancel.Visible = true;
                         progressBar1.Style = ProgressBarStyle.Marquee;
 
                         int n = Convert.ToInt32(numericUpDownN.Value),
@@ -406,8 +408,9 @@ namespace automata_sharp
                 }
                 else
                 {
-                    tabControlMain.Enabled = false;
+                    //tabControlMain.Enabled = false;
                     progressBar1.Visible = true;
+                    buttonIcdfaCancel.Visible = true;
                     progressBar1.Style = ProgressBarStyle.Marquee;
 
                     int n = Convert.ToInt32(numericUpDownN.Value),
@@ -436,16 +439,6 @@ namespace automata_sharp
 
             updaterIcdfa.Enabled = false;//Отключаем таймер который подтягивает изменения в CurrentIcdfaLogic
             UpdateIcdfaOutput();//Обновляем вывод  
-            
-
-            //Если задача подсчета сумарного кол-ва автоматов не завершена
-            //TODO В идеале сделать через CancellationToken
-            if (TotalCountTask != null)
-            {
-                TotalCountTask.GetAwaiter().GetResult();//Ожидаем завершения подсчета 
-                TotalCountTask.Dispose();//Освобождаем системные ресурсы связанные с задачей
-                TotalCountTask = null;//Сброс
-            }
 
             //Восстанавливаем интерфейс
             buttonIcdfaGenerate.Visible = true;
@@ -488,7 +481,7 @@ namespace automata_sharp
 
             var deltaTime = DateTime.UtcNow - CurrentIcdfaLogic.LaunchTime;//Получаем время работы
 
-            ulong? totalCount = GetTotalCount();
+            ulong? totalCount = IcdfaHelper.GetTotalCountNullable(CurrentIcdfaLogic.N, CurrentIcdfaLogic.K);
 
             StringBuilder.Append(GetDeltaTime(deltaTime));
             StringBuilder.Append("\n");
@@ -513,27 +506,32 @@ namespace automata_sharp
                 StringBuilder.Append("\n");
 
                 StringBuilder.Append(GetProgress(progress));
-                StringBuilder.Append("\n");
+                //StringBuilder.Append("\n");
 
                 //StringBuilder.Append(GetTransactionPerSecond(deltaTime,currentCount));
                 //StringBuilder.Append("\n");
 
-                StringBuilder.Append(GetGCCallsPerSecond(deltaTime, GC.CollectionCount(0), GC.CollectionCount(1), GC.CollectionCount(2)));
-                StringBuilder.Append("\n");
+                //StringBuilder.Append(GetGCCallsPerSecond(deltaTime, GC.CollectionCount(0), GC.CollectionCount(1), GC.CollectionCount(2)));
+                //StringBuilder.Append("\n");
             }
             else
             {
                 StringBuilder.Append("<Calculating additional information...>");
                 StringBuilder.Append("\n");
             }
-
-            for(int i = 0; i < array.Length; i++)
+            chartICDFA.Series[0].Points.Clear();
+            for (int i = 0; i < array.Length; i++)
             {
-                StringBuilder.Append("\n");
-                StringBuilder.Append(i.ToString("D2"));
-                StringBuilder.Append(" - ");
-                StringBuilder.Append(array[i].ToString());
+                //StringBuilder.Append("\n");
+                //StringBuilder.Append(i.ToString("D2"));
+                //StringBuilder.Append(" - ");
+                //StringBuilder.Append(array[i].ToString());
+                
+                chartICDFA.Series[0].Points.Add(array[i], i);
             }
+
+            chartICDFA.Update();
+            chartICDFA.Series.Invalidate();
 
             richTextBoxIcdfaOutput.Text = StringBuilder.ToString();
         }
@@ -582,10 +580,6 @@ namespace automata_sharp
             ResetWordCancellation?.Cancel();
         }
 
-        //Мне было лень делать нормально)
-        //Сделаю потом
-        Task<ulong> TotalCountTask;
-
         /// <summary>
         /// Переключение между вкладками
         /// </summary>
@@ -600,40 +594,30 @@ namespace automata_sharp
             {
                 case "Generator":
                     RightPanel(deactivate);
+                    chartICDFA.Visible = false;
                     richTextBoxIcdfaOutput.Visible = false;
                     break;
                 case "Constuctor":
+                    chartICDFA.Visible = false;
                     RightPanel(deactivate);
                     richTextBoxIcdfaOutput.Visible = false;
                     break;
                 case "File":
+                    chartICDFA.Visible = false;
                     richTextBoxIcdfaOutput.Visible = false;
                     break;
                 case "Reset word experiment":
                     richTextBoxIcdfaOutput.Visible = true;
+                    chartICDFA.Visible = true;
                     break;
                 case "About":
+                    chartICDFA.Visible = false;
                     richTextBoxIcdfaOutput.Visible = false;
                     break;
             }
         }
 
-        private ulong? GetTotalCount()
-        {
-            if (TotalCountTask == null)
-            {
-                if (CurrentIcdfaLogic != null)
-                    TotalCountTask = Task.Factory.StartNew(() => CurrentIcdfaLogic.GetTotalCount(), new CancellationToken() ,TaskCreationOptions.None, PriorityScheduler.BelowNormal);
-            }
-            else
-            {
-                if (TotalCountTask.IsCompleted)
-                    return TotalCountTask.GetAwaiter().GetResult();
-            }
-            return null;
-        }
-
-        private void checkBoxShutdown_CheckedChanged(object sender, EventArgs e)
+            private void checkBoxShutdown_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxShutdown.Checked)
             {
@@ -673,7 +657,12 @@ namespace automata_sharp
                 comboBoxStates.Text = string.Empty;
             }
         }
-        
+
+        private void buttonIcdfaCancel_Click(object sender, EventArgs e)
+        {
+            CurrentIcdfaLogic?.Cancel();
+        }
+
         void Shutdown()
         {
             //System.Diagnostics.Process.Start("Shutdown", "-s -t 60");

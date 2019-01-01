@@ -30,6 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 5D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 4D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 2D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 3D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageGenerate = new System.Windows.Forms.TabPage();
             this.panelGenerate = new System.Windows.Forms.Panel();
@@ -54,8 +61,8 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonOpen = new System.Windows.Forms.Button();
             this.tabIcdfa = new System.Windows.Forms.TabPage();
+            this.buttonIcdfaCancel = new System.Windows.Forms.Button();
             this.checkBoxShutdown = new System.Windows.Forms.CheckBox();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label20 = new System.Windows.Forms.Label();
             this.numericUpDownCalculateTo = new System.Windows.Forms.NumericUpDown();
             this.label19 = new System.Windows.Forms.Label();
@@ -68,6 +75,7 @@
             this.buttonIcdfaGenerate = new System.Windows.Forms.Button();
             this.numericUpDownTotalParts = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownCalculateFrom = new System.Windows.Forms.NumericUpDown();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.tabPageAbout = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -103,6 +111,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.richTextBoxIcdfaOutput = new System.Windows.Forms.RichTextBox();
             this.updaterIcdfa = new System.Windows.Forms.Timer(this.components);
+            this.chartICDFA = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabControlMain.SuspendLayout();
             this.tabPageGenerate.SuspendLayout();
             this.panelGenerate.SuspendLayout();
@@ -127,6 +136,7 @@
             this.groupBoxResetWord.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAutomata)).BeginInit();
             this.groupBoxWordCheck.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartICDFA)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -341,8 +351,9 @@
             // 
             // tabIcdfa
             // 
+            this.tabIcdfa.Controls.Add(this.buttonIcdfaGenerate);
+            this.tabIcdfa.Controls.Add(this.buttonIcdfaCancel);
             this.tabIcdfa.Controls.Add(this.checkBoxShutdown);
-            this.tabIcdfa.Controls.Add(this.progressBar1);
             this.tabIcdfa.Controls.Add(this.label20);
             this.tabIcdfa.Controls.Add(this.numericUpDownCalculateTo);
             this.tabIcdfa.Controls.Add(this.label19);
@@ -352,12 +363,19 @@
             this.tabIcdfa.Controls.Add(this.label17);
             this.tabIcdfa.Controls.Add(this.numericUpDownK);
             this.tabIcdfa.Controls.Add(this.numericUpDownN);
-            this.tabIcdfa.Controls.Add(this.buttonIcdfaGenerate);
             this.tabIcdfa.Controls.Add(this.numericUpDownTotalParts);
             this.tabIcdfa.Controls.Add(this.numericUpDownCalculateFrom);
+            this.tabIcdfa.Controls.Add(this.progressBar1);
             resources.ApplyResources(this.tabIcdfa, "tabIcdfa");
             this.tabIcdfa.Name = "tabIcdfa";
             this.tabIcdfa.UseVisualStyleBackColor = true;
+            // 
+            // buttonIcdfaCancel
+            // 
+            resources.ApplyResources(this.buttonIcdfaCancel, "buttonIcdfaCancel");
+            this.buttonIcdfaCancel.Name = "buttonIcdfaCancel";
+            this.buttonIcdfaCancel.UseVisualStyleBackColor = true;
+            this.buttonIcdfaCancel.Click += new System.EventHandler(this.buttonIcdfaCancel_Click);
             // 
             // checkBoxShutdown
             // 
@@ -365,14 +383,6 @@
             this.checkBoxShutdown.Name = "checkBoxShutdown";
             this.checkBoxShutdown.UseVisualStyleBackColor = true;
             this.checkBoxShutdown.CheckedChanged += new System.EventHandler(this.checkBoxShutdown_CheckedChanged);
-            // 
-            // progressBar1
-            // 
-            resources.ApplyResources(this.progressBar1, "progressBar1");
-            this.progressBar1.Maximum = 1000;
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Step = 1;
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             // 
             // label20
             // 
@@ -496,6 +506,14 @@
             0,
             0,
             0});
+            // 
+            // progressBar1
+            // 
+            resources.ApplyResources(this.progressBar1, "progressBar1");
+            this.progressBar1.Maximum = 1000;
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Step = 1;
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             // 
             // tabPageAbout
             // 
@@ -732,6 +750,7 @@
             // richTextBoxIcdfaOutput
             // 
             resources.ApplyResources(this.richTextBoxIcdfaOutput, "richTextBoxIcdfaOutput");
+            this.richTextBoxIcdfaOutput.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBoxIcdfaOutput.Name = "richTextBoxIcdfaOutput";
             this.richTextBoxIcdfaOutput.ReadOnly = true;
             // 
@@ -739,10 +758,53 @@
             // 
             this.updaterIcdfa.Tick += new System.EventHandler(this.updaterIcdfa_Tick);
             // 
+            // chartICDFA
+            // 
+            resources.ApplyResources(this.chartICDFA, "chartICDFA");
+            this.chartICDFA.BackColor = System.Drawing.SystemColors.Control;
+            chartArea1.AlignmentOrientation = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Horizontal;
+            chartArea1.Area3DStyle.Enable3D = true;
+            chartArea1.Area3DStyle.WallWidth = 0;
+            chartArea1.Name = "ChartArea1";
+            chartArea1.ShadowOffset = 10;
+            this.chartICDFA.ChartAreas.Add(chartArea1);
+            this.chartICDFA.IsSoftShadows = false;
+            this.chartICDFA.Name = "chartICDFA";
+            series1.ChartArea = "ChartArea1";
+            series1.CustomProperties = "CollectedColor=White";
+            series1.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            series1.IsValueShownAsLabel = true;
+            series1.IsVisibleInLegend = false;
+            series1.IsXValueIndexed = true;
+            series1.LabelBackColor = System.Drawing.SystemColors.Control;
+            series1.LabelBorderColor = System.Drawing.Color.Black;
+            series1.LabelFormat = "{0}";
+            series1.Legend = "Legend1";
+            series1.MarkerBorderColor = System.Drawing.Color.White;
+            series1.MarkerColor = System.Drawing.Color.Silver;
+            series1.MarkerStep = 2;
+            series1.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Star10;
+            series1.Name = "Series3";
+            series1.Points.Add(dataPoint1);
+            series1.Points.Add(dataPoint2);
+            series1.Points.Add(dataPoint3);
+            series1.Points.Add(dataPoint4);
+            series1.Points.Add(dataPoint5);
+            series1.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.Yes;
+            series1.SmartLabelStyle.CalloutBackColor = System.Drawing.Color.Black;
+            series1.SmartLabelStyle.CalloutLineAnchorCapStyle = System.Windows.Forms.DataVisualization.Charting.LineAnchorCapStyle.Diamond;
+            series1.SmartLabelStyle.CalloutLineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.DashDot;
+            series1.SmartLabelStyle.CalloutLineWidth = 2;
+            series1.SmartLabelStyle.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.LabelCalloutStyle.None;
+            series1.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
+            series1.SmartLabelStyle.MinMovingDistance = 2D;
+            this.chartICDFA.Series.Add(series1);
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chartICDFA);
             this.Controls.Add(this.richTextBoxIcdfaOutput);
             this.Controls.Add(this.groupBoxWordCheck);
             this.Controls.Add(this.dataGridViewAutomata);
@@ -782,6 +844,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAutomata)).EndInit();
             this.groupBoxWordCheck.ResumeLayout(false);
             this.groupBoxWordCheck.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartICDFA)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -863,6 +926,8 @@
         private System.Windows.Forms.NumericUpDown numericUpDownCalculateTo;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.CheckBox checkBoxShutdown;
+        private System.Windows.Forms.Button buttonIcdfaCancel;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartICDFA;
     }
 }
 
