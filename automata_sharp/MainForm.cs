@@ -660,7 +660,7 @@ namespace automata_sharp
 
         private void buttonIcdfaCancel_Click(object sender, EventArgs e)
         {
-            CurrentIcdfaLogic?.CancellationToken.Cancel();
+            CurrentIcdfaLogic?.Cancel();
         }
 
         void Shutdown()

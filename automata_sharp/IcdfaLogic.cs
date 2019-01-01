@@ -31,7 +31,7 @@ namespace automata_sharp
         /// </summary>
         public readonly int CountParts;
 
-        public readonly CancellationTokenSource CancellationToken;
+        public readonly CancellationTokenSource CancellationTokenSource;
 
         public int RowLength => (N - 1) * (N - 1) + 1;
         /// <summary>
@@ -65,7 +65,7 @@ namespace automata_sharp
             Tasks = new Task[countParts];
             Lengths = new Dictionary<int, ulong[]>(CountParts);
 
-            CancellationToken = new CancellationTokenSource();
+            CancellationTokenSource = new CancellationTokenSource();
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace automata_sharp
         /// <returns></returns>
         Task CreateTask(int num)
         {
-            return new Task(() => MainLogic(Lengths[num], num, CancellationToken.Token));
+            return new Task(() => MainLogic(Lengths[num], num, CancellationTokenSource.Token));
         }
 
         /// <summary>
@@ -229,18 +229,26 @@ namespace automata_sharp
                     if (i == part)
                         lengths[generator.getWordLength()]++;
                     if (i == total)
+                    {
                         i = 0;
+                        if (cancellationToken.IsCancellationRequested)
+                            return;
+                    }
                     generator.NextICDFA(nm, km);
                     checked
                     {
                         count++;
                     }
-                    i++;
+                    i++;   
                 }
                 generator.NextFlags(nmm);
-                if (CancellationToken.IsCancellationRequested)
-                    return;
+                
             }
+        }
+
+        public void Cancel()
+        {
+            CancellationTokenSource.Cancel();
         }
 
         /// <summary>
