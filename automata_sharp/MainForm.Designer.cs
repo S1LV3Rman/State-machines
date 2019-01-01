@@ -32,11 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 5D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 4D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 2D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 3D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageGenerate = new System.Windows.Forms.TabPage();
             this.panelGenerate = new System.Windows.Forms.Panel();
@@ -61,6 +56,7 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonOpen = new System.Windows.Forms.Button();
             this.tabIcdfa = new System.Windows.Forms.TabPage();
+            this.buttonIcdfaGenerate = new System.Windows.Forms.Button();
             this.buttonIcdfaCancel = new System.Windows.Forms.Button();
             this.checkBoxShutdown = new System.Windows.Forms.CheckBox();
             this.label20 = new System.Windows.Forms.Label();
@@ -72,7 +68,6 @@
             this.label17 = new System.Windows.Forms.Label();
             this.numericUpDownK = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownN = new System.Windows.Forms.NumericUpDown();
-            this.buttonIcdfaGenerate = new System.Windows.Forms.Button();
             this.numericUpDownTotalParts = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownCalculateFrom = new System.Windows.Forms.NumericUpDown();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -370,6 +365,14 @@
             this.tabIcdfa.Name = "tabIcdfa";
             this.tabIcdfa.UseVisualStyleBackColor = true;
             // 
+            // buttonIcdfaGenerate
+            // 
+            resources.ApplyResources(this.buttonIcdfaGenerate, "buttonIcdfaGenerate");
+            this.buttonIcdfaGenerate.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.buttonIcdfaGenerate.Name = "buttonIcdfaGenerate";
+            this.buttonIcdfaGenerate.UseVisualStyleBackColor = false;
+            this.buttonIcdfaGenerate.Click += new System.EventHandler(this.buttonIcdfaGenerate_Click);
+            // 
             // buttonIcdfaCancel
             // 
             resources.ApplyResources(this.buttonIcdfaCancel, "buttonIcdfaCancel");
@@ -468,14 +471,6 @@
             0,
             0,
             0});
-            // 
-            // buttonIcdfaGenerate
-            // 
-            resources.ApplyResources(this.buttonIcdfaGenerate, "buttonIcdfaGenerate");
-            this.buttonIcdfaGenerate.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.buttonIcdfaGenerate.Name = "buttonIcdfaGenerate";
-            this.buttonIcdfaGenerate.UseVisualStyleBackColor = false;
-            this.buttonIcdfaGenerate.Click += new System.EventHandler(this.buttonIcdfaGenerate_Click);
             // 
             // numericUpDownTotalParts
             // 
@@ -785,11 +780,6 @@
             series1.MarkerStep = 2;
             series1.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Star10;
             series1.Name = "Series3";
-            series1.Points.Add(dataPoint1);
-            series1.Points.Add(dataPoint2);
-            series1.Points.Add(dataPoint3);
-            series1.Points.Add(dataPoint4);
-            series1.Points.Add(dataPoint5);
             series1.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.Yes;
             series1.SmartLabelStyle.CalloutBackColor = System.Drawing.Color.Black;
             series1.SmartLabelStyle.CalloutLineAnchorCapStyle = System.Windows.Forms.DataVisualization.Charting.LineAnchorCapStyle.Diamond;

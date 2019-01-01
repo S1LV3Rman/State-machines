@@ -2203,6 +2203,9 @@ Special thanks to Sergey Davydov for consulting in C#</value>
   <data name="chartICDFA.Text" xml:space="preserve">
     <value>chart1</value>
   </data>
+  <data name="chartICDFA.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;chartICDFA.Name" xml:space="preserve">
     <value>chartICDFA</value>
   </data>
