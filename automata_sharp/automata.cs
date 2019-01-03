@@ -111,8 +111,8 @@ namespace automata_sharp
                 for (int j = 0, m = letters; j < m; ++j)
                     temp.Add(Convert.ToChar('a' + j), Convert.ToInt32(dataTable.Rows[i][j + 1]));
             }
-            ListUniqueListPool = new CollectionPool<List<UniqueList<int>>, UniqueList<int>>(() => new List<UniqueList<int>>());
-            UniqueListPool = new CollectionPool<UniqueList<int>, int>(() => new UniqueList<int>());
+            ListUniqueListPool = new CollectionPool<List<UniqueSortedListInt>, UniqueSortedListInt>(() => new List<UniqueSortedListInt>());
+            UniqueListPool = new CollectionPool<UniqueSortedListInt, int>(() => new UniqueSortedListInt());
         }
 
         public Automata(List<int> states, String letters, Dictionary<int, Dictionary<char, int>> transitions)
@@ -120,8 +120,8 @@ namespace automata_sharp
             _states = states;
             _letters = letters;
             _transitions = transitions;
-            ListUniqueListPool = new CollectionPool<List<UniqueList<int>>, UniqueList<int>>(() => new List<UniqueList<int>>());
-            UniqueListPool = new CollectionPool<UniqueList<int>, int>(() => new UniqueList<int>());
+            ListUniqueListPool = new CollectionPool<List<UniqueSortedListInt>, UniqueSortedListInt>(() => new List<UniqueSortedListInt>());
+            UniqueListPool = new CollectionPool<UniqueSortedListInt, int>(() => new UniqueSortedListInt());
         }
 
         public SortedSet<int> Delta(SortedSet<int> states, String word)
@@ -150,7 +150,7 @@ namespace automata_sharp
             return nextStates;
         }
 
-        public void Delta(UniqueList<int> result, UniqueList<int> states, char letter)
+        public void Delta(UniqueSortedListInt result, UniqueSortedListInt states, char letter)
         {
             result.Clear();
 
@@ -188,17 +188,17 @@ namespace automata_sharp
             return nextState;
         }
 
-        Dictionary<int, List<UniqueList<int>>> usedStates = new Dictionary<int, List<UniqueList<int>>>();
-        List<UniqueList<int>> currentStates = new List<UniqueList<int>>();
-        List<UniqueList<int>> nextStates = new List<UniqueList<int>>();
+        Dictionary<int, List<UniqueSortedListInt>> usedStates = new Dictionary<int, List<UniqueSortedListInt>>();
+        List<UniqueSortedListInt> currentStates = new List<UniqueSortedListInt>();
+        List<UniqueSortedListInt> nextStates = new List<UniqueSortedListInt>();
         List<string> currentWords = new List<string>();
         List<string> nextWords = new List<string>();
-        //UniqueList<int> start = new UniqueList<int>();
+        //UniqueSortedListInt start = new UniqueSortedListInt();
 
-        UniqueList<int> tempStates = new UniqueList<int>();
+        UniqueSortedListInt tempStates = new UniqueSortedListInt();
 
-        CollectionPool<List<UniqueList<int>>, UniqueList<int>> ListUniqueListPool;
-        CollectionPool<UniqueList<int>, int> UniqueListPool;
+        CollectionPool<List<UniqueSortedListInt>, UniqueSortedListInt> ListUniqueListPool;
+        CollectionPool<UniqueSortedListInt, int> UniqueListPool;
 
         public string FindShortestResetWord_WithoutAsync()
         {

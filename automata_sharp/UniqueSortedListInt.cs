@@ -4,77 +4,71 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace automata_sharp
 {
-    public class UniqueList<T> : IList<T>
+    public class UniqueSortedListInt : IList<int>
     {
-        private List<T> list;
+        private List<int> list;
 
-        public T this[int index] { get => list[index]; set => list[index] = value; }
+        public int this[int index] { get => list[index]; set => list[index] = value; }
 
         public int Count => list.Count;
 
         public bool IsReadOnly => false;
 
 
-        public UniqueList()
+        public UniqueSortedListInt()
             : this(10)
         {
 
         }
-        public UniqueList(int capacity)
+        public UniqueSortedListInt(int capacity)
         {
-            list = new List<T>(capacity);
+            list = new List<int>(capacity);
         }
-        public UniqueList(IEnumerable<T> enumerable)
+        public UniqueSortedListInt(IEnumerable<int> enumerable)
             : this(10)
         {
             foreach (var e in enumerable)
                 Add(e);
         }
 
-        bool sorted;
-
-        public bool SetEquals(UniqueList<T> other)
+        public bool SetEquals(UniqueSortedListInt other)
         {
             if (other.list.Count != list.Count) return false;
 
-            if (!sorted)
-            {
-                list.Sort();
-                sorted = true;
-            }
-            if (!other.sorted)
-            {
-                other.list.Sort();
-                other.sorted = true;
-            }
-
             for (int i = 0; i < list.Count; i++)
-                if (!list[i].Equals(other.list[i])) return false;
+                if (list[i] != other.list[i]) return false;
 
             return true;
         }
 
-        public void Override(UniqueList<T> other)
+        public void Override(UniqueSortedListInt other)
         {
             list.Clear();
-            sorted = other.sorted;
             var otherlist = other.list;
             for (int i = 0; i < otherlist.Count; i++)
                 list.Add(otherlist[i]);
         }
 
-        public bool Add(T item)
+        public bool Add(int item)
         {
             if (list.Contains(item)) return false;
+            for (int i = 0; i < list.Count; i++)
+                if (list[i] > item)
+                {
+                    list.Insert(i, item);
+                    return true;
+                }
+
             list.Add(item);
-            sorted = false;
+
             return true;
         }
 
-        void ICollection<T>.Add(T item)
+        void ICollection<int>.Add(int item)
         {
             Add(item);
         }
@@ -82,39 +76,37 @@ namespace automata_sharp
         public void Clear()
         {
             list.Clear();
-            sorted = true;
         }
 
-        public bool Contains(T item)
+        public bool Contains(int item)
         {
             return list.Contains(item);
         }
 
-        public void CopyTo(T[] array, int arrayIndex)
+        public void CopyTo(int[] array, int arrayIndex)
         {
             list.CopyTo(array, arrayIndex);
         }
 
-        public IEnumerator<T> GetEnumerator()
+        public IEnumerator<int> GetEnumerator()
         {
             return list.GetEnumerator();
         }
 
-        public int IndexOf(T item)
+        public int IndexOf(int item)
         {
             return list.IndexOf(item);
         }
 
-        void IList<T>.Insert(int index, T item)
+        void IList<int>.Insert(int index, int item)
         {
             if (!list.Contains(item))
             {
                 list.Insert(index, item);
-                sorted = false;
             }
         }
 
-        public bool Remove(T item)
+        public bool Remove(int item)
         {
             return list.Remove(item);
         }
