@@ -10,11 +10,12 @@ namespace automata_sharp
 {
     public class UniqueSortedListInt : IList<int>
     {
-        private List<int> list;
+        private int[] list;
+        int count;
 
         public int this[int index] { get => list[index]; set => list[index] = value; }
 
-        public int Count => list.Count;
+        public int Count => count;
 
         public bool IsReadOnly => false;
 
@@ -26,7 +27,8 @@ namespace automata_sharp
         }
         public UniqueSortedListInt(int capacity)
         {
-            list = new List<int>(capacity);
+            list = new int[capacity];
+            count = 0;
         }
         public UniqueSortedListInt(IEnumerable<int> enumerable)
             : this(10)
@@ -37,36 +39,51 @@ namespace automata_sharp
 
         public bool SetEquals(UniqueSortedListInt other)
         {
-            if (other.list.Count != list.Count) return false;
+            if (other.count != count)
+                return false;
 
-            for (int i = 0; i < list.Count; i++)
-                if (list[i] != other.list[i]) return false;
+            for (int i = 0; i < count; i++)
+                if (list[i] != other.list[i])
+                    return false;
 
             return true;
         }
 
         public void Override(UniqueSortedListInt other)
         {
-            list.Clear();
+            if (count < other.count)
+                list = new int[other.count];
+
+            count = other.count;
+
             var otherlist = other.list;
-            for (int i = 0; i < otherlist.Count; i++)
-                list.Add(otherlist[i]);
+            
+            for (int i = 0; i < count; i++)
+                list[i] = otherlist[i];
         }
 
         public bool Add(int item)
         {
-            if (list.Contains(item)) return false;
-            for (int i = 0; i < list.Count; i++)
+            if (Contains(item)) return false;
+
+            if (count + 1 >= list.Length)
+                Array.Resize(ref list, count * 2 + 1);
+
+            for (int i = 0; i < count; i++)
                 if (list[i] > item)
                 {
-                    list.Insert(i, item);
+                    InsertPrivate(i, item);
+                    count++;
                     return true;
                 }
 
-            list.Add(item);
+            list[count] = item;
+            count++;
 
             return true;
         }
+
+        
 
         void ICollection<int>.Add(int item)
         {
@@ -75,12 +92,15 @@ namespace automata_sharp
 
         public void Clear()
         {
-            list.Clear();
+            count = 0;
         }
 
         public bool Contains(int item)
         {
-            return list.Contains(item);
+            for (int i = 0; i < count; i++)
+                if (list[i] == item)
+                    return true;
+            return false;
         }
 
         public void CopyTo(int[] array, int arrayIndex)
@@ -90,30 +110,42 @@ namespace automata_sharp
 
         public IEnumerator<int> GetEnumerator()
         {
-            return list.GetEnumerator();
+            for (int i = 0; i < count; i++)
+                yield return list[i];
         }
 
         public int IndexOf(int item)
         {
-            return list.IndexOf(item);
+            return Array.IndexOf(list, item, 0, count);
         }
 
         void IList<int>.Insert(int index, int item)
         {
-            if (!list.Contains(item))
-            {
-                list.Insert(index, item);
-            }
+            throw new InvalidOperationException();
+        }
+
+        void InsertPrivate(int index, int item)
+        {
+            for (int i = count ; i > index; i--)
+                list[i] = list[i - 1];
+            list[index] = item;
         }
 
         public bool Remove(int item)
         {
-            return list.Remove(item);
+            var index = Array.IndexOf(list, item,0,count);
+            if (index < 0) return false;
+
+            for (int i = index + 1; i < count; i++)
+                list[i - 1] = list[i];
+
+            return true;
         }
 
         public void RemoveAt(int index)
         {
-            list.RemoveAt(index);
+            for (int i = index + 1; i < count; i++)
+                list[i - 1] = list[i];
         }
 
         IEnumerator IEnumerable.GetEnumerator()
