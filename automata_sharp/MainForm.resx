@@ -750,41 +750,11 @@
   <data name="&gt;&gt;tabPageFile.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="buttonIcdfaGenerate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="buttonIcdfaGenerate.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Popup</value>
-  </data>
-  <data name="buttonIcdfaGenerate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonIcdfaGenerate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 134</value>
-  </data>
-  <data name="buttonIcdfaGenerate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>467, 27</value>
-  </data>
-  <data name="buttonIcdfaGenerate.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="buttonIcdfaGenerate.Text" xml:space="preserve">
-    <value>Calculate</value>
-  </data>
-  <data name="&gt;&gt;buttonIcdfaGenerate.Name" xml:space="preserve">
-    <value>buttonIcdfaGenerate</value>
-  </data>
-  <data name="&gt;&gt;buttonIcdfaGenerate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonIcdfaGenerate.Parent" xml:space="preserve">
-    <value>tabIcdfa</value>
-  </data>
-  <data name="&gt;&gt;buttonIcdfaGenerate.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="buttonIcdfaCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
+  </data>
+  <data name="buttonIcdfaCancel.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
   </data>
   <data name="buttonIcdfaCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>400, 134</value>
@@ -796,7 +766,10 @@
     <value>20</value>
   </data>
   <data name="buttonIcdfaCancel.Text" xml:space="preserve">
-    <value>cancel</value>
+    <value>Cancel</value>
+  </data>
+  <data name="buttonIcdfaCancel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;buttonIcdfaCancel.Name" xml:space="preserve">
     <value>buttonIcdfaCancel</value>
@@ -808,7 +781,7 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;buttonIcdfaCancel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="checkBoxShutdown.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -835,7 +808,7 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;checkBoxShutdown.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="label20.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -865,7 +838,7 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;label20.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="numericUpDownCalculateTo.Location" type="System.Drawing.Point, System.Drawing">
     <value>345, 101</value>
@@ -886,7 +859,7 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;numericUpDownCalculateTo.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="label19.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -916,7 +889,7 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;label19.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="label18.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -946,7 +919,7 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;label18.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="label15.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -979,7 +952,7 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="label16.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1009,7 +982,7 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;label16.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="label17.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1039,7 +1012,7 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;label17.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="numericUpDownK.Location" type="System.Drawing.Point, System.Drawing">
     <value>111, 70</value>
@@ -1060,7 +1033,7 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;numericUpDownK.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="numericUpDownN.Location" type="System.Drawing.Point, System.Drawing">
     <value>111, 35</value>
@@ -1081,7 +1054,7 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;numericUpDownN.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="numericUpDownTotalParts.Location" type="System.Drawing.Point, System.Drawing">
     <value>345, 35</value>
@@ -1102,7 +1075,7 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;numericUpDownTotalParts.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="numericUpDownCalculateFrom.Location" type="System.Drawing.Point, System.Drawing">
     <value>345, 68</value>
@@ -1123,7 +1096,43 @@
     <value>tabIcdfa</value>
   </data>
   <data name="&gt;&gt;numericUpDownCalculateFrom.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="buttonIcdfaGenerate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="buttonIcdfaGenerate.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
+  </data>
+  <data name="buttonIcdfaGenerate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonIcdfaGenerate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 134</value>
+  </data>
+  <data name="buttonIcdfaGenerate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>467, 27</value>
+  </data>
+  <data name="buttonIcdfaGenerate.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="buttonIcdfaGenerate.Text" xml:space="preserve">
+    <value>Calculate</value>
+  </data>
+  <data name="&gt;&gt;buttonIcdfaGenerate.Name" xml:space="preserve">
+    <value>buttonIcdfaGenerate</value>
+  </data>
+  <data name="&gt;&gt;buttonIcdfaGenerate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonIcdfaGenerate.Parent" xml:space="preserve">
+    <value>tabIcdfa</value>
+  </data>
+  <data name="&gt;&gt;buttonIcdfaGenerate.ZOrder" xml:space="preserve">
     <value>13</value>
+  </data>
+  <data name="progressBar1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="progressBar1.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 134</value>

@@ -183,13 +183,13 @@
             0,
             0});
             this.numericUpDownAlphabet.Minimum = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
             this.numericUpDownAlphabet.Name = "numericUpDownAlphabet";
             this.numericUpDownAlphabet.Value = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -203,13 +203,13 @@
             // 
             resources.ApplyResources(this.numericUpDownStates, "numericUpDownStates");
             this.numericUpDownStates.Minimum = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
             this.numericUpDownStates.Name = "numericUpDownStates";
             this.numericUpDownStates.Value = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -259,13 +259,13 @@
             0,
             0});
             this.numericUpDownCreateAlphabet.Minimum = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
             this.numericUpDownCreateAlphabet.Name = "numericUpDownCreateAlphabet";
             this.numericUpDownCreateAlphabet.Value = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -279,13 +279,13 @@
             // 
             resources.ApplyResources(this.numericUpDownCreateStates, "numericUpDownCreateStates");
             this.numericUpDownCreateStates.Minimum = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
             this.numericUpDownCreateStates.Name = "numericUpDownCreateStates";
             this.numericUpDownCreateStates.Value = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -346,7 +346,6 @@
             // 
             // tabIcdfa
             // 
-            this.tabIcdfa.Controls.Add(this.buttonIcdfaGenerate);
             this.tabIcdfa.Controls.Add(this.buttonIcdfaCancel);
             this.tabIcdfa.Controls.Add(this.checkBoxShutdown);
             this.tabIcdfa.Controls.Add(this.label20);
@@ -360,6 +359,7 @@
             this.tabIcdfa.Controls.Add(this.numericUpDownN);
             this.tabIcdfa.Controls.Add(this.numericUpDownTotalParts);
             this.tabIcdfa.Controls.Add(this.numericUpDownCalculateFrom);
+            this.tabIcdfa.Controls.Add(this.buttonIcdfaGenerate);
             this.tabIcdfa.Controls.Add(this.progressBar1);
             resources.ApplyResources(this.tabIcdfa, "tabIcdfa");
             this.tabIcdfa.Name = "tabIcdfa";
@@ -376,8 +376,10 @@
             // buttonIcdfaCancel
             // 
             resources.ApplyResources(this.buttonIcdfaCancel, "buttonIcdfaCancel");
+            this.buttonIcdfaCancel.BackColor = System.Drawing.Color.LightCoral;
+            this.buttonIcdfaCancel.ForeColor = System.Drawing.SystemColors.ControlText;
             this.buttonIcdfaCancel.Name = "buttonIcdfaCancel";
-            this.buttonIcdfaCancel.UseVisualStyleBackColor = true;
+            this.buttonIcdfaCancel.UseVisualStyleBackColor = false;
             this.buttonIcdfaCancel.Click += new System.EventHandler(this.buttonIcdfaCancel_Click);
             // 
             // checkBoxShutdown
@@ -766,6 +768,7 @@
             this.chartICDFA.ChartAreas.Add(chartArea1);
             this.chartICDFA.IsSoftShadows = false;
             this.chartICDFA.Name = "chartICDFA";
+            this.chartICDFA.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
             series1.ChartArea = "ChartArea1";
             series1.CustomProperties = "CollectedColor=White";
             series1.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));

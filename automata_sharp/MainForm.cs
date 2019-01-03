@@ -402,6 +402,8 @@ namespace automata_sharp
 
         private void buttonIcdfaGenerate_Click(object sender, EventArgs e)
         {
+            buttonIcdfaCancel.Visible = true;
+
             int totalParts = Convert.ToInt32(numericUpDownTotalParts.Value),
               startPart = Convert.ToInt32(numericUpDownCalculateFrom.Value),
               endPart = Convert.ToInt32(numericUpDownCalculateTo.Value),
@@ -465,6 +467,7 @@ namespace automata_sharp
             tabControlMain.Enabled = true;
             progressBar1.Visible = false;
             progressBar1.Value = 0;
+            buttonIcdfaCancel.Visible = false;
 
             // Запись в файл
             SaveIcdfaPart();
@@ -564,7 +567,8 @@ namespace automata_sharp
                 
                 chartICDFA.Series[0].Points.Add(array[i], i);
             }
-
+            if (chartICDFA.Series[0].Points.Count >= 25)
+                chartICDFA.Series[0].Points[chartICDFA.Series[0].Points.Count - 2].LabelBackColor = Color.LimeGreen;
             chartICDFA.Update();
             chartICDFA.Series.Invalidate();
 
