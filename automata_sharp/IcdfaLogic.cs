@@ -281,23 +281,47 @@ namespace automata_sharp
         }
     }
 
+    /// <summary>
+    /// Класс содержащий тулзы Icdfa
+    /// </summary>
     public static class IcdfaHelper
     {
-        const string FILENAME_CACHE = "CachedTotalCounts.cache";
+        /// <summary>
+        /// Путь к файлу с кэшем
+        /// </summary>
+        const string FILEPATH_CACHE = "CachedTotalCounts.cache";
+        /// <summary>
+        /// Словрь задач кэширования
+        /// </summary>
         readonly static IDictionary<(int n, int k), Task<ulong>> CachedTotalCounts;
 
         static IcdfaHelper()
         {
             CachedTotalCounts = new Dictionary<(int n, int k), Task<ulong>>(10);
+            //Загружаем кэш из файла
             LoadCache();
         }
 
+        /// <summary>
+        /// Возвращает кэш если тот существует и подсчитан, иначе веренет null
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
         public static ulong? GetTotalCountNullable(int n, int k)
         {
+            //Запрашиваем задачу кэширования
             var task = GetTotalCountTask(n, k);
+            //Если задача завершена возвращаем результат
             return task.IsCompleted ? (ulong?)task.GetAwaiter().GetResult() : null;
         }
 
+        /// <summary>
+        /// Возвращает задачу кэширования для заданных n и k
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
         public static Task<ulong> GetTotalCountTask(int n, int k)
         {
             if (n < 0 || k < 0) throw new ArgumentException();
@@ -308,18 +332,27 @@ namespace automata_sharp
                 //Если получается то возвращаем таску 
                 return CachedTotalCounts[key];
 
-            //Иначе создаем задачу, запускаем и возврщаем ее
+            //Иначе создаем задачу
             var task = new Task<ulong>(() => GetTotalCount(n,k));
+            //Запускаем
             task.Start(PriorityScheduler.AboveNormal);
-            var result = task;
-            
-            CachedTotalCounts.Add(key, result);
 
-            task.GetAwaiter().OnCompleted(SaveCache);//По завершению сохраняем кэш
+            //Добавляем в словарь задач кэширования
+            CachedTotalCounts.Add(key, task);
 
-            return result;
+            //Подписываемся на завершение задачи
+            //По завершению сохраняем кэш
+            task.GetAwaiter().OnCompleted(SaveCache);
+
+            return task;
         }
 
+        /// <summary>
+        /// Алгоритм подсчета
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
         private static ulong GetTotalCount(int n, int k)
         {
             Generator temp = new Generator(n, k);
@@ -344,18 +377,26 @@ namespace automata_sharp
             return count_all;
         }
 
+        /// <summary>
+        /// Сохранение кэша в файл
+        /// </summary>
         private static void SaveCache()
         {
             StreamWriter writer = null;
             try
             {
-                writer = new StreamWriter(new FileStream(FILENAME_CACHE,FileMode.Create));
+                writer = new StreamWriter(new FileStream(FILEPATH_CACHE, FileMode.Create));
+                /* Преобразуем в массив, потому что в процессе записи CachedTotalCounts может изминиться 
+                (Это маловероятно, конечно, но возможно) */
                 foreach (var e in CachedTotalCounts.ToArray())
                 {
+                    //Если задача кэширования завершена - можем записать ее в файл
                     if(e.Value.IsCompleted)
+                        //Формат : N,K,TOTAL_COUNT
                         writer.WriteLine($"{e.Key.n},{e.Key.k},{e.Value.GetAwaiter().GetResult()}");
                 }
             }
+            //В любом случае нам нужно освободить системные ресурсы
             finally { writer?.Dispose(); }
         }
         private static void LoadCache()
@@ -363,21 +404,30 @@ namespace automata_sharp
             StreamReader reader = null;
             try
             {
-                reader = new StreamReader(new FileStream(FILENAME_CACHE, FileMode.OpenOrCreate));
+                reader = new StreamReader(new FileStream(FILEPATH_CACHE, FileMode.OpenOrCreate));
                 var temp = new Dictionary<(int n, int k), ulong>(10);
                 var readed = reader.ReadToEnd().Split('\n');
                 reader.Close();
                 
                 foreach (var e in readed)
                 {
+                    //Разбиваем строчку на части по знаку ','
                     var args = e.Split(',');
+                    //Если кол-во агрументов не рано 3, то пропускаем сторочку
                     if (args.Length != 3) continue;
+                    //Записываем во временный словарь
                     temp.Add((int.Parse(args[0]), int.Parse(args[1])), ulong.Parse(args[2]));
                 }
 
+                /* Переносим все данные из временного кэша в постоянный
+                Временный кэш нужен из-за возможных проблем на этапе чтения и
+                преобразования данных из файла. Если данные будут поврежденными 
+                то в постоянном кэше могут быть не корректные данные
+                */
                 foreach(var e in temp)
                     CachedTotalCounts.Add(e.Key, Task.FromResult(e.Value));
             }
+            //В любом случае нам нужно освободить системные ресурсы
             finally { reader?.Dispose(); }
         }
     }
