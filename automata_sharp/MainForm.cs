@@ -236,6 +236,8 @@ namespace automata_sharp
             dataGridViewAutomata.DataSource = dataTable;
             dataGridViewAutomata.ReadOnly = false;
 
+            dataGridViewAutomata.Columns[0].ReadOnly = true;
+                        
             labelCreateInfo.Text = "Put all data into table, then push \"Confirm\"";
             buttonCreateTable.Visible = false;
             buttonCreateConfirm.Visible = true;
@@ -248,13 +250,31 @@ namespace automata_sharp
         /// <param name="e"></param>
         private void buttonCreateConfirm_Click(object sender, EventArgs e)
         {
-            tabControlMain.Enabled = true;
-            automata = new Automata(dataTable);
-            buttonCreateTable.Visible = true;
-            buttonCreateConfirm.Visible = false;
-            labelCreateInfo.Text = "Select size, then push \"Create Table\"";
+            if (dataGridAutomataVerificate())
+            {
+                dataGridViewAutomata.ReadOnly = true;
 
-            RightPanel(activate);
+                tabControlMain.Enabled = true;
+                automata = new Automata(dataTable);
+                buttonCreateTable.Visible = true;
+                buttonCreateConfirm.Visible = false;
+                labelCreateInfo.Text = "Select size, then push \"Create Table\"";
+
+                RightPanel(activate);
+            }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show("Wrong input", "Input", MessageBoxButtons.OK);
+            }
+        }
+
+        private bool dataGridAutomataVerificate()
+        {
+            // Проверка, нет ли ячеек со значением большим максимального
+            for (int i = 0, n = Convert.ToInt32(numericUpDownCreateStates.Value); i < n; ++i)
+                for (int j = 1, m = Convert.ToInt32(numericUpDownCreateAlphabet.Value); j <= m; ++j)
+                    if (Convert.ToInt32(dataGridViewAutomata[j, i].Value.ToString()) >= n) return false;
+            return true;
         }
 
         /// <summary>
