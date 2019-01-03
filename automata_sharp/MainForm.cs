@@ -469,8 +469,9 @@ namespace automata_sharp
             progressBar1.Value = 0;
             buttonIcdfaCancel.Visible = false;
 
-            // Запись в файл
-            SaveIcdfaPart();
+            if(!CurrentIcdfaLogic.CancellationTokenSource.IsCancellationRequested)
+                // Запись в файл
+                SaveIcdfaPart();
 
             CurrentIcdfaLogic = null;//Сбрасываем CurrentIcdfaLogic
             if (checkBoxShutdown.Checked) Shutdown();
