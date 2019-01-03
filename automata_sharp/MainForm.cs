@@ -447,14 +447,29 @@ namespace automata_sharp
             progressBar1.Value = 0;
 
             // Запись в файл
-            var result = CurrentIcdfaLogic.GetTotalLenghts();
-            var stream = new StreamWriter($"Prtcl{n}x{k}_pts{startPart}-{startPart + countParts - 1}of{totalParts}.txt");
-            foreach (var record in result)
-                stream.WriteLine(record);
-            stream.Close();
+            SaveIcdfaPart();
 
             CurrentIcdfaLogic = null;//Сбрасываем CurrentIcdfaLogic
             if (checkBoxShutdown.Checked) Shutdown();
+        }
+
+        private void SaveIcdfaPart()
+        {
+            var icdfa = CurrentIcdfaLogic;
+            if (icdfa == null) throw new NullReferenceException(nameof(CurrentIcdfaLogic));
+
+            if (!Directory.Exists("icdfa parts"))
+                Directory.CreateDirectory("icdfa parts");
+
+            if(!Directory.Exists($"icdfa parts/Prtcl{icdfa.N}x{icdfa.K}"))
+                Directory.CreateDirectory($"icdfa parts/Prtcl{icdfa.N}x{icdfa.K}");
+
+            var result = CurrentIcdfaLogic.GetTotalLenghts();
+            //TODO "Remove Prtcl{icdfa.N}x{icdfa.K}"
+            var stream = new StreamWriter(new FileStream($"icdfa parts/Prtcl{icdfa.N}x{icdfa.K}/Prtcl{icdfa.N}x{icdfa.K}_pts{icdfa.StartPart}-{icdfa.StartPart + icdfa.CountParts - 1}of{icdfa.TotalParts}.txt", FileMode.CreateNew));
+            foreach (var record in result)
+                stream.WriteLine(record);
+            stream.Close();
         }
 
         private void updaterIcdfa_Tick(object sender, EventArgs e)

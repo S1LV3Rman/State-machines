@@ -2153,7 +2153,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>2</value>
   </data>
   <data name="richTextBoxIcdfaOutput.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Top, Left, Right</value>
   </data>
   <data name="richTextBoxIcdfaOutput.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 217</value>
@@ -2202,6 +2202,9 @@ Special thanks to Sergey Davydov for consulting in C#</value>
   </data>
   <data name="chartICDFA.Text" xml:space="preserve">
     <value>chart1</value>
+  </data>
+  <data name="chartICDFA.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;chartICDFA.Name" xml:space="preserve">
     <value>chartICDFA</value>
