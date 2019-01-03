@@ -489,7 +489,7 @@ namespace automata_sharp
 
             var result = CurrentIcdfaLogic.GetTotalLenghts();
             //TODO "Remove Prtcl{icdfa.N}x{icdfa.K}"
-            var stream = new StreamWriter(new FileStream($"icdfa parts/Prtcl{icdfa.N}x{icdfa.K}/Prtcl{icdfa.N}x{icdfa.K}_pts{icdfa.StartPart}-{icdfa.StartPart + icdfa.CountParts - 1}of{icdfa.TotalParts}.txt", FileMode.CreateNew));
+            var stream = new StreamWriter(new FileStream($"icdfa parts/Prtcl{icdfa.N}x{icdfa.K}/Prtcl{icdfa.N}x{icdfa.K}_pts{icdfa.StartPart}-{icdfa.StartPart + icdfa.CountParts - 1}of{icdfa.TotalParts}.txt", FileMode.Create));
             foreach (var record in result)
                 stream.WriteLine(record);
             stream.Close();
