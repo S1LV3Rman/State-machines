@@ -391,7 +391,7 @@ namespace automata_sharp
                 else
                 {
                     labelCheckResult.ForeColor = Color.Red;
-                    labelCheckResult.Text = "Word NOT the reset";
+                    labelCheckResult.Text = "Word is NOT the reset";
                 }
             }
             catch
