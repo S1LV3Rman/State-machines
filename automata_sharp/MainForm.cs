@@ -520,7 +520,7 @@ namespace automata_sharp
                 StringBuilder.Append("\n");
             }
             chartICDFA.Series[0].Points.Clear();
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 1; i < array.Length; i++)
             {
                 //StringBuilder.Append("\n");
                 //StringBuilder.Append(i.ToString("D2"));
@@ -587,19 +587,14 @@ namespace automata_sharp
         /// <param name="e"></param>
         private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
         {
-            buttonResetWordCalculate.Visible = true;
-            buttonShortResetWordCalculate.Visible = true;
-
             switch (tabControlMain.SelectedTab.Text)
             {
                 case "Generator":
-                    RightPanel(deactivate);
                     chartICDFA.Visible = false;
                     richTextBoxIcdfaOutput.Visible = false;
                     break;
-                case "Constuctor":
+                case "Constructor":
                     chartICDFA.Visible = false;
-                    RightPanel(deactivate);
                     richTextBoxIcdfaOutput.Visible = false;
                     break;
                 case "File":
