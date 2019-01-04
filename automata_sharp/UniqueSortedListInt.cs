@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace automata_sharp
 {
-    public class UniqueSortedListInt : IList<int>
+    public sealed class UniqueSortedListInt : IList<int>
     {
         private int[] list;
         int count;
@@ -21,7 +21,7 @@ namespace automata_sharp
 
 
         public UniqueSortedListInt()
-            : this(10)
+            : this(16)
         {
 
         }
@@ -31,13 +31,13 @@ namespace automata_sharp
             count = 0;
         }
         public UniqueSortedListInt(IEnumerable<int> enumerable)
-            : this(10)
+            : this(16)
         {
             foreach (var e in enumerable)
                 Add(e);
         }
 
-        public bool SetEquals(UniqueSortedListInt other)
+        public  bool SetEquals(UniqueSortedListInt other)
         {
             if (other.count != count)
                 return false;
@@ -51,15 +51,17 @@ namespace automata_sharp
 
         public void Override(UniqueSortedListInt other)
         {
-            if (count < other.count)
+            if (list.Length < other.count)
                 list = new int[other.count];
 
             count = other.count;
 
             var otherlist = other.list;
-            
+
             for (int i = 0; i < count; i++)
+            {
                 list[i] = otherlist[i];
+            }
         }
 
         public bool Add(int item)

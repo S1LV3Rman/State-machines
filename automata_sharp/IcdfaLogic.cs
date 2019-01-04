@@ -293,11 +293,11 @@ namespace automata_sharp
         /// <summary>
         /// Словрь задач кэширования
         /// </summary>
-        readonly static IDictionary<(int n, int k), Task<ulong>> CachedTotalCounts;
+        readonly static IDictionary<Tuple<int, int>, Task<ulong>> CachedTotalCounts;
 
         static IcdfaHelper()
         {
-            CachedTotalCounts = new Dictionary<(int n, int k), Task<ulong>>(10);
+            CachedTotalCounts = new Dictionary<Tuple<int, int>, Task<ulong>>(10);
             //Загружаем кэш из файла
             LoadCache();
         }
@@ -327,7 +327,7 @@ namespace automata_sharp
             if (n < 0 || k < 0) throw new ArgumentException();
 
             //Пытаемся получить данные из кэша 
-            var key = (n, k);
+            var key = new Tuple<int, int>(n,k);
             if(CachedTotalCounts.ContainsKey(key))
                 //Если получается то возвращаем таску 
                 return CachedTotalCounts[key];
@@ -393,7 +393,7 @@ namespace automata_sharp
                     //Если задача кэширования завершена - можем записать ее в файл
                     if(e.Value.IsCompleted)
                         //Формат : N,K,TOTAL_COUNT
-                        writer.WriteLine($"{e.Key.n},{e.Key.k},{e.Value.GetAwaiter().GetResult()}");
+                        writer.WriteLine($"{e.Key.Item1},{e.Key.Item2},{e.Value.GetAwaiter().GetResult()}");
                 }
             }
             //В любом случае нам нужно освободить системные ресурсы
@@ -405,7 +405,7 @@ namespace automata_sharp
             try
             {
                 reader = new StreamReader(new FileStream(FILEPATH_CACHE, FileMode.OpenOrCreate));
-                var temp = new Dictionary<(int n, int k), ulong>(10);
+                var temp = new Dictionary<Tuple<int, int>, ulong>(10);
                 var readed = reader.ReadToEnd().Split('\n');
                 reader.Close();
                 
@@ -416,7 +416,7 @@ namespace automata_sharp
                     //Если кол-во агрументов не рано 3, то пропускаем сторочку
                     if (args.Length != 3) continue;
                     //Записываем во временный словарь
-                    temp.Add((int.Parse(args[0]), int.Parse(args[1])), ulong.Parse(args[2]));
+                    temp.Add(new Tuple<int, int>(int.Parse(args[0]), int.Parse(args[1])), ulong.Parse(args[2]));
                 }
 
                 /* Переносим все данные из временного кэша в постоянный
