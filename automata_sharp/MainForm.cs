@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Media;
 
 namespace automata_sharp
 {
@@ -22,6 +23,7 @@ namespace automata_sharp
         CancellationTokenSource ResetWordCancellation, ShortResetWordCancellation;
         IcdfaLogic CurrentIcdfaLogic;
         StringBuilder StringBuilder = new StringBuilder();
+        SoundPlayer CompleteSoundPlayer;
 
         public MainForm()
         {
@@ -31,6 +33,7 @@ namespace automata_sharp
             RightPanel(deactivate);
             numericUpDownTotalParts.Value =
                 numericUpDownCalculateTo.Value = Environment.ProcessorCount;
+            CompleteSoundPlayer = new SoundPlayer(Properties.Resources.CompleteSound);
         }
         
         /// <summary>
@@ -448,6 +451,8 @@ namespace automata_sharp
             }
         }
 
+        
+
         private async void GeneratorCreatePartLogic(int n, int k, int totalParts, int startPart, int countParts)
         {
             buttonIcdfaGenerate.Visible = false;
@@ -459,9 +464,11 @@ namespace automata_sharp
             await CurrentIcdfaLogic.StartAsync();//Запускаем вычисления и ждем их завершения
             /* Вычисления закончены */
 
+            CompleteSoundPlayer.Play();
+
             updaterIcdfa.Enabled = false;//Отключаем таймер который подтягивает изменения в CurrentIcdfaLogic
             UpdateIcdfaOutput();//Обновляем вывод  
-
+            
             //Восстанавливаем интерфейс
             buttonIcdfaGenerate.Visible = true;
             tabControlMain.Enabled = true;

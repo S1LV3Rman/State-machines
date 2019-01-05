@@ -136,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AutomatonIco.ico" />
+    <None Include="Resources\CompleteSound.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
