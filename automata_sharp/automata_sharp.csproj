@@ -82,6 +82,7 @@
     <Compile Include="PriorityScheduler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shutdown.cs" />
     <Compile Include="UniqueSortedListInt.cs" />
     <Compile Include="UniqueList.cs" />
     <EmbeddedResource Include="MainForm.resx">

@@ -488,34 +488,6 @@ namespace automata_sharp
             return true;
         }
 
-        public String OutputToString()
-        {
-            String output = "States: ";
-            for (int i = 0, n = _states.Count; i < n; ++i)
-                output += $"{_states[i]} ";
-            output += '\n';
-
-            output += "Language: ";
-            for (int i = 0, n = _letters.Length; i < n; ++i)
-                output += $"{_letters[i]} ";
-            output += '\n';
-
-
-            output += "Transitions: \n   ";
-            for (int j = 0, m = _letters.Length; j < m; ++j)
-                output += $"{_letters[j]} ";
-            output += '\n';
-
-            for (int i = 0, n = _states.Count; i < n; ++i)
-            {
-                output += $"{_states[i]}: ";
-                for (int j = 0, m = _letters.Length; j < m; ++j)
-                    output += $"{_transitions[_states[i]][_letters[j]]} ";
-                output += '\n';
-            }
-            return output;
-        }
-
         public DataTable OutputToDataTable()
         {
             DataTable output = new DataTable();

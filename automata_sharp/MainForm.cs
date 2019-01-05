@@ -24,6 +24,7 @@ namespace automata_sharp
         IcdfaLogic CurrentIcdfaLogic;
         StringBuilder StringBuilder = new StringBuilder();
         SoundPlayer CompleteSoundPlayer;
+        Shutdown shutdown = new Shutdown();
 
         public MainForm()
         {
@@ -481,7 +482,7 @@ namespace automata_sharp
                 SaveIcdfaPart();
 
             CurrentIcdfaLogic = null;//Сбрасываем CurrentIcdfaLogic
-            if (checkBoxShutdown.Checked) Shutdown();
+            if (checkBoxShutdown.Checked) shutdown.Lock();
         }
 
         private void SaveIcdfaPart()
@@ -703,14 +704,6 @@ namespace automata_sharp
         private void buttonIcdfaCancel_Click(object sender, EventArgs e)
         {
             CurrentIcdfaLogic?.Cancel();
-        }
-
-        void Shutdown()
-        {
-            //System.Diagnostics.Process.Start("Shutdown", "-s -t 60");
-            //DialogResult dialogResult = MessageBox.Show("Cancel shutdown?", "Shutdown", MessageBoxButtons.YesNo);
-            //if (dialogResult == DialogResult.Yes) System.Diagnostics.Process.Start("Shutdown", "-a");
-        }
+        }   
     }
-
 }
