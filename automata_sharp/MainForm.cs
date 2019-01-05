@@ -464,7 +464,7 @@ namespace automata_sharp
             await CurrentIcdfaLogic.StartAsync();//Запускаем вычисления и ждем их завершения
             /* Вычисления закончены */
 
-            CompleteSoundPlayer.Play();
+            if (textBoxCheck.Text == "meow") CompleteSoundPlayer.Play(); 
 
             updaterIcdfa.Enabled = false;//Отключаем таймер который подтягивает изменения в CurrentIcdfaLogic
             UpdateIcdfaOutput();//Обновляем вывод  
