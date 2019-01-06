@@ -482,7 +482,7 @@ namespace automata_sharp
                 SaveIcdfaPart();
 
             CurrentIcdfaLogic = null;//Сбрасываем CurrentIcdfaLogic
-            if (checkBoxShutdown.Checked) shutdown.Lock();
+            if (checkBoxShutdown.Checked) shutdown.halt(false, false);
         }
 
         private void SaveIcdfaPart()
