@@ -726,7 +726,7 @@ namespace automata_sharp
                 if (!dir.Exists)
                     throw new DirectoryNotFoundException(); // Если директория не существует
 
-                while (currentPart != parts)
+                while (currentPart < parts)
                 {
                     var file = dir.GetFiles($"Prtcl{states}x{alphabet}_pts{currentPart}-*of{parts}.txt");
 
