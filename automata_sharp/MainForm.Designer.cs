@@ -56,6 +56,8 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonOpen = new System.Windows.Forms.Button();
             this.tabIcdfa = new System.Windows.Forms.TabPage();
+            this.buttonDrawResults = new System.Windows.Forms.Button();
+            this.buttonCompileResults = new System.Windows.Forms.Button();
             this.buttonIcdfaCancel = new System.Windows.Forms.Button();
             this.checkBoxShutdown = new System.Windows.Forms.CheckBox();
             this.label20 = new System.Windows.Forms.Label();
@@ -107,8 +109,6 @@
             this.richTextBoxIcdfaOutput = new System.Windows.Forms.RichTextBox();
             this.updaterIcdfa = new System.Windows.Forms.Timer(this.components);
             this.chartICDFA = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.buttonCompileResults = new System.Windows.Forms.Button();
-            this.buttonDrawResults = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageGenerate.SuspendLayout();
             this.panelGenerate.SuspendLayout();
@@ -368,6 +368,24 @@
             resources.ApplyResources(this.tabIcdfa, "tabIcdfa");
             this.tabIcdfa.Name = "tabIcdfa";
             this.tabIcdfa.UseVisualStyleBackColor = true;
+            // 
+            // buttonDrawResults
+            // 
+            this.buttonDrawResults.BackColor = System.Drawing.SystemColors.ControlLight;
+            resources.ApplyResources(this.buttonDrawResults, "buttonDrawResults");
+            this.buttonDrawResults.Name = "buttonDrawResults";
+            this.buttonDrawResults.UseVisualStyleBackColor = false;
+            this.buttonDrawResults.Click += new System.EventHandler(this.buttonDrawResults_Click);
+            // 
+            // buttonCompileResults
+            // 
+            this.buttonCompileResults.BackColor = System.Drawing.SystemColors.ControlLight;
+            resources.ApplyResources(this.buttonCompileResults, "buttonCompileResults");
+            this.buttonCompileResults.Name = "buttonCompileResults";
+            this.buttonCompileResults.UseVisualStyleBackColor = false;
+            this.buttonCompileResults.Click += new System.EventHandler(this.buttonCompileResults_Click);
+            this.buttonCompileResults.MouseLeave += new System.EventHandler(this.buttonCompileResults_MouseLeave);
+            this.buttonCompileResults.MouseMove += new System.Windows.Forms.MouseEventHandler(this.buttonCompileResults_MouseMove);
             // 
             // buttonIcdfaCancel
             // 
@@ -797,22 +815,6 @@
             series1.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
             series1.SmartLabelStyle.MinMovingDistance = 2D;
             this.chartICDFA.Series.Add(series1);
-            // 
-            // buttonCompileResults
-            // 
-            this.buttonCompileResults.BackColor = System.Drawing.SystemColors.ControlLight;
-            resources.ApplyResources(this.buttonCompileResults, "buttonCompileResults");
-            this.buttonCompileResults.Name = "buttonCompileResults";
-            this.buttonCompileResults.UseVisualStyleBackColor = false;
-            this.buttonCompileResults.Click += new System.EventHandler(this.buttonCompileResults_Click);
-            // 
-            // buttonDrawResults
-            // 
-            this.buttonDrawResults.BackColor = System.Drawing.SystemColors.ControlLight;
-            resources.ApplyResources(this.buttonDrawResults, "buttonDrawResults");
-            this.buttonDrawResults.Name = "buttonDrawResults";
-            this.buttonDrawResults.UseVisualStyleBackColor = false;
-            this.buttonDrawResults.Click += new System.EventHandler(this.buttonDrawResults_Click);
             // 
             // MainForm
             // 

@@ -4,11 +4,9 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
-using System.Windows.Forms.DataVisualization.Charting;
 using System.Media;
 
 namespace automata_sharp
@@ -663,7 +661,7 @@ namespace automata_sharp
             }
         }
 
-            private void checkBoxShutdown_CheckedChanged(object sender, EventArgs e)
+        private void checkBoxShutdown_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxShutdown.Checked)
             {
@@ -803,6 +801,27 @@ namespace automata_sharp
             {
                 DialogResult dialogResult = MessageBox.Show("Something went wrong!", "Error", MessageBoxButtons.OK);
             }
+        }
+
+        private void buttonCompileResults_MouseMove(object sender, MouseEventArgs e)
+        {
+            buttonCompileResults.BackColor = Color.Orange;
+            numericUpDownN.BackColor = Color.Orange;
+            numericUpDownK.BackColor = Color.Orange;
+            numericUpDownTotalParts.BackColor = Color.Orange;
+        }
+
+        private void buttonCompileResults_MouseLeave(object sender, EventArgs e)
+        {
+            var tempColor = numericUpDownCalculateFrom.BackColor;
+            
+            numericUpDownN.BackColor = tempColor;
+            numericUpDownK.BackColor = tempColor;
+            numericUpDownTotalParts.BackColor = tempColor;
+
+            tempColor = buttonGenerate.BackColor;
+
+            buttonCompileResults.BackColor = tempColor;
         }
 
         private void buttonIcdfaCancel_Click(object sender, EventArgs e)
