@@ -196,7 +196,7 @@
     <value>120, 27</value>
   </data>
   <data name="numericUpDownAlphabet.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;numericUpDownAlphabet.Name" xml:space="preserve">
     <value>numericUpDownAlphabet</value>
@@ -247,7 +247,7 @@
     <value>120, 27</value>
   </data>
   <data name="numericUpDownStates.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;numericUpDownStates.Name" xml:space="preserve">
     <value>numericUpDownStates</value>
@@ -277,7 +277,7 @@
     <value>464, 27</value>
   </data>
   <data name="buttonGenerate.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="buttonGenerate.Text" xml:space="preserve">
     <value>Generate</value>
@@ -421,7 +421,7 @@
     <value>120, 27</value>
   </data>
   <data name="numericUpDownCreateAlphabet.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;numericUpDownCreateAlphabet.Name" xml:space="preserve">
     <value>numericUpDownCreateAlphabet</value>
@@ -472,7 +472,7 @@
     <value>120, 27</value>
   </data>
   <data name="numericUpDownCreateStates.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;numericUpDownCreateStates.Name" xml:space="preserve">
     <value>numericUpDownCreateStates</value>
@@ -502,7 +502,7 @@
     <value>468, 27</value>
   </data>
   <data name="buttonCreateTable.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="buttonCreateTable.Text" xml:space="preserve">
     <value>Create Table</value>
@@ -670,7 +670,7 @@
     <value>384, 27</value>
   </data>
   <data name="buttonSave.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="buttonSave.Text" xml:space="preserve">
     <value>Save</value>
@@ -763,7 +763,7 @@
     <value>75, 27</value>
   </data>
   <data name="buttonDrawResults.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+    <value>9</value>
   </data>
   <data name="buttonDrawResults.Text" xml:space="preserve">
     <value>Draw</value>
@@ -793,7 +793,7 @@
     <value>75, 27</value>
   </data>
   <data name="buttonCompileResults.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>8</value>
   </data>
   <data name="buttonCompileResults.Text" xml:space="preserve">
     <value>Compile</value>
@@ -853,7 +853,7 @@
     <value>112, 23</value>
   </data>
   <data name="checkBoxShutdown.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>7</value>
   </data>
   <data name="checkBoxShutdown.Text" xml:space="preserve">
     <value>Shutdown PC</value>
@@ -907,7 +907,7 @@
     <value>54, 27</value>
   </data>
   <data name="numericUpDownCalculateTo.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;numericUpDownCalculateTo.Name" xml:space="preserve">
     <value>numericUpDownCalculateTo</value>
@@ -1081,7 +1081,7 @@
     <value>61, 27</value>
   </data>
   <data name="numericUpDownK.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;numericUpDownK.Name" xml:space="preserve">
     <value>numericUpDownK</value>
@@ -1102,7 +1102,7 @@
     <value>61, 27</value>
   </data>
   <data name="numericUpDownN.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;numericUpDownN.Name" xml:space="preserve">
     <value>numericUpDownN</value>
@@ -1123,7 +1123,7 @@
     <value>55, 27</value>
   </data>
   <data name="numericUpDownTotalParts.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;numericUpDownTotalParts.Name" xml:space="preserve">
     <value>numericUpDownTotalParts</value>
@@ -1144,7 +1144,7 @@
     <value>54, 27</value>
   </data>
   <data name="numericUpDownCalculateFrom.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;numericUpDownCalculateFrom.Name" xml:space="preserve">
     <value>numericUpDownCalculateFrom</value>
@@ -1466,7 +1466,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>489, 210</value>
   </data>
   <data name="tabControlMain.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;tabControlMain.Name" xml:space="preserve">
     <value>tabControlMain</value>
@@ -1592,7 +1592,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>311, 27</value>
   </data>
   <data name="buttonImpact.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>8</value>
   </data>
   <data name="buttonImpact.Text" xml:space="preserve">
     <value>Impact</value>
@@ -1676,7 +1676,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>257, 27</value>
   </data>
   <data name="comboBoxStates.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;comboBoxStates.Name" xml:space="preserve">
     <value>comboBoxStates</value>
@@ -1727,7 +1727,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>257, 27</value>
   </data>
   <data name="textBoxWord.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;textBoxWord.Name" xml:space="preserve">
     <value>textBoxWord</value>
@@ -1781,7 +1781,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>314, 27</value>
   </data>
   <data name="buttonCancelShortResetWord.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>5</value>
   </data>
   <data name="buttonCancelShortResetWord.Text" xml:space="preserve">
     <value>Cancel</value>
@@ -1811,7 +1811,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>314, 27</value>
   </data>
   <data name="buttonCancelResetWord.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>4</value>
   </data>
   <data name="buttonCancelResetWord.Text" xml:space="preserve">
     <value>Cancel</value>
@@ -2099,7 +2099,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>311, 27</value>
   </data>
   <data name="buttonCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>10</value>
   </data>
   <data name="buttonCheck.Text" xml:space="preserve">
     <value>Check</value>
@@ -2153,7 +2153,7 @@ Special thanks to Sergey Davydov for consulting in C#</value>
     <value>257, 27</value>
   </data>
   <data name="textBoxCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;textBoxCheck.Name" xml:space="preserve">
     <value>textBoxCheck</value>
