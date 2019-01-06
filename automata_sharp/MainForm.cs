@@ -478,12 +478,14 @@ namespace automata_sharp
             progressBar1.Value = 0;
             buttonIcdfaCancel.Visible = false;
 
-            if(!CurrentIcdfaLogic.CancellationTokenSource.IsCancellationRequested)
+            if (!CurrentIcdfaLogic.CancellationTokenSource.IsCancellationRequested)
+            {
                 // Запись в файл
                 SaveIcdfaPart();
+                if (checkBoxShutdown.Checked) shutdown.halt(false, false);
+            }
 
             CurrentIcdfaLogic = null;//Сбрасываем CurrentIcdfaLogic
-            if (checkBoxShutdown.Checked) shutdown.halt(false, false);
         }
 
         private void SaveIcdfaPart()
@@ -789,6 +791,8 @@ namespace automata_sharp
                         lengths[i] = Convert.ToUInt64(data[i]);
 
                     chartICDFA.Visible = true;
+
+                    chartICDFA.Series[0].Points.Clear();
 
                     for (int i = 1; i < lengths.Length; ++i)
                         chartICDFA.Series[0].Points.Add(lengths[i], i);
