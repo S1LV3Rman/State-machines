@@ -717,27 +717,60 @@ namespace automata_sharp
 
             var lengths = new ulong[(states - 1) * (states - 1) + 1];
 
+            int currentPart = 1;
+
             try
             {
-                var txtFiles = Directory.EnumerateFiles($"icdfa parts/Prtcl{states}x{alphabet}", "*.txt");
-                foreach (string currentFile in txtFiles)
-                {
-                    StreamReader stream = new StreamReader(currentFile);
-                    for (int i = 0; i < lengths.Count(); ++i)
-                        lengths[i] += Convert.ToUInt64(stream.ReadLine());
+                var dir = new DirectoryInfo($@"icdfa parts/Prtcl{states}x{alphabet}");
 
-                    stream.Close();
+                if (!dir.Exists)
+                    throw new DirectoryNotFoundException(); // Если директория не существует
+
+                while (currentPart != parts)
+                {
+                    var file = dir.GetFiles($"Prtcl{states}x{alphabet}_pts{currentPart}-*of{parts}.txt");
+
+                    if (file.Length == 0)
+                        throw new FileNotFoundException(); // Если файлы не удалось получить по маске
+
+                    StreamReader stream = new StreamReader(file[0].FullName);
+                    for (int i = 0; i < lengths.Length; ++i)
+                        lengths[i] += Convert.ToUInt64(stream.ReadLine());
+                    currentPart = Convert.ToInt32(getBetween(file[0].Name, "-", "of")) + 1;
                 }
 
                 StreamWriter writer = new StreamWriter($"icdfa parts/Prtcl{states}x{alphabet}/Prtcl{states}x{alphabet}.txt");
-                for (int i = 0; i < lengths.Count(); ++i)
+                for (int i = 0; i < lengths.Length; ++i)
                     writer.WriteLine(lengths[i]);
 
                 writer.Close();
             }
+            catch (FileNotFoundException)
+            {
+                DialogResult dialogResult = MessageBox.Show($"Missing part {currentPart}", "Error", MessageBoxButtons.OK);
+            }
+            catch (DirectoryNotFoundException)
+            {
+                DialogResult dialogResult = MessageBox.Show($"Folder \"Prtcl{states}x{alphabet}\" not exists", "Error", MessageBoxButtons.OK);
+            }
             catch
             {
-                DialogResult dialogResult = MessageBox.Show("Something went wrong!", "Error", MessageBoxButtons.OK);
+                DialogResult dialogResult = MessageBox.Show($"Something went wrong!", "Error", MessageBoxButtons.OK);
+            }
+        }
+
+        public static string getBetween(string strSource, string strStart, string strEnd)
+        {
+            int Start, End;
+            if (strSource.Contains(strStart) && strSource.Contains(strEnd))
+            {
+                Start = strSource.IndexOf(strStart, 0) + strStart.Length;
+                End = strSource.IndexOf(strEnd, Start);
+                return strSource.Substring(Start, End - Start);
+            }
+            else
+            {
+                return "";
             }
         }
 
@@ -754,12 +787,12 @@ namespace automata_sharp
 
                     var lengths = new ulong[data.Count() - 1];
 
-                    for (int i = 0; i < lengths.Count(); ++i)
+                    for (int i = 0; i < lengths.Length; ++i)
                         lengths[i] = Convert.ToUInt64(data[i]);
 
                     chartICDFA.Visible = true;
 
-                    for (int i = 1; i < lengths.Count(); ++i)
+                    for (int i = 1; i < lengths.Length; ++i)
                         chartICDFA.Series[0].Points.Add(lengths[i], i);
 
                     if (chartICDFA.Series[0].Points.Count >= 25)
