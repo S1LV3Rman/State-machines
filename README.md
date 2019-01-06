@@ -8,4 +8,3 @@ How to use "Reset word experiment" correctly:
 2. "Total segmentation" is how you divide multiplicity of ALL NxK DFAs; then "Calculate from" and "Calculate to" is which parts you will generate right now
 3. To get fastest generation you should make number of parts to generate equal to your CPU's threads. By default Automs will put correct "Calc. to" to get this condition
 4. Automs will use your CPU's threads by 100%, that will lead stuttering. Automs by default have low priority, but it may not work on your PC
-5. "Shutdown PC" is currently unaviable because of Windows Defender
