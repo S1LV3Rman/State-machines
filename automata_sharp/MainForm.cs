@@ -701,6 +701,74 @@ namespace automata_sharp
             }
         }
 
+        /// <summary>
+        /// Собирает все файлы протоколов воедино
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonCompileResults_Click(object sender, EventArgs e)
+        {
+            int states = Convert.ToInt32(numericUpDownN.Value);
+            int alphabet = Convert.ToInt32(numericUpDownK.Value);
+            int parts = Convert.ToInt32(numericUpDownTotalParts.Value);
+
+            var lengths = new ulong[(states - 1) * (states - 1) + 1];
+
+            try
+            {
+                var txtFiles = Directory.EnumerateFiles($"icdfa parts/Prtcl{states}x{alphabet}", "*.txt");
+                foreach (string currentFile in txtFiles)
+                {
+                    StreamReader stream = new StreamReader(currentFile);
+                    for (int i = 0; i < lengths.Count(); ++i)
+                        lengths[i] += Convert.ToUInt64(stream.ReadLine());
+
+                    stream.Close();
+                }
+
+                StreamWriter writer = new StreamWriter($"icdfa parts/Prtcl{states}x{alphabet}/Prtcl{states}x{alphabet}.txt");
+                for (int i = 0; i < lengths.Count(); ++i)
+                    writer.WriteLine(lengths[i]);
+
+                writer.Close();
+            }
+            catch
+            {
+                DialogResult dialogResult = MessageBox.Show("Something went wrong!", "Error", MessageBoxButtons.OK);
+            }
+        }
+
+        private void buttonDrawResults_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog open = new OpenFileDialog();
+                if (open.ShowDialog() == DialogResult.OK)
+                {
+                    StreamReader stream = new StreamReader(open.OpenFile());
+                    var rawData = stream.ReadToEnd();
+                    var data = rawData.Split('\n');
+
+                    var lengths = new ulong[data.Count() - 1];
+
+                    for (int i = 0; i < lengths.Count(); ++i)
+                        lengths[i] = Convert.ToUInt64(data[i]);
+
+                    chartICDFA.Visible = true;
+
+                    for (int i = 1; i < lengths.Count(); ++i)
+                        chartICDFA.Series[0].Points.Add(lengths[i], i);
+
+                    if (chartICDFA.Series[0].Points.Count >= 25)
+                        chartICDFA.Series[0].Points[chartICDFA.Series[0].Points.Count - 2].LabelBackColor = Color.LimeGreen;
+                }
+            }
+            catch
+            {
+                DialogResult dialogResult = MessageBox.Show("Something went wrong!", "Error", MessageBoxButtons.OK);
+            }
+        }
+
         private void buttonIcdfaCancel_Click(object sender, EventArgs e)
         {
             CurrentIcdfaLogic?.Cancel();

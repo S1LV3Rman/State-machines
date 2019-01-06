@@ -56,7 +56,6 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonOpen = new System.Windows.Forms.Button();
             this.tabIcdfa = new System.Windows.Forms.TabPage();
-            this.buttonIcdfaGenerate = new System.Windows.Forms.Button();
             this.buttonIcdfaCancel = new System.Windows.Forms.Button();
             this.checkBoxShutdown = new System.Windows.Forms.CheckBox();
             this.label20 = new System.Windows.Forms.Label();
@@ -70,6 +69,7 @@
             this.numericUpDownN = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownTotalParts = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownCalculateFrom = new System.Windows.Forms.NumericUpDown();
+            this.buttonIcdfaGenerate = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.tabPageAbout = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
@@ -107,6 +107,8 @@
             this.richTextBoxIcdfaOutput = new System.Windows.Forms.RichTextBox();
             this.updaterIcdfa = new System.Windows.Forms.Timer(this.components);
             this.chartICDFA = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.buttonCompileResults = new System.Windows.Forms.Button();
+            this.buttonDrawResults = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageGenerate.SuspendLayout();
             this.panelGenerate.SuspendLayout();
@@ -346,6 +348,8 @@
             // 
             // tabIcdfa
             // 
+            this.tabIcdfa.Controls.Add(this.buttonDrawResults);
+            this.tabIcdfa.Controls.Add(this.buttonCompileResults);
             this.tabIcdfa.Controls.Add(this.buttonIcdfaCancel);
             this.tabIcdfa.Controls.Add(this.checkBoxShutdown);
             this.tabIcdfa.Controls.Add(this.label20);
@@ -364,14 +368,6 @@
             resources.ApplyResources(this.tabIcdfa, "tabIcdfa");
             this.tabIcdfa.Name = "tabIcdfa";
             this.tabIcdfa.UseVisualStyleBackColor = true;
-            // 
-            // buttonIcdfaGenerate
-            // 
-            resources.ApplyResources(this.buttonIcdfaGenerate, "buttonIcdfaGenerate");
-            this.buttonIcdfaGenerate.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.buttonIcdfaGenerate.Name = "buttonIcdfaGenerate";
-            this.buttonIcdfaGenerate.UseVisualStyleBackColor = false;
-            this.buttonIcdfaGenerate.Click += new System.EventHandler(this.buttonIcdfaGenerate_Click);
             // 
             // buttonIcdfaCancel
             // 
@@ -503,6 +499,14 @@
             0,
             0,
             0});
+            // 
+            // buttonIcdfaGenerate
+            // 
+            resources.ApplyResources(this.buttonIcdfaGenerate, "buttonIcdfaGenerate");
+            this.buttonIcdfaGenerate.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.buttonIcdfaGenerate.Name = "buttonIcdfaGenerate";
+            this.buttonIcdfaGenerate.UseVisualStyleBackColor = false;
+            this.buttonIcdfaGenerate.Click += new System.EventHandler(this.buttonIcdfaGenerate_Click);
             // 
             // progressBar1
             // 
@@ -794,6 +798,22 @@
             series1.SmartLabelStyle.MinMovingDistance = 2D;
             this.chartICDFA.Series.Add(series1);
             // 
+            // buttonCompileResults
+            // 
+            this.buttonCompileResults.BackColor = System.Drawing.SystemColors.ControlLight;
+            resources.ApplyResources(this.buttonCompileResults, "buttonCompileResults");
+            this.buttonCompileResults.Name = "buttonCompileResults";
+            this.buttonCompileResults.UseVisualStyleBackColor = false;
+            this.buttonCompileResults.Click += new System.EventHandler(this.buttonCompileResults_Click);
+            // 
+            // buttonDrawResults
+            // 
+            this.buttonDrawResults.BackColor = System.Drawing.SystemColors.ControlLight;
+            resources.ApplyResources(this.buttonDrawResults, "buttonDrawResults");
+            this.buttonDrawResults.Name = "buttonDrawResults";
+            this.buttonDrawResults.UseVisualStyleBackColor = false;
+            this.buttonDrawResults.Click += new System.EventHandler(this.buttonDrawResults_Click);
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -922,6 +942,8 @@
         private System.Windows.Forms.CheckBox checkBoxShutdown;
         private System.Windows.Forms.Button buttonIcdfaCancel;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartICDFA;
+        private System.Windows.Forms.Button buttonDrawResults;
+        private System.Windows.Forms.Button buttonCompileResults;
     }
 }
 
